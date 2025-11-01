@@ -1,0 +1,64 @@
+.player{
+width:min(880px,94vw);
+background:#000;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 8px 30px rgba(2,6,23,0.7);
+position:relative;
+}
+
+
+video{display:block;width:100%;height:auto;background:#000}
+
+
+/* big central play button */
+.big-play{
+position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;
+}
+.big-play button{
+pointer-events:auto;appearance:none;border:0;background:linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02));
+width:92px;height:92px;border-radius:999px;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(6px);
+transition:transform .15s ease,opacity .15s ease;
+}
+.big-play svg{width:34px;height:34px;fill:var(--muted)}
+
+
+/* control bar */
+.controls{
+position:absolute;left:0;right:0;bottom:0;padding:10px;background:linear-gradient(0deg, rgba(0,0,0,0.6), transparent 60%);
+display:flex;gap:8px;align-items:center;height:var(--height);
+}
+
+
+.left-controls, .right-controls{display:flex;align-items:center;gap:8px}
+.center{flex:1;display:flex;align-items:center;gap:12px}
+
+
+button.ctrl{
+height:36px;padding:8px 10px;border-radius:8px;border:0;background:var(--panel);color:var(--muted);cursor:pointer;
+display:inline-grid;place-items:center;min-width:40px;
+}
+button.ctrl:active{transform:translateY(1px)}
+button.ctrl[aria-pressed="true"]{box-shadow:0 0 0 2px rgba(16,185,129,0.12)}
+
+
+input[type="range"].progress{width:100%;appearance:none;height:6px;background:transparent}
+input[type="range"]::-webkit-slider-runnable-track{height:6px;background:rgba(255,255,255,0.08);border-radius:6px}
+input[type="range"]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);margin-top:-4px}
+
+
+.time{font-size:13px;color:var(--muted);min-width:64px;text-align:center}
+.volume{width:120px}
+
+
+/* small responsive tweaks */
+@media (max-width:520px){
+.big-play button{width:68px;height:68px}
+.big-play svg{width:26px;height:26px}
+.volume{width:80px}
+}
+
+
+/* subtle hover show */
+.player:not(:hover) .controls{opacity:0;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease}
+.player:hover .controls{opacity:1;transform:none}
