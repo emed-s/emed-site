@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+ 
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Verdana,sans-serif;color:#222;margin:0;padding:0}
+    header{background:#5c0a13;color:#fff;text-align:center;padding:2rem 1rem}
+    header h1{margin:0;font-size:2.2rem; margin-top: 5rem;}
+    header p{opacity:.9}
+    .search-bar{text-align:center;margin:1.2rem auto}
+    .search-bar input,.search-bar select{padding:.65rem;font-size:1rem;border-radius:8px;border:1px solid #ccc;width:240px;margin:.3rem}
+    main{max-width:1200px;margin:0 auto;padding:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.4rem}
+    .card{background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.08);padding:1.2rem;transition:transform .2s,box-shadow .2s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 10px 20px rgba(0,0,0,.12)}
+    .card h2{color:#5c0a13;margin:0 0 .4rem;font-size:1.05rem;border-bottom:2px solid #5c0a13;padding-bottom:.35rem}
+    .card p{margin:0;font-size:.95rem;line-height:1.45;text-align:justify}
+    .card button{margin-top:.8rem;padding:.45rem .75rem;background:#5c0a13;color:#fff;border:0;border-radius:6px;cursor:pointer}
+    .card button:hover{background:#7b0f1d}
+    footer{background:#5c0a13;color:#fff;text-align:center;padding:1rem;font-size:.9rem;margin-top:1.6rem}
+    .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,.6)}
+    .modal-content{background:#fff;margin:3% auto;padding:1.6rem;border-radius:12px;max-width:1000px;position:relative;max-height:86vh;overflow-y:auto}
+    .close{position:absolute;top:10px;right:20px;color:#5c0a13;font-size:1.6rem;font-weight:700;cursor:pointer}
+    .close:hover{color:#7b0f1d}
+    .modal h3{margin-top:1rem}
+    .modal p{line-height:1.6;text-align:justify}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Neurológicos</h1>
+    <p>Etiologia, fisiopatologia, manifestações clínicas, diagnóstico, tratamento e prognóstico</p>
+  </header>
+
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="vascular">Vascular</option>
+      <option value="epilepsia">Epilepsia</option>
+      <option value="cefaleia">Cefaleia</option>
+      <option value="degenerativos">Degenerativos</option>
+      <option value="autoimunes">Autoimunes / Inflamatórios</option>
+      <option value="infecciosos">Infecciosos</option>
+      <option value="neurocirurgicos">Neurocirúrgicos / Trauma</option>
+      <option value="perifericos">Periféricos / Neuromusculares</option>
+      <option value="neurooftalmo">Neuro-oftalmologia / Outros</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="vascular"><h2>AVC Isquêmico</h2><p>Oclusão arterial cerebral com infarto focal; atenção a tempo é cérebro (TBI).</p><button onclick="abrirModal('avc_isquemico')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="vascular"><h2>AVC Hemorrágico</h2><p>Sangramento intracerebral ou subaracnóideo com pressão e lesão neuronal.</p><button onclick="abrirModal('avc_hemorr')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="epilepsia"><h2>Epilepsia</h2><p>Distúrbio cerebral com crises recorrentes devido a atividade elétrica excessiva.</p><button onclick="abrirModal('epilepsia')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="cefaleia"><h2>Enxaqueca</h2><p>Cefaleia primária recidivante, frequentemente unilateral e acompanhada de náusea e fotofobia.</p><button onclick="abrirModal('enxaqueca')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="perifericos"><h2>Neuralgia do Trigêmeo</h2><p>Dor facial lancinante em distribuição trigeminal, com crises breves e gatilhos sensitivos.</p><button onclick="abrirModal('trigemino')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="autoimunes"><h2>Esclerose Múltipla</h2><p>Doença inflamatória desmielinizante do SNC com apresentação multifásica.</p><button onclick="abrirModal('esclerose')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="degenerativos"><h2>Doença de Parkinson</h2><p>Doença neurodegenerativa com bradicinesia, tremor e rigidez por perda dopaminérgica.</p><button onclick="abrirModal('parkinson')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="degenerativos"><h2>Doença de Alzheimer</h2><p>Demência progressiva com perda cognitiva, memória e alterações comportamentais.</p><button onclick="abrirModal('alzheimer')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="degenerativos"><h2>Doença de Huntington</h2><p>Doença genética com coreia, declínio cognitivo e alterações psiquiátricas.</p><button onclick="abrirModal('huntington')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="perifericos"><h2>Esclerose Lateral Amiotrófica (ELA)</h2><p>Degeneração de neurónios motores superiores e inferiores levando a fraqueza progressiva.</p><button onclick="abrirModal('ela')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="perifericos"><h2>Neuropatia Periférica Diabética</h2><p>Lesão de nervos periféricos por hiperglicemia crônica; padrão sensitivo com dor e perda sensorial.</p><button onclick="abrirModal('neuropatia_diab')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="autoimunes"><h2>Mielite Transversa</h2><p>Inflamação da medula espinhal ocasionando déficit motor, sensitivo e autonômico.</p><button onclick="abrirModal('mielite')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="infecciosos"><h2>Meningite</h2><p>Inflamação das meninges por agentes bacterianos, virais ou fúngicos — emergência neurológica.</p><button onclick="abrirModal('meningite')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="infecciosos"><h2>Encefalite</h2><p>Inflamação do parênquima cerebral, frequentemente viral, cursando com confusão e convulsões.</p><button onclick="abrirModal('encefalite')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neurocirurgicos"><h2>Tumores Cerebrais</h2><p>Lesões expansivas intracranianas primárias ou metastáticas com sintomas focalizantes e hipertensão intracraniana.</p><button onclick="abrirModal('tumores')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neurocirurgicos"><h2>Traumatismo Cranioencefálico (TCE)</h2><p>Lesão cerebral por impacto com lesões primárias e secundárias (edema, hemorragia, isquemia).</p><button onclick="abrirModal('tce')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neurooftalmo"><h2>Neuropatia Óptica</h2><p>Lesão do nervo óptico por inflamação, isquemia ou compressão, causando perda visual.</p><button onclick="abrirModal('neuropatia_optica')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="perifericos"><h2>Síndrome de Guillain-Barré</h2><p>Polirradiculoneuropatia inflamatória aguda com paralisia ascendente e venda de reflexos.</p><button onclick="abrirModal('gbs')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="perifericos"><h2>Miastenia Gravis</h2><p>Doença autoimune da junção neuromuscular com fraqueza fatigável e comprometimento ocular.</p><button onclick="abrirModal('miastenia')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neurooftalmo"><h2>Neuropatia Óptica Isquêmica</h2><p>Perda súbita de visão por insuficiência vascular do nervo óptico (arterítica/ não-arterítica).</p><button onclick="abrirModal('noisquemica')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neurooftalmo"><h2>Neuralgia Pós-Herpética</h2><p>Dor neuropática persistente após herpes zoster devido a lesão nervosa.</p><button onclick="abrirModal('postherp')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="epilepsia"><h2>Ataxias Hereditárias</h2><p>Grupo de doenças genéticas que afetam o cerebelo e a coordenação motora.</p><button onclick="abrirModal('ataxias')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="perifericos"><h2>Síndrome do Túnel do Carpo</h2><p>Compressão do nervo mediano no punho causando parestesia e déficit de força preensão.</p><button onclick="abrirModal('tunel')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neurooftalmo"><h2>Hidrocefalia</h2><p>Acúmulo excessivo de líquido cefalorraquidiano causando aumento da pressão intracraniana e sintomas variáveis.</p><button onclick="abrirModal('hidrocefalia')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="infecciosos"><h2>Transtornos do Sono (Narcolepsia, Apneia)</h2><p>Condições que comprometem o sono com impacto neurológico e funcional significativo.</p><button onclick="abrirModal('sono')">Leitura detalhada</button></div>
+  </main>
+
+  <div id="modal" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal()">&times;</span><div id="modalText"></div></div></div>
+
+  <footer><p>Fontes: Harrison's, Adams & Victor, Bradley's Neurology, WHO, UpToDate.</p></footer>
+
+  <script>
+    const searchInput=document.getElementById('searchInput');
+    const filterSelect=document.getElementById('filterSelect');
+    const cards=document.querySelectorAll('.card');
+    const modal=document.getElementById('modal');
+    const modalText=document.getElementById('modalText');
+    searchInput.addEventListener('input',filtrarCards);
+    filterSelect.addEventListener('change',filtrarCards);
+    function filtrarCards(){const termo=searchInput.value.toLowerCase();const categoria=filterSelect.value;cards.forEach(card=>{const titulo=card.querySelector('h2').textContent.toLowerCase();const texto=card.textContent.toLowerCase();const cardCategoria=card.getAttribute('data-categoria');const correspondeTermo=titulo.includes(termo)||texto.includes(termo);const correspondeCategoria=categoria==='todos'||cardCategoria===categoria;card.style.display=(correspondeTermo&&correspondeCategoria)?'block':'none'})}
+
+    const textosDetalhados={
+      avc_isquemico:`<h2>Acidente Vascular Cerebral Isquêmico</h2>
+<h3>Etiologia</h3>
+<p>Oclusão arterial por trombose ou êmbolo (cardioembólico, arterioarterial), e causas menos comuns (dissecção, vasculite, trombofilias).</p>
+<h3>Fisiopatologia</h3>
+<p>Isquemia focal leva a perda de function neuronal, edema citotóxico e, sem reperfusão, infarto irreversível. Penumbra isquêmica é alvo terapêutico.</p>
+<h3>Manifestações</h3>
+<p>Déficit focal súbito (fraqueza unilateral, afasia, perda sensorial, alteração de campo visual). Escala NIHSS quantifica gravidade.</p>
+<h3>Diagnóstico</h3>
+<p>TC de crânio inicial para excluir hemorragia; angioTC/angioRM e imagem de perfusão orientam elegibilidade para trombólise (alteplase) e trombectomia mecânica.</p>
+<h3>Tratamento</h3>
+<p>Suporte ABC, trombólise IV em janela temporal adequada, trombectomia mecânica para grandes oclusões, controle da glicemia, pressão arterial e prevenção secundária (antitromboticos, estatinas).</p>
+<h3>Prognóstico</h3>
+<p>Depende do tempo para reperfusão, extensão do território e comorbidades; reabilitação melhora recuperação funcional.</p>`,
+
+      avc_hemorr:`<h2>Acidente Vascular Cerebral Hemorrágico</h2>
+<h3>Etiologia</h3>
+<p>Hipertensão arterial crônica, malformações arteriovenosas, aneurismas rompidos, coagulopatias e trauma.</p>
+<h3>Fisiopatologia</h3>
+<p>Sangramento intracerebral ou subaracnóideo causa lesão direta por massa, além de vasoespasmo e aumento da pressão intracraniana.</p>
+<h3>Manifestações</h3>
+<p>Cefaleia súbita intensa (especialmente SAH), náusea, vômito, déficit focal, diminuição do nível de consciência.</p>
+<h3>Diagnóstico</h3>
+<p>TC de crânio sem contraste é o exame inicial; angiotomografia ou angiografia cerebral para fonte vascular; punção lombar em SAH suspeito e TC negativa.</p>
+<h3>Tratamento</h3>
+<p>Suporte neurocrítico, controle pressão arterial, correção de coagulopatias, intervenção neurocirúrgica quando indicada (evacuação, clipagem ou embolização de aneurisma) e manejo de vasoespasmo.</p>
+<h3>Prognóstico</h3>
+<p>Maior mortalidade que AVC isquêmico; variabilidade conforme volume hemorrágico, localização e rapidez do manejo.</p>`,
+
+      epilepsia:`<h2>Epilepsia</h2>
+<h3>Etiologia</h3>
+<p>Episódios podem ser provocados por lesões estruturais, genética, tumores, infecções, ou idiopática.</p>
+<h3>Fisiopatologia</h3>
+<p>Desequilíbrio entre excitação e inibição cortical leva a descarga neuronal sincronizada causando crises focais ou generalizadas.</p>
+<h3>Manifestações</h3>
+<p>Crises motoras, não-motoras, alterações de consciência; status epilepticus é emergência com risco de dano neuronal.</p>
+<h3>Diagnóstico</h3>
+<p>EEG, imagem cerebral (RM) para causas estruturais, investigação metabólica e toxicológica.</p>
+<h3>Tratamento</h3>
+<p>Antiepilépticos (escolha baseada no tipo de crise), cirurgia antiepiléptica, neuromodulação (VNS, DBS) e manejo de fatores precipitantes.</p>
+<h3>Prognóstico</h3>
+<p>Muitos controlam crises com medicação; refratariedade requer abordagem cirúrgica ou terapias complementares.</p>`,
+
+      enxaqueca:`<h2>Enxaqueca</h2>
+<h3>Etiologia</h3>
+<p>Multifatorial: predisposição genética, gatilhos ambientais, alterações neurovasculares e ativação do sistema trigeminovascular.</p>
+<h3>Fisiopatologia</h3>
+<p>Liberação de neuropeptídeos (CGRP) e inflamação neurogênica contribuem à dor; alterações na excitabilidade cortical (onda cortical de depressão) podem explicar aura.</p>
+<h3>Manifestações</h3>
+<p>Cefaleia pulsátil, náusea, fotofobia e fonofobia; aura visual pode preceder a dor em alguns casos.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico com critérios da ICHD; excluir causas secundárias conforme sinal de alerta.</p>
+<h3>Tratamento</h3>
+<p>Abortivos: triptanos, AINEs, antieméticos; preventivos: betabloqueadores, anticonvulsivantes, antidepresivos, bloqueio de CGRP e ajustes de estilo de vida.</p>
+<h3>Prognóstico</h3>
+<p>Crônica em alguns; terapias preventivas e abortivas reduzem frequência e impacto funcional.</p>`,
+
+      trigemino:`<h2>Neuralgia do Trigêmeo</h2>
+<h3>Etiologia</h3>
+<p>Compressão vascular do nervo trigêmeo por laços vasculares, esclerose múltipla ou lesões estruturais.</p>
+<h3>Fisiopatologia</h3>
+<p>Desmielinização focal gera arritmogênese ectópica com baixíssima intensidade de estímulo capaz de provocar disparos dolorosos.</p>
+<h3>Manifestações</h3>
+<p>Crises breves de dor facial lancinante desencadeadas por estímulos leves (escovar dentes, vento).</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; RNM para excluir compressões e lesões secundárias.</p>
+<h3>Tratamento</h3>
+<p>Carbamazepina, oxcarbazepina, e procedimentos microcirúrgicos (descompressão vascular) ou percutâneos se farmacoterapia falhar.</p>
+<h3>Prognóstico</h3>
+<p>Boa resposta inicial a medicação; cirurgia indicada em casos refratários.</p>`,
+
+      esclerose:`<h2>Esclerose Múltipla</h2>
+<h3>Etiologia</h3>
+<p>Doença autoimune com predisposição genética e fatores ambientais (vitamina D, tabagismo, infecções virais).</p>
+<h3>Fisiopatologia</h3>
+<p>Inflamação e desmielinização do SNC com perda axonal subsequente. Lesões em fase aguda e crônica em cérebro e medula.</p>
+<h3>Manifestações</h3>
+<p>Sintomas variados: disfunção visual, fraqueza, parestesia, ataxia, fadiga e sintomas cognitivos; curso pode ser remitente-recorrente ou progressivo.</p>
+<h3>Diagnóstico</h3>
+<p>RM com lesões periventriculares, oligoclonais no LCR e critérios de McDonald para disseminação temporal e espacial.</p>
+<h3>Tratamento</h3>
+<p>Imunomoduladores (interferons, acetato de glatirâmero), terapias orais e biológicas, corticosteroides para surtos e reabilitação.</p>
+<h3>Prognóstico</h3>
+<p>Variável; tratamentos alteram o curso, reduzindo surtos e desacelerando progressão.</p>`,
+
+      parkinson:`<h2>Doença de Parkinson</h2>
+<h3>Etiologia</h3>
+<p>Idiopática na maioria; fatores genéticos e ambientais (toxinas) contribuem em subgrupos.</p>
+<h3>Fisiopatologia</h3>
+<p>Degeneração de neurónios dopaminérgicos na substância negra e presença de corpos de Lewy; desequilíbrio dopamina/acetilcolina.</p>
+<h3>Manifestações</h3>
+<p>Tremor de repouso, bradicinesia, rigidez e instabilidade postural; manifestações não motoras incluem sono, depressão e demência.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; resposta à levodopa é suporte diagnóstico; imagem (DAT-scan) em casos duvidosos.</p>
+<h3>Tratamento</h3>
+<p>Levodopa/agonistas dopaminérgicos, inibidores MAO-B, tratamento de sintomas não motores, fisioterapia e estimulação cerebral profunda em casos selecionados.</p>
+<h3>Prognóstico</h3>
+<p>Progressiva; terapia melhora qualidade de vida, mas complicações motoras e não motoras aumentam com tempo.</p>`,
+
+      alzheimer:`<h2>Doença de Alzheimer</h2>
+<h3>Etiologia</h3>
+<p>Complexa com fatores genéticos (APOE ε4) e ambientais; acúmulo de β-amiloide e proteína tau são marcos patológicos.</p>
+<h3>Fisiopatologia</h3>
+<p>Deposição de placas amiloides e emaranhados neurofibrilares levando à perda sináptica e atrofia cortical progressiva, especialmente em hipocampo.</p>
+<h3>Manifestações</h3>
+<p>Perda progressiva de memória episódica, dificuldade executive functions, alterações comportamentais e dependência funcional.</p>
+<h3>Diagnóstico</h3>
+<p>Avaliação neuropsicológica, RM para atrofia, biomarcadores em LCR/imagem PET para amiloide e tau quando disponível.</p>
+<h3>Tratamento</h3>
+<p>Inibidores da colinesterase, memantina para estágios moderados; abordagens não farmacológicas e suporte familiar são essenciais.</p>
+<h3>Prognóstico</h3>
+<p>Progressiva e incurável; manejo sintomático melhora qualidade de vida e planejamento de cuidados.</p>`,
+
+      huntington:`<h2>Doença de Huntington</h2>
+<h3>Etiologia</h3>
+<p>Mutação por expansão de CAG no gene HTT (autossômica dominante).</p>
+<h3>Fisiopatologia</h3>
+<p>Degeneração estriatal e cortical levando a movimentos coreicos e declínio cognitivo.</p>
+<h3>Manifestações</h3>
+<p>Coreia, alterações psiquiátricas (depressão, irritabilidade) e demência progressiva.</p>
+<h3>Diagnóstico</h3>
+<p>Genético confirmatório; avaliação clínica e neuroimagem auxiliar.</p>
+<h3>Tratamento</h3>
+<p>Sintomático: tetrabenazina para coreia, antipsicóticos, suporte multidisciplinar; pesquisa em terapias modificadoras genéticas em andamento.</p>
+<h3>Prognóstico</h3>
+<p>Progressiva; expectativa de vida reduzida por complicações motoras, pneumonia e suicídio.</p>`,
+
+      ela:`<h2>Esclerose Lateral Amiotrófica (ELA)</h2>
+<h3>Etiologia</h3>
+<p>Maioria esporádica; algumas formas genéticas (SOD1, C9orf72).</p>
+<h3>Fisiopatologia</h3>
+<p>Degeneração de motoneurónios superiores e inferiores levando a fraqueza progressiva, atrofia muscular e atrofia corticoespinhal.</p>
+<h3>Manifestações</h3>
+<p>Fasciculações, fraqueza assimétrica, disfagia, dispneia por fraqueza respiratória; sensorial geralmente preservado.</p>
+<h3>Diagnóstico</h3>
+<p>Base clínico e eletromiografia mostrando denervação crônica; excluir mimetizadores (MND mimics).</p>
+<h3>Tratamento</h3>
+<p>Riluzole e edaravone podem retardar progressão ligeiramente; suporte respiratório, nutrição e cuidados paliativos são essenciais.</p>
+<h3>Prognóstico</h3>
+<p>Progressiva com média de sobrevivência de alguns anos sem suporte ventilatório; variabilidade individual grande.</p>`,
+
+      neuropatia_diab:`<h2>Neuropatia Periférica Diabética</h2>
+<h3>Etiologia</h3>
+<p>Hiperglicemia crônica com glicotoxicidade, microangiopatia e alterações metabólicas.</p>
+<h3>Fisiopatologia</h3>
+<p>Lesão axonal e desmielinização devido a estresse oxidativo, glicação de proteínas e alterações microvasculares.</p>
+<h3>Manifestações</h3>
+<p>Padrão em luvas/ meias: perda sensorial, dor neuropática, úlceras plantares e risco de amputação.</p>
+<h3>Diagnóstico</h3>
+<p>Exame clínico, testes de condução nervosa, avaliação de sensibilidade vibratória e monofilamento.</p>
+<h3>Tratamento</h3>
+<p>Controle glicêmico, analgésicos, antidepressivos tricíclicos, gabapentinoides, e cuidados com pele e calçados para prevenir úlceras.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com bom controle glicêmico; dor neuropática pode persistir apesar do controle metabólico.</p>`,
+
+      mielite:`<h2>Mielite Transversa</h2>
+<h3>Etiologia</h3>
+<p>Idiopática, pós-infecciosa, associada a doenças autoimunes (EM) ou por infecções.</p>
+<h3>Fisiopatologia</h3>
+<p>Inflamação segmentar da medula produz edema, disfunção de vias motoras, sensoriais e autonômicas.</p>
+<h3>Manifestações</h3>
+<p>Déficit sensitivo e motor bilateral, nível sensitivo, disfunção vesical e intestinal.</p>
+<h3>Diagnóstico</h3>
+<p>RM medula com realce inflamatório, LCR com pleocitose/ proteínas e exclusão de compressão mecânica.</p>
+<h3>Tratamento</h3>
+<p>Corticóides em altas doses, plasmaférese em casos refratários, reabilitação intensiva.</p>
+<h3>Prognóstico</h3>
+<p>Recuperação variável; alguns recuperam totalmente, outros ficam com sequelas duradouras.</p>`,
+
+      meningite:`<h2>Meningite</h2>
+<h3>Etiologia</h3>
+<p>Bacteriana (N. meningitidis, S. pneumoniae), viral (enterovírus), fúngica e tuberculosa.</p>
+<h3>Fisiopatologia</h3>
+<p>Inflamação das meninges com aumento da permeabilidade vascular, risco de edema cerebral e complicações sérias.</p>
+<h3>Manifestações</h3>
+<p>Febre, rigidez de nuca, cefaleia intensa, vômitos e alteração do estado mental; sinais meníngeos positivos.</p>
+<h3>Diagnóstico</h3>
+<p>Punção lombar com análise de LCR, hemoculturas, PCR e imagem quando necessário.</p>
+<h3>Tratamento</h3>
+<p>Antibióticos empíricos imediatos na suspeita bacteriana, manejo intensivo, dexametasona precoce em alguns casos; suporte e profilaxia para contactos quando indicado.</p>
+<h3>Prognóstico</h3>
+<p>Depende da etiologia e rapidez do tratamento; meningite bacteriana pode causar sequelas neurológicas.</p>`,
+
+      encefalite:`<h2>Encefalite</h2>
+<h3>Etiologia</h3>
+<p>Viral (HSV, VZV, enterovírus), autoimune (anti-NMDA) e causas associadas a neoplasia ou medicamentos.</p>
+<h3>Fisiopatologia</h3>
+<p>Inflamação do parênquima cerebral com edema, disfunção neuronal e risco de status epiléptico.</p>
+<h3>Manifestações</h3>
+<p>Alteração do nível de consciência, febre, cefaleia, déficits focais e convulsões.</p>
+<h3>Diagnóstico</h3>
+<p>RM cerebral, PCR para vírus no LCR, EEG para atividade epileptiforme e painel autoimune se suspeita.</p>
+<h3>Tratamento</h3>
+<p>Acyclovir empírico para HSV, manejo de complicações, imunoterapia para formas autoimunes.</p>
+<h3>Prognóstico</h3>
+<p>Variable; presença de lesão temporal em HSV associa-se a pior prognose; tratamento precoce melhora outcomes.</p>`,
+
+      tumores:`<h2>Tumores Cerebrais</h2>
+<h3>Etiologia</h3>
+<p>Primários (gliomas, meningiomas) ou metastáticos; fatores genéticos influenciam alguns tipos.</p>
+<h3>Fisiopatologia</h3>
+<p>Massa expansiva produz efeito de massa, edema vasogênico e hipertensão intracraniana; localização determina déficits focais.</p>
+<h3>Manifestações</h3>
+<p>Cefaleia progressiva, náusea, vómito, crises epilépticas, déficits neurológicos focais e alteração cognitiva.</p>
+<h3>Diagnóstico</h3>
+<p>RM com contraste é exame de escolha; biópsia para diagnóstico histológico e estadiamento molecular em gliomas.</p>
+<h3>Tratamento</h3>
+<p>Ressecção cirúrgica quando possível, radioterapia, quimioterapia e terapias alvo conforme tipo; manejo de edema com corticosteroides.</p>
+<h3>Prognóstico</h3>
+<p>Depende do tipo histológico, grau e possibilidade de ressecção; glioblastoma tem prognóstico reservado.</p>`,
+
+      tce:`<h2>Traumatismo Cranioencefálico (TCE)</h2>
+<h3>Etiologia</h3>
+<p>Acidentes de viação, quedas, violência e esportes de contato.</p>
+<h3>Fisiopatologia</h3>
+<p>Lesão primária por impacto seguida por processos secundários (hipóxia, inflamação, edema, hemorragia) que amplificam dano.</p>
+<h3>Manifestações</h3>
+<p>Desde concussão com perda breve de consciência até lesões graves com coma, déficits neurológicos e crises.</p>
+<h3>Diagnóstico</h3>
+<p>TC inicial para lesões agudas, RM para avaliação subaguda/crônica; escala de coma de Glasgow para estratificar gravidade.</p>
+<h3>Tratamento</h3>
+<p>Suporte neurológico e neurocirúrgico conforme lesões (hemorragias, edema), reabilitação interdisciplinar para sequelas.</p>
+<h3>Prognóstico</h3>
+<p>Variável; depende da gravidade inicial, intervenções e reabilitação precoce.</p>`,
+
+      neuropatia_optica:`<h2>Neuropatia Óptica</h2>
+<h3>Etiologia</h3>
+<p>Neuropatia óptica inflamatória (neurite óptica), isquêmica, compressiva ou tóxica.</p>
+<h3>Fisiopatologia</h3>
+<p>Lesão axonal e inflamação do nervo óptico leva perda de função conductiva e redução da acuidade visual.</p>
+<h3>Manifestações</h3>
+<p>Perda visual unilateral aguda, dor ocular à movimentação, defeitos do campo visual e perda de cor.</p>
+<h3>Diagnóstico</h3>
+<p>Exame oftalmológico, potencial evocado visual, RM para causas inflamatórias e investigação sistêmica (EM, doenças autoimunes).</p>
+<h3>Tratamento</h3>
+<p>Corticóides para neurite óptica inflamatória; tratamento da causa subjacente e reabilitação visual.</p>
+<h3>Prognóstico</h3>
+<p>Recuperação parcial a completa em muitos casos Inflamatórios; isquêmicos têm recuperação limitada.</p>`,
+
+      gbs:`<h2>Síndrome de Guillain-Barré</h2>
+<h3>Etiologia</h3>
+<p>Frequentemente pós-infecciosa (Campylobacter jejuni, vírus), com resposta autoimune dirigida a raízes e nervos periféricos.</p>
+<h3>Fisiopatologia</h3>
+<p>Desmielinização segmentar e/ou axonal provoca condução nervosa comprometida — perda reflexos e paralisia ascendente.</p>
+<h3>Manifestações</h3>
+<p>Fraqueza progressiva, parestesia, perda reflexa e possível envolvimento bulbar e respiratório.</p>
+<h3>Diagnóstico</h3>
+<p>Elevação de proteína no LCR com pleocitose discreta, estudos de condução nervosa e exame clínico.</p>
+<h3>Tratamento</h3>
+<p>Plasmaférese ou imunoglobulina IV, suporte respiratório quando necessário e reabilitação.</p>
+<h3>Prognóstico</h3>
+<p>Maioria recupera, mas a recuperação pode ser lenta; pequenos percentuais ficam com défice permanente.</p>`,
+
+      miastenia:`<h2>Miastenia Gravis</h2>
+<h3>Etiologia</h3>
+<p>Autoanticorpos contra receptores de acetilcolina ou proteínas associadas (MuSK), frequentemente associada a timo anormal.</p>
+<h3>Fisiopatologia</h3>
+<p>Bloqueio e degradação dos receptores nicotínicos prejudica transmissão neuromuscular e provoca fatigabilidade.</p>
+<h3>Manifestações</h3>
+<p>Fraqueza fatigável, ptose, diplopia, bulbar involvement, piora com exercício e melhora com repouso.</p>
+<h3>Diagnóstico</h3>
+<p>Testes farmacológicos (edrofônio), eletrofisiologia (decremento em estimulação repetitiva), anticorpos anti-AChR/MuSK e imagem de timo.</p>
+<h3>Tratamento</h3>
+<p>Anticolinesterásicos (piridostigmina), imunossupressão, plasmaférese/IVIG em crises miastênicas e timectomia em indicações</p>
+<h3>Prognóstico</h3>
+<p>Controle possível com terapia adequada; crises respiratórias são emergências.</p>`,
+
+      noisquemica:`<h2>Neuropatia Óptica Isquêmica</h2>
+<h3>Etiologia</h3>
+<p>Arterítica (vasculite — arterite de células gigantes) ou não-arterítica (hipoperfusão, fatores vasculares).</p>
+<h3>Fisiopatologia</h3>
+<p>Isquemia do nervo óptico anterior causa infarto de fibras axonais e perda visual súbita.</p>
+<h3>Manifestações</h3>
+<p>Perda visual indolor, defeito pupilar aferente e campo visual alt</p>
+<h3>Diagnóstico</h3>
+<p>Exame oftalmológico, ESR/CRP para forma arterítica, e investigação vascular; RM em casos duvidosos.</p>
+<h3>Tratamento</h3>
+<p>Arterítica: corticosteroides imediatos para prevenir perda no outro olho; não-arterítica: manejo de fatores vasculares e prevenção secundária.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente fixa; recuperação limitada, especialmente na forma arterítica se não tratada.</p>`,
+
+      postherp:`<h2>Neuralgia Pós-Herpética</h2>
+<h3>Etiologia</h3>
+<p>Sequela do Herpes Zoster com dano nervoso periférico e central.</p>
+<h3>Fisiopatologia</h3>
+<p>Mecanismos de sensibilização central e periférica produzem dor neuropática persistente após resolução da lesão cutânea.</p>
+<h3>Manifestações</h3>
+<p>Dor contínua ou paroxística na distribuição do dermátomo previamente afetado, hiperalgesia e alodinia.</p>
+<h3>Diagnóstico</h3>
+<p>História compatível com herpes zoster prévio; avaliação clínica de dor neuropática.</p>
+<h3>Tratamento</h3>
+<p>Antineuropáticos (gabapentina, pregabalina), antidepressivos tricíclicos, tópicos (lidocaína, capsaicina) e intervenção quando necessário.</p>
+<h3>Prognóstico</h3>
+<p>Pode persistir por meses a anos; tratamento precoce do zóster reduz risco.</p>`,
+
+      ataxias:`<h2>Ataxias Hereditárias</h2>
+<h3>Etiologia</h3>
+<p>Grupo heterogêneo: ataxia de Friedreich, ataxias por trinucleotídeos (SCA) e outras mutações autossômicas dominantes/recessivas.</p>
+<h3>Fisiopatologia</h3>
+<p>Degeneração do cerebelo e suas vias de conexão leva a descoordenação motora, ataxia de marcha e disartria.</p>
+<h3>Manifestações</h3>
+<p>Ataxia progressiva, perda de coordenação, oftalmoplegia em alguns tipos e manifestações sistêmicas (cardiomiopatia em Friedreich).</p>
+<h3>Diagnóstico</h3>
+<p>Avaliação genética, RM cerebelar e exame neurológico dirigido.</p>
+<h3>Tratamento</h3>
+<p>Majoritariamente sintomático e reabilitação; algumas causas têm terapia específica em investigação.</p>
+<h3>Prognóstico</h3>
+<p>Progressivo; dependente do subtipo genético e complicações sistêmicas.</p>`,
+
+      tunel:`<h2>Síndrome do Túnel do Carpo</h2>
+<h3>Etiologia</h3>
+<p>Compressão do nervo mediano por uso repetitivo, edema, trauma ou doenças sistêmicas (diabetes, hipotireoidismo).</p>
+<h3>Fisiopatologia</h3>
+<p>Compressão prolongada leva a isquemia e desmielinização focal do nervo mediano.</p>
+<h3>Manifestações</h3>
+<p>Parestesias nocturnas, dor e fraqueza de preensão, sinal de Phalen e Tinel positivos.</p>
+<h3>Diagnóstico</h3>
+<p>Eletroneuromiografia confirma retardo de condução; exame clínico orienta tratamento.</p>
+<h3>Tratamento</h3>
+<p>Imobilização, injeção com corticosteroide, terapia ocupacional e cirurgia de liberação do túnel em casos refratários.</p>
+<h3>Prognóstico</h3>
+<p>Boa com tratamento adequado; recuperação completa possível quando tratada cedo.</p>`,
+
+      hidrocefalia:`<h2>Hidrocefalia</h2>
+<h3>Etiologia</h3>
+<p>Obstrutiva (não comunicante) por massa/estenose ou comunicante por absorção defeituosa; causas congênitas e adquiridas.</p>
+<h3>Fisiopatologia</h3>
+<p>Acúmulo de LCR aumenta pressão intracraniana e dilatação ventricular, comprimindo tecido cerebral.</p>
+<h3>Manifestações</h3>
+<p>Em adultos: cefaleia, náusea, alterações cognitivas, marcha instável; em crianças: macrocefalia e fontanelas tensas.</p>
+<h3>Diagnóstico</h3>
+<p>TC/RM mostram ventriculomegalia; avaliação da pressão e etiologia é necessária.</p>
+<h3>Tratamento</h3>
+<p>Drenagem cirúrgica (shunt ventriculoperitoneal) ou endoscopic third ventriculostomy (ETV) dependendo da causa.</p>
+<h3>Prognóstico</h3>
+<p>Melhora significativa após tratamento; complicações relacionadas a shunts podem ocorrer.</p>`,
+
+      sono:`<h2>Transtornos do Sono (Narcolepsia, Apneia)</h2>
+<h3>Etiologia</h3>
+<p>Narcolepsia frequentemente ligada a perda de neurónios produtores de hipocretina; apneia obstrutiva relacionada a obesidade e anatomia das vias aéreas.</p>
+<h3>Fisiopatologia</h3>
+<p>Narcolepsia envolve disfunção na regulação do sono REM; apneia causa fragmentação do sono por colapsos das vias aéreas e hipoxemia.</p>
+<h3>Manifestações</h3>
+<p>Sonolência diurna excessiva, cataplexia em narcolepsia; ronco, pausas respiratórias e sonolência em apneia.</p>
+<h3>Diagnóstico</h3>
+<p>Polissonografia noturna e teste de latência múltipla do sono; avaliação clínica e escalas para apneia (AHI).</p>
+<h3>Tratamento</h3>
+<p>Narcolepsia: estimulantes e modafinil, manejo de cataplexia com antidepressivos; apneia: CPAP, perda de peso e cirurgias de via aérea conforme indicação.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com tratamento; impacto crônico na qualidade de vida sem tratamento.</p>`
+    };
+
+    function abrirModal(chave){modalText.innerHTML=textosDetalhados[chave]||'<p>Detalhes não disponíveis.</p>';modal.style.display='block'}
+    function fecharModal(){modal.style.display='none'}
+    window.onclick=function(e){if(e.target===modal)fecharModal()}
+  </script>
+</body>
+
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

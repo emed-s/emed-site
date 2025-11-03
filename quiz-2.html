@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz de Patologias Cardiovasculares</title>
+  <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.5s, color 0.5s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 60px 10px 20px;
+    }
+    :root {
+      --primary: #8b0000;
+      --bg-light: #f9f9f9;
+      --text-light: #222;
+      --bg-dark: #1a1a1a;
+      --text-dark: #eee;
+    }
+    body.light { --bg: var(--bg-light); --text: var(--text-light); }
+    body.dark { --bg: var(--bg-dark); --text: var(--text-dark); }
+    h1 {
+      color: var(--primary);
+      font-size: 2em;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--primary);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+      backdrop-filter: blur(10px);
+    }
+    .question {
+      font-size: 1.25em;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .answers button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      background: rgba(139, 0, 0, 0.8);
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .answers button:hover { transform: scale(1.03); }
+    .answers button.correct { background-color: #2ecc71 !important; }
+    .answers button.wrong { opacity: 0.7; }
+    .nav-btns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+    }
+    .nav-btns button {
+      background: var(--primary);
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .nav-btns button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px var(--primary);
+    }
+    #result {
+      font-size: 1.2em;
+      margin-top: 20px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    #modeToggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1.8em;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    #modeToggle:hover { transform: rotate(25deg); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      .card { width: 90%; }
+      .question { font-size: 1.1em; }
+    }
+  </style>
+</head>
+<body class="dark">
+  <button id="modeToggle"><ion-icon name="sunny-outline"></ion-icon></button>
+  <h1>Quiz: Patologias Cardiovasculares</h1>
+  <div class="card">
+    <div class="question" id="question"></div>
+    <div class="answers" id="answers"></div>
+    <div class="nav-btns">
+      <button id="prev">⟵</button>
+      <button id="next">⟶</button>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    const questions = [
+      { q: 'Qual é a principal causa de insuficiência cardíaca?', a: ['Hipertensão arterial', 'Anemia', 'Diabetes', 'Hipotireoidismo'], correct: 0 },
+      { q: 'O que caracteriza a angina estável?', a: ['Dor em repouso', 'Dor previsível com esforço', 'Dor noturna', 'Sem dor'], correct: 1 },
+      { q: 'Qual exame confirma o infarto agudo do miocárdio?', a: ['ECG', 'Raio-X', 'Hemograma', 'Ultrassonografia'], correct: 0 },
+      { q: 'A endocardite infecciosa afeta qual estrutura?', a: ['Pericárdio', 'Miocárdio', 'Válvulas cardíacas', 'Artérias coronárias'], correct: 2 },
+      { q: 'A aterosclerose envolve acúmulo de quê?', a: ['Lipídios', 'Proteínas', 'Cálcio', 'Água'], correct: 0 },
+      { q: 'A fibrilação atrial aumenta o risco de?', a: ['AVC', 'Infarto renal', 'Trombose venosa profunda', 'Hipotensão'], correct: 0 },
+      { q: 'O choque cardiogênico ocorre por?', a: ['Falha na bomba cardíaca', 'Perda de volume', 'Vasodilatação', 'Infecção'], correct: 0 },
+      { q: 'O principal sintoma da pericardite é?', a: ['Dor torácica que piora ao deitar', 'Febre alta', 'Dispneia', 'Palpitações'], correct: 0 },
+      { q: 'O ECG na taquicardia ventricular mostra?', a: ['QRS largo', 'QRS estreito', 'Ausência de QRS', 'QT longo'], correct: 0 },
+      { q: 'O tratamento da hipertensão inclui?', a: ['Dieta, exercício e medicamentos', 'Somente cirurgia', 'Repouso absoluto', 'Antibióticos'], correct: 0 },
+      { q: 'O que é cardiomiopatia dilatada?', a: ['Dilatação do coração e redução da contratilidade', 'Inflamação do pericárdio', 'Obstrução das coronárias', 'Hipertrofia ventricular'], correct: 0 },
+      { q: 'A insuficiência mitral causa refluxo de sangue para?', a: ['Átrio esquerdo', 'Átrio direito', 'Ventrículo direito', 'Aorta'], correct: 0 },
+      { q: 'O sopro sistólico é ouvido durante?', a: ['Contração ventricular', 'Relaxamento ventricular', 'Fechamento da válvula pulmonar', 'Fechamento da tricúspide'], correct: 0 },
+      { q: 'A dislipidemia se caracteriza por?', a: ['Aumento de colesterol e triglicerídeos', 'Baixa glicose', 'Aumento de sódio', 'Aumento de ureia'], correct: 0 },
+      { q: 'A trombose coronária leva a?', a: ['Infarto', 'Insuficiência renal', 'AVC', 'Edema pulmonar'], correct: 0 },
+      { q: 'A hipertrofia ventricular esquerda é comum na?', a: ['Hipertensão', 'Hipotensão', 'Anemia', 'Arritmia'], correct: 0 },
+      { q: 'A principal complicação da fibrilação atrial é?', a: ['AVC isquêmico', 'Hipotensão', 'Edema', 'Tosse'], correct: 0 },
+      { q: 'O exame padrão-ouro para coronariopatia é?', a: ['Angiografia coronariana', 'ECG', 'Ecocardiograma', 'Ressonância'], correct: 0 },
+      { q: 'O coração direito bombeia sangue para?', a: ['Pulmões', 'Corpo', 'Fígado', 'Cérebro'], correct: 0 },
+      { q: 'A bradicardia é definida como?', a: ['FC < 60 bpm', 'FC > 100 bpm', 'FC = 80 bpm', 'Ausência de pulso'], correct: 0 },
+      { q: 'O principal sintoma da insuficiência cardíaca direita é?', a: ['Edema periférico', 'Dispneia', 'Cianose', 'Tosse'], correct: 0 },
+      { q: 'A doença de Chagas pode causar?', a: ['Cardiomiopatia dilatada', 'Hipotireoidismo', 'Anemia', 'AVC hemorrágico'], correct: 0 },
+      { q: 'O sopro diastólico ocorre durante?', a: ['Relaxamento do ventrículo', 'Contração ventricular', 'Sístole atrial', 'Fechamento da mitral'], correct: 0 },
+      { q: 'A coarctação da aorta é?', a: ['Estenose da aorta', 'Dilatação da aorta', 'Inflamação arterial', 'Infecção cardíaca'], correct: 0 },
+      { q: 'A causa mais comum de morte súbita é?', a: ['Arritmia ventricular', 'AVC', 'Infarto cerebral', 'Trombose venosa'], correct: 0 }
+    ];
+
+    let current = 0;
+    let score = 0;
+    const qEl = document.getElementById('question');
+    const aEl = document.getElementById('answers');
+    const resEl = document.getElementById('result');
+    const modeToggle = document.getElementById('modeToggle');
+    const icon = modeToggle.querySelector('ion-icon');
+
+    function showQuestion() {
+      const q = questions[current];
+      qEl.textContent = `${current + 1}. ${q.q}`;
+      aEl.innerHTML = '';
+      q.a.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => selectAnswer(btn, i === q.correct);
+        aEl.appendChild(btn);
+      });
+      resEl.textContent = '';
+    }
+
+    function selectAnswer(btn, correct) {
+      const all = aEl.querySelectorAll('button');
+      all.forEach(b => b.disabled = true);
+      if (correct) {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        all[questions[current].correct].classList.add('correct');
+      }
+    }
+
+    document.getElementById('next').onclick = () => {
+      if (current < questions.length - 1) {
+        current++;
+        showQuestion();
+      } else {
+        showResult();
+      }
+    };
+
+    document.getElementById('prev').onclick = () => {
+      if (current > 0) {
+        current--;
+        showQuestion();
+      }
+    };
+
+    function showResult() {
+      qEl.textContent = 'Resultado final';
+      aEl.innerHTML = '';
+      resEl.textContent = `Você acertou ${score} de ${questions.length} perguntas!`;
+    }
+
+    modeToggle.onclick = () => {
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
+      if (document.body.classList.contains('dark')) {
+        icon.setAttribute('name', 'sunny-outline');
+      } else {
+        icon.setAttribute('name', 'moon-outline');
+      }
+    };
+
+    showQuestion();
+  </script>
+</body>
+</html>

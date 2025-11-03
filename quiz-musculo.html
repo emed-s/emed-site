@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Musculoesquelético - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #b30000;
+  }
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Musculoesquelético - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // 30 múltipla escolha (MC)
+  {type:"mc", q:"A osteoartrite é caracterizada por:", a:["Degeneração da cartilagem articular","Inflamação autoimune","Infecção bacteriana","Deficiência de vitamina D"], correct:0},
+  {type:"mc", q:"A artrite reumatoide envolve:", a:["Doença autoimune com inflamação das articulações","Degeneração mecânica","Infecção viral","Excesso de cálcio"], correct:0},
+  {type:"mc", q:"A gota é causada por:", a:["Acúmulo de ácido úrico","Deficiência de vitamina C","Infecção bacteriana","Excesso de cálcio"], correct:0},
+  {type:"mc", q:"A osteoporose é caracterizada por:", a:["Perda de massa óssea","Inflamação articular","Fibrose muscular","Edema"], correct:0},
+  {type:"mc", q:"A fibromialgia envolve:", a:["Dor muscular generalizada","Inflamação articular","Perda óssea","Fraturas frequentes"], correct:0},
+  {type:"mc", q:"A escoliose é:", a:["Curvatura lateral da coluna vertebral","Inflamação da coluna","Fratura vertebral","Osteoporose"], correct:0},
+  {type:"mc", q:"A doença de Paget afeta:", a:["Remodelação óssea anormal","Inflamação muscular","Fibrose articular","Tendinite"], correct:0},
+  {type:"mc", q:"A osteomielite é:", a:["Infecção óssea","Inflamação articular","Degeneração cartilaginosa","Fratura"], correct:0},
+  {type:"mc", q:"A tendinite envolve:", a:["Inflamação do tendão","Degeneração óssea","Fratura","Fibrose muscular"], correct:0},
+  {type:"mc", q:"A bursite envolve:", a:["Inflamação da bursa","Inflamação óssea","Degeneração articular","Fratura"], correct:0},
+  {type:"mc", q:"A síndrome do túnel do carpo envolve:", a:["Compressão do nervo mediano","Inflamação da coluna","Osteoporose","Fibromialgia"], correct:0},
+  {type:"mc", q:"A espondilite anquilosante é:", a:["Doença inflamatória da coluna","Degeneração cartilaginosa","Fratura vertebral","Fibrose muscular"], correct:0},
+  {type:"mc", q:"A distrofia muscular de Duchenne é:", a:["Doença genética com fraqueza progressiva","Inflamação articular","Osteoporose","Tendinite"], correct:0},
+  {type:"mc", q:"A doença de Osgood-Schlatter afeta:", a:["Tuberosidade tibial em adolescentes","Ombro","Punho","Quadril"], correct:0},
+  {type:"mc", q:"A luxação é:", a:["Deslocamento de uma articulação","Fratura óssea","Inflamação muscular","Degeneração óssea"], correct:0},
+  {type:"mc", q:"A fratura por estresse ocorre devido a:", a:["Trauma repetitivo","Infecção","Osteoporose apenas","Inflamação articular"], correct:0},
+  {type:"mc", q:"A osteocondrite dissecante envolve:", a:["Fragmento ósseo e cartilaginoso solto","Inflamação muscular","Tendinite","Fratura"], correct:0},
+  {type:"mc", q:"A cãibra muscular é causada por:", a:["Contração involuntária do músculo","Inflamação articular","Infecção óssea","Fratura"], correct:0},
+  {type:"mc", q:"A lordose é:", a:["Curvatura exagerada da coluna lombar","Inflamação articular","Escoliose","Fratura vertebral"], correct:0},
+  {type:"mc", q:"A cifose é:", a:["Curvatura exagerada da coluna torácica","Inflamação muscular","Fratura","Escoliose"], correct:0},
+  {type:"mc", q:"A sarcopenia é:", a:["Perda de massa muscular com idade","Inflamação articular","Osteoporose","Fratura"], correct:0},
+  {type:"mc", q:"A esclerodermia pode causar:", a:["Rigidez articular e fibrose","Perda óssea","Tendinite","Fratura"], correct:0},
+  {type:"mc", q:"A síndrome de Marfan afeta:", a:["Tecido conjuntivo e articulações","Osteoporose","Fraturas","Tendinite"], correct:0},
+  {type:"mc", q:"A gota geralmente afeta:", a:["Articulações do pé, especialmente o primeiro metatarsofalângico","Ombro","Punho","Quadril"], correct:0},
+  {type:"mc", q:"A osteomalácia é causada por:", a:["Deficiência de vitamina D","Infecção óssea","Inflamação muscular","Fratura"], correct:0},
+  {type:"mc", q:"A doença de Charcot envolve:", a:["Destruição articular neuropática","Inflamação articular","Tendinite","Fratura"], correct:0},
+  {type:"mc", q:"A condromalácia patelar envolve:", a:["Amolecimento da cartilagem da patela","Fratura","Inflamação muscular","Osteoporose"], correct:0},
+  {type:"mc", q:"A epicondilite lateral é conhecida como:", a:["Cotovelo de tenista","Cotovelo de golfista","Fratura de úmero","Inflamação do ombro"], correct:0},
+  {type:"mc", q:"A osteogênese imperfeita é:", a:["Doença genética de fragilidade óssea","Inflamação articular","Tendinite","Fibrose muscular"], correct:0},
+  {type:"mc", q:"A síndrome do impacto do ombro envolve:", a:["Compressão dos tendões do manguito rotador","Osteoporose","Fratura do úmero","Fibromialgia"], correct:0},
+
+  // 20 verdadeiro/falso (VF)
+  {type:"vf", q:"A osteoartrite envolve degeneração da cartilagem articular.", correct:true},
+  {type:"vf", q:"A artrite reumatoide é autoimune.", correct:true},
+  {type:"vf", q:"A gota é causada pelo excesso de ácido úrico.", correct:true},
+  {type:"vf", q:"A osteoporose é caracterizada por aumento de densidade óssea.", correct:false},
+  {type:"vf", q:"A fibromialgia envolve dor muscular generalizada.", correct:true},
+  {type:"vf", q:"A escoliose é curvatura lateral da coluna.", correct:true},
+  {type:"vf", q:"A osteomielite é infecção óssea.", correct:true},
+  {type:"vf", q:"A tendinite é inflamação de uma articulação.", correct:false},
+  {type:"vf", q:"A bursite envolve inflamação da bursa.", correct:true},
+  {type:"vf", q:"A distrofia muscular de Duchenne é uma doença genética.", correct:true},
+  {type:"vf", q:"A lordose é curvatura exagerada da coluna lombar.", correct:true},
+  {type:"vf", q:"A cifose é curvatura exagerada da coluna torácica.", correct:true},
+  {type:"vf", q:"A sarcopenia é perda de massa muscular com idade.", correct:true},
+  {type:"vf", q:"A síndrome de Marfan afeta o tecido conjuntivo.", correct:true},
+  {type:"vf", q:"A osteomalácia é causada por deficiência de vitamina D.", correct:true},
+  {type:"vf", q:"A epicondilite lateral é conhecida como cotovelo de tenista.", correct:true},
+  {type:"vf", q:"A osteogênese imperfeita é fragilidade óssea genética.", correct:true},
+  {type:"vf", q:"A síndrome do impacto do ombro envolve compressão dos tendões do manguito rotador.", correct:true},
+  {type:"vf", q:"A gota raramente afeta o pé.", correct:false},
+  {type:"vf", q:"A doença de Paget envolve remodelação óssea anormal.", correct:true}
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a : ["Verdadeiro","Falso"];
+    options.forEach((ans,i)=>{
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?i:(i===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach((btn,i)=>{
+    if((q.type==="mc" && i===q.correct) || (q.type==="vf" && ((i===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === answer || (q.type==="vf" && ((i===0)===answer))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html>

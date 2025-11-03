@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Verdana,sans-serif;;color:#222;margin:0;padding:0}
+    header{background:#5c0a13;color:#fff;text-align:center;padding:2rem 1rem}
+    header h1{margin:0;font-size:2.2rem; margin-top: 5rem;}
+    header p{opacity:.9}
+    .search-bar{text-align:center;margin:1.5rem auto}
+    .search-bar input,.search-bar select{padding:.7rem;font-size:1rem;border-radius:8px;border:1px solid #ccc;width:220px;margin:.3rem}
+    main{max-width:1200px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.8rem}
+    .card{background:#fff;border-radius:14px;box-shadow:0 4px 10px rgba(0,0,0,.1);padding:1.6rem;transition:transform .25s,box-shadow .25s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 10px 22px rgba(0,0,0,.14)}
+    .card h2{color:#5c0a13;margin-bottom:.5rem;font-size:1.25rem;border-bottom:2px solid #5c0a13;padding-bottom:.4rem}
+    .card p{line-height:1.5;text-align:justify;margin:0.3rem 0}
+    .card button{margin-top:1rem;padding:.5rem .9rem;background:#5c0a13;color:#fff;border:0;border-radius:6px;cursor:pointer}
+    .card button:hover{background:#7b0f1d}
+    footer{background:#5c0a13;color:#fff;text-align:center;padding:1rem;font-size:.9rem;margin-top:2rem}
+    .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,.6)}
+    .modal-content{background:#fff;margin:4% auto;padding:2rem;border-radius:12px;max-width:900px;position:relative;max-height:82vh;overflow-y:auto}
+    .close{position:absolute;top:10px;right:20px;color:#5c0a13;font-size:1.8rem;font-weight:700;cursor:pointer}
+    .close:hover{color:#7b0f1d}
+    .modal h3{margin-top:1rem}
+    .modal p{line-height:1.6;text-align:justify}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Sensoriais — Visão & Audição</h1>
+    <p>Principais doenças oftalmológicas e otológicas: descrição clínica, diagnóstico e tratamento</p>
+  </header>
+
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="visao">Visão</option>
+      <option value="audicao">Audição</option>
+      <option value="neurossensorial">Neuro-sensorial</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="visao"><h2>Catarata</h2><p>Opacificação progressiva do cristalino que leva a perda de acuidade visual e ofuscamento.</p><button onclick="abrirModal('catarata')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="visao"><h2>Glaucoma</h2><p>Neuropatia óptica progressiva muitas vezes associada a aumento da pressão intraocular e perda do campo visual.</p><button onclick="abrirModal('glaucoma')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="visao"><h2>Degeneração Macular Relacionada à Idade (DMRI)</h2><p>Doença da mácula que causa perda da visão central, mais comum em idosos.</p><button onclick="abrirModal('dmri')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="audicao"><h2>Presbiacusia</h2><p>Perda auditiva relacionada à idade, caracterizada por diminuição da sensibilidade, especialmente a sons agudos.</p><button onclick="abrirModal('presbiacusia')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="audicao"><h2>Doença de Ménière</h2><p>Distúrbio do ouvido interno com vertigem episódica, perda auditiva flutuante e zumbido.</p><button onclick="abrirModal('meniere')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="audicao"><h2>Tinnitus (Zumbido)</h2><p>Percepção de som sem fonte externa; pode ser pulsátil ou contínuo e impactar qualidade de vida.</p><button onclick="abrirModal('tinnitus')">Leitura detalhada</button></div>
+  </main>
+
+  <div id="modal" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal()">&times;</span><div id="modalText"></div></div></div>
+
+  <footer><p>Fontes: American Academy of Ophthalmology, WHO, AAO, UpToDate, British Association of Otolaryngology.</p></footer>
+
+  <script>
+    const searchInput=document.getElementById('searchInput');
+    const filterSelect=document.getElementById('filterSelect');
+    const cards=document.querySelectorAll('.card');
+    const modal=document.getElementById('modal');
+    const modalText=document.getElementById('modalText');
+    searchInput.addEventListener('input',filtrarCards);
+    filterSelect.addEventListener('change',filtrarCards);
+    function filtrarCards(){const termo=searchInput.value.toLowerCase();const categoria=filterSelect.value;cards.forEach(card=>{const titulo=card.querySelector('h2').textContent.toLowerCase();const texto=card.textContent.toLowerCase();const cardCategoria=card.getAttribute('data-categoria');const correspondeTermo=titulo.includes(termo)||texto.includes(termo);const correspondeCategoria=categoria==='todos'||cardCategoria===categoria;card.style.display=(correspondeTermo&&correspondeCategoria)?'block':'none'})}
+
+    const textosDetalhados={
+      catarata:`<h2>Catarata</h2>
+<h3>Etiologia</h3>
+<p>Envelhecimento (catarata senil) é a causa mais comum. Outras causas: trauma, diabetes mellitus, uso prolongado de corticosteroides, radiação e doenças congénitas.</p>
+<h3>Fisiopatologia</h3>
+<p>Opacificação progressiva das proteínas do cristalino leva a dispersão da luz, diminuição do contraste e redução da acuidade visual. Tipos incluem nuclear, cortical e subcapsular posterior, com apresentações e efeitos na refração distintos.</p>
+<h3>Manifestações Clínicas</h3>
+<p>Visão embaçada, sensibilidade à luz e ofuscamento, visão noturna prejudicada, mudança de refração (miopização em catarata nuclear).</p>
+<h3>Diagnóstico</h3>
+<p>Exame oftalmológico com lâmpada de fenda, avaliação da acuidade visual, potencialmente biomicroscopia, e avaliação pré-operatória com topografia e biometria ocular.</p>
+<h3>Tratamento</h3>
+<p>Inicialmente correções ópticas; a única terapia curativa é cirurgia de facoemulsificação com implante de lente intraocular (LIO) quando a visão compromete a função diária.</p>
+<h3>Prognóstico</h3>
+<p>Excelente após cirurgia com restauração significativa da visão na maioria dos casos; complicações são raras com técnica moderna.</p>`,
+
+      glaucoma:`<h2>Glaucoma</h2>
+<h3>Etiologia</h3>
+<p>Multifatorial: pressão intraocular (PIO) elevada é fator de risco principal, mas glaucoma de ângulo normal existe; predisposição genética e vascular também contribuem.</p>
+<h3>Fisiopatologia</h3>
+<p>Dano progressivo das fibras do nervo óptico e perda de células ganglionares retinianas, levando a defeitos do campo visual. Mecanismos incluem pressão mecânica e isquemia óptica.</p>
+<h3>Manifestações Clínicas</h3>
+<p>Inicialmente assintomático; perda periférica do campo visual progressiva, podendo evoluir para perda central tardia. Glaucoma agudo de ângulo fechado apresenta dor intensa, náusea, visão embaçada e hiperemia.</p>
+<h3>Diagnóstico</h3>
+<p>Medida de PIO, exame do disco óptico, campimetria (perimetria visual), OCT de fibra nervosa; gonioscopia para avaliação do ângulo.</p>
+<h3>Tratamento</h3>
+<p>Redução da PIO: colírios (beta-bloqueadores, prostaglandinas, inibidores de anidrase carbônica, alfa-agonistas), laser (trabeculoplastia) e cirurgia (trabeculectomia, implantes) em casos resistentes.</p>
+<h3>Prognóstico</h3>
+<p>Crônico e progressivo; controlo adequado da PIO reduz risco de progressão, mas dano já estabelecido é irreversível.</p>`,
+
+      dmri:`<h2>Degeneração Macular Relacionada à Idade (DMRI)</h2>
+<h3>Etiologia</h3>
+<p>Idade avançada, tabagismo, história familiar, fatores genéticos (ex.: variantes CFH e ARMS2) e exposição UV são fatores de risco.</p>
+<h3>Fisiopatologia</h3>
+<p>Na forma seca (atrófica) há acumulação de drusas e atrofia do epitélio pigmentar; na forma húmida (neovascular) há neovascularização coroidal com exsudação e hemorragia macular.</p>
+<h3>Manifestações Clínicas</h3>
+<p>Perda progressiva da visão central, metamorfopsias, dificuldade em ler e reconhecer faces.</p>
+<h3>Diagnóstico</h3>
+<p>Exame de fundo, OCT (tomografia de coerência óptica) para avaliar edema e neovascularização, angiografia com fluoresceína em casos selecionados.</p>
+<h3>Tratamento</h3>
+<p>Forma seca: suplementação antioxidante (AREDS2) para casos moderados a avançados; forma húmida: injeções intravítreas de anti-VEGF (bevacizumab, ranibizumab, aflibercepte), laser terapêutico em indicações restritas.</p>
+<h3>Prognóstico</h3>
+<p>Variável; forma húmida pode progredir rapidamente sem tratamento; terapias anti-VEGF melhoraram muito o prognóstico.</p>`,
+
+      presbiacusia:`<h2>Presbiacusia</h2>
+<h3>Etiologia</h3>
+<p>Envelhecimento natural do sistema auditivo com fatores genéticos e exposição a ruído ao longo da vida.</p>
+<h3>Fisiopatologia</h3>
+<p>Degeneração das células ciliadas cocleares, perda de neurónios do nervo auditivo e alterações vasculares diminuem a sensibilidade, sobretudo a frequências altas.</p>
+<h3>Manifestações Clínicas</h3>
+<p>Dificuldade em entender fala em ambientes ruidosos, necessidade de aumentar o volume, perda progressiva bilateral e simétrica.</p>
+<h3>Diagnóstico</h3>
+<p>Audiometria tonal e vocal, avaliação otoscópica e histórico de exposição a ruído; testes adicionais para discriminação de fala.</p>
+<h3>Tratamento</h3>
+<p>Reabilitação auditiva: aparelhos auditivos, implantes cocleares em casos selecionados; terapia auditiva e estratégias comunicacionais.</p>
+<h3>Prognóstico</h3>
+<p>Progressivo; intervenção auditiva melhora comunicação e qualidade de vida.</p>`,
+
+      meniere:`<h2>Doença de Ménière</h2>
+<h3>Etiologia</h3>
+<p>Multifatorial e pouco compreendida; factores incluem disfunção da circulação endolinfática, infecções virais, alergias e predisposição genética.</p>
+<h3>Fisiopatologia</h3>
+<p>Hidrorréia endolinfática (acúmulo anormal de endolinfa) na cóclea e vestíbulo leva a distensão membranosa, comprometimento sensorial e episódios de vertigem.</p>
+<h3>Manifestações Clínicas</h3>
+<p>Crises episódicas de vertigem rotatória, perda auditiva flutuante, zumbido (tinnitus) e sensação de pressão auricular.</p>
+<h3>Diagnóstico</h3>
+<p>Baseado em critérios clínicos (episódios típicos de vertigem, perda auditiva documentada, audiometria), excluir outras causas com imagiologia quando indicado.</p>
+<h3>Tratamento</h3>
+<p>Medidas dietéticas (redução de sal), diuréticos, vasodilatadores, terapia de alivio de vertigem (betahistina, dimenidrinato), injeções intratimpânicas (glicerol, gentamicina) e procedimentos cirúrgicos em casos refratários.</p>
+<h3>Prognóstico</h3>
+<p>Curso variável; muitas pessoas melhoram com tratamento; pode haver perda auditiva progressiva.</p>`,
+
+      tinnitus:`<h2>Tinnitus (Zumbido)</h2>
+<h3>Etiologia</h3>
+<p>Multicausal: exposição a ruído, perda auditiva sensorioneural, ototoxicidade medicamentosa, doenças vasculares, alterações na articulação temporomandibular e causas idiopáticas.</p>
+<h3>Fisiopatologia</h3>
+<p>Alterações periféricas e centrais no processamento auditivo levam a percepções sonoras sem fonte externa; mecanismos incluem hiperatividade neuronal e reorganização cortical.</p>
+<h3>Manifestações Clínicas</h3>
+<p>Percepção de som (zum, apito, pulsátil) com impacto variável na concentração, sono e saúde mental; pode ser pulsátil se de origem vascular.</p>
+<h3>Diagnóstico</h3>
+<p>Audiometria, exame otológico, investigação de causas reversíveis (medicamentos, doença vascular), imagem quando indicado.</p>
+<h3>Tratamento</h3>
+<p>Manejo inclui correcção de perda auditiva, terapia de reabilitação sonora, terapia cognitivo-comportamental, aparelhos geradores de som e, em casos selecionados, tratamento da causa subjacente.</p>
+<h3>Prognóstico</h3>
+<p>Variante; muitos beneficiam de medidas de habituation e reabilitação; em alguns, tinnitus permanece crônico e debilitante.</p>`
+    };
+
+    function abrirModal(chave){modalText.innerHTML=textosDetalhados[chave]||'<p>Detalhes não disponíveis.</p>';modal.style.display='block'}
+    function fecharModal(){modal.style.display='none'}
+    window.onclick=function(e){if(e.target===modal)fecharModal()}
+  </script>
+</body>
+
+
+
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

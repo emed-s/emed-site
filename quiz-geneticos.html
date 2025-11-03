@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Genético - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #b30000;
+  }
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+  input[type=text] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+  body.dark input[type=text] {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Genético - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // 30 múltipla escolha (MC)
+  {type:"mc", q:"A fibrose cística é causada por mutações em qual gene?", a:["CFTR","BRCA1","HBB","FBN1"], correct:0},
+  {type:"mc", q:"A síndrome de Down é causada por:", a:["Trissomia do cromossomo 21","Mutação do gene TP53","Deleção do X","Translocação cromossômica do 15"], correct:0},
+  {type:"mc", q:"A doença de Huntington é uma doença:", a:["Autossômica dominante","Autossômica recessiva","Ligada ao X","Mitocondrial"], correct:0},
+  {type:"mc", q:"A hemofilia A é causada por mutação no gene:", a:["Fator VIII","Fator IX","Fator X","Fator II"], correct:0},
+  {type:"mc", q:"A fenilcetonúria é causada por deficiência da enzima:", a:["Fenilalanina hidroxilase","Tirosina quinase","Glicose-6-fosfato desidrogenase","Hexosaminidase A"], correct:0},
+  {type:"mc", q:"A talassemia é causada por:", a:["Mutação em genes da hemoglobina","Deficiência de ferro","Mutação mitocondrial","Defeito de coagulação"], correct:0},
+  {type:"mc", q:"A atrofia muscular espinhal envolve:", a:["Perda de neurônios motores","Hemoglobina anormal","Deficiência de ferro","Problemas de coagulação"], correct:0},
+  {type:"mc", q:"A mutação no gene BRCA aumenta risco de:", a:["Câncer de mama e ovário","Anemia","Fibrose cística","Doença de Tay-Sachs"], correct:0},
+  {type:"mc", q:"A doença de Tay-Sachs é causada por deficiência de:", a:["Hexosaminidase A","Fenilalanina hidroxilase","CFTR","Fator VIII"], correct:0},
+  {type:"mc", q:"A síndrome de Klinefelter apresenta cariótipo:", a:["47,XXY","45,X","46,XY","46,XX"], correct:0},
+  {type:"mc", q:"A síndrome de Turner apresenta cariótipo:", a:["45,X","47,XXY","46,XY","46,XX"], correct:0},
+  {type:"mc", q:"A mutação no gene FBN1 causa:", a:["Síndrome de Marfan","Síndrome de Down","Hemofilia","Fibrose cística"], correct:0},
+  {type:"mc", q:"A doença de Wilson envolve acúmulo de:", a:["Cobre","Ferro","Cálcio","Zinco"], correct:0},
+  {type:"mc", q:"A distrofia muscular de Duchenne é ligada ao cromossomo:", a:["X","Y","21","7"], correct:0},
+  {type:"mc", q:"A ataxia de Friedreich é causada por:", a:["Repetições GAA no gene FXN","Mutação CFTR","Mutação BRCA","Deficiência de ferro"], correct:0},
+  {type:"mc", q:"A síndrome de Prader-Willi envolve:", a:["Imprinting paterno","Imprinting materno","Deleção cromossômica 21","Mutação BRCA"], correct:0},
+  {type:"mc", q:"A síndrome de Angelman envolve:", a:["Imprinting materno","Imprinting paterno","Trissomia 21","Mutação FBN1"], correct:0},
+  {type:"mc", q:"A doença de Gaucher é causada por deficiência de:", a:["Glucocerebrosidase","Hexosaminidase A","Fenilalanina hidroxilase","CFTR"], correct:0},
+  {type:"mc", q:"A fibrose cística afeta principalmente:", a:["Pulmões e pâncreas","Fígado","Coração","Rins"], correct:0},
+  {type:"mc", q:"A coreia de Huntington afeta:", a:["Córtex e gânglios da base","Pulmões","Fígado","Rins"], correct:0},
+  {type:"mc", q:"A anemia falciforme resulta de mutação em:", a:["Gene da beta-globina","Gene CFTR","Gene FBN1","Gene BRCA1"], correct:0},
+  {type:"mc", q:"A hemofilia B é causada por deficiência de:", a:["Fator IX","Fator VIII","Fator X","Fator II"], correct:0},
+  {type:"mc", q:"A fenilcetonúria pode causar:", a:["Retardo mental se não tratada","Policitemia","Trombocitopenia","Hemofilia"], correct:0},
+  {type:"mc", q:"A deficiência de G6PD provoca:", a:["Hemólise","Fibrose pulmonar","Convulsões","Ataxia"], correct:0},
+  {type:"mc", q:"A mutação em gene mitocondrial é transmitida por:", a:["Mãe","Pai","Ambos","Ninguém"], correct:0},
+  {type:"mc", q:"A doença de Charcot-Marie-Tooth é:", a:["Neuropatia hereditária","Anemia","Fibrose cística","Distrofia muscular"], correct:0},
+  {type:"mc", q:"A síndrome de Bloom é caracterizada por:", a:["Instabilidade cromossômica","Deficiência de ferro","Hemofilia","Fibrose cística"], correct:0},
+  {type:"mc", q:"A síndrome de Li-Fraumeni envolve mutação em:", a:["TP53","CFTR","FBN1","BRCA"], correct:0},
+  {type:"mc", q:"A síndrome de Ehlers-Danlos afeta:", a:["Colágeno","Hemoglobina","CFTR","BRCA"], correct:0},
+
+  // 20 verdadeiro/falso (VF)
+  {type:"vf", q:"A síndrome de Down é causada por trissomia do cromossomo 21.", correct:true},
+  {type:"vf", q:"A fibrose cística é uma doença autossômica recessiva.", correct:true},
+  {type:"vf", q:"A doença de Huntington é autossômica recessiva.", correct:false},
+  {type:"vf", q:"A hemofilia é ligada ao X.", correct:true},
+  {type:"vf", q:"A fenilcetonúria pode levar a retardo mental se não tratada.", correct:true},
+  {type:"vf", q:"A síndrome de Turner ocorre em 45,X.", correct:true},
+  {type:"vf", q:"A síndrome de Klinefelter ocorre em 46,XX.", correct:false},
+  {type:"vf", q:"A distrofia muscular de Duchenne é ligada ao X.", correct:true},
+  {type:"vf", q:"A doença de Gaucher envolve deficiência de glucocerebrosidase.", correct:true},
+  {type:"vf", q:"A anemia falciforme é causada por mutação no gene alfa-globina.", correct:false},
+  {type:"vf", q:"A doença de Wilson envolve acúmulo de cobre.", correct:true},
+  {type:"vf", q:"A ataxia de Friedreich envolve repetições GAA no gene FXN.", correct:true},
+  {type:"vf", q:"A síndrome de Prader-Willi envolve imprinting paterno.", correct:true},
+  {type:"vf", q:"A síndrome de Angelman envolve imprinting paterno.", correct:false},
+  {type:"vf", q:"A mutação em genes mitocondriais é transmitida exclusivamente pela mãe.", correct:true},
+  {type:"vf", q:"A síndrome de Bloom apresenta instabilidade cromossômica.", correct:true},
+  {type:"vf", q:"A síndrome de Li-Fraumeni envolve mutação em TP53.", correct:true},
+  {type:"vf", q:"A síndrome de Ehlers-Danlos afeta principalmente o colágeno.", correct:true},
+  {type:"vf", q:"A doença de Charcot-Marie-Tooth é uma neuropatia hereditária.", correct:true},
+  {type:"vf", q:"A hemofilia B é causada por deficiência de fator VIII.", correct:false}
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a : ["Verdadeiro","Falso"];
+    options.forEach((ans,i)=>{
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?i:(i===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach((btn,i)=>{
+    if((q.type==="mc" && i===q.correct) || (q.type==="vf" && ((i===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === answer || (q.type==="vf" && ((i===0)===answer))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html

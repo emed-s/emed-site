@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+ 
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Verdana,sans-serif;color:#222;margin:0;padding:0}
+    header{background:#5c0a13;color:#fff;text-align:center;padding:2rem 1rem}
+    header h1{margin:0;font-size:2.2rem; margin-top: 5rem;}
+    header p{opacity:.9}
+    .search-bar{text-align:center;margin:1.2rem auto}
+    .search-bar input,.search-bar select{padding:.65rem;font-size:1rem;border-radius:8px;border:1px solid #ccc;width:220px;margin:.3rem}
+    main{max-width:1200px;margin:0 auto;padding:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.4rem}
+    .card{background:#fff;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.08);padding:1.2rem;transition:transform .2s,box-shadow .2s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 10px 20px rgba(0,0,0,.12)}
+    .card h2{color:#5c0a13;margin:0 0 .4rem;font-size:1.05rem;border-bottom:2px solid #5c0a13;padding-bottom:.35rem}
+    .card p{margin:0;font-size:.95rem;line-height:1.45;text-align:justify}
+    .card button{margin-top:.8rem;padding:.45rem .75rem;background:#5c0a13;color:#fff;border:0;border-radius:6px;cursor:pointer}
+    .card button:hover{background:#7b0f1d}
+    footer{background:#5c0a13;color:#fff;text-align:center;padding:1rem;font-size:.9rem;margin-top:1.6rem}
+    .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,.6)}
+    .modal-content{background:#fff;margin:3% auto;padding:1.6rem;border-radius:12px;max-width:1000px;position:relative;max-height:86vh;overflow-y:auto}
+    .close{position:absolute;top:10px;right:20px;color:#5c0a13;font-size:1.6rem;font-weight:700;cursor:pointer}
+    .close:hover{color:#7b0f1d}
+    .modal h3{margin-top:1rem}
+    .modal p{line-height:1.6;text-align:justify}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Endócrinos</h1>
+    <p>Etiologia, fisiopatologia, manifestações clínicas, diagnóstico, tratamento e prognóstico</p>
+  </header>
+
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="glicemicos">Glicêmicos</option>
+      <option value="tireoide">Tireoide</option>
+      <option value="adrenais">Adrenais</option>
+      <option value="hipofise">Hipófise/Hormônios de Crescimento</option>
+      <option value="paratireoide">Paratireoide/Calcio</option>
+      <option value="gonadal">Gonadal/Reprodutivo</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <!-- Cards -->
+    <div class="card" data-categoria="glicemicos"><h2>Diabetes Mellitus Tipo 1</h2><p>Doença autoimune com destruição de células β pancreáticas e deficiência absoluta de insulina.</p><button onclick="abrirModal('dm1')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="glicemicos"><h2>Diabetes Mellitus Tipo 2</h2><p>Resistência insulínica e defeito progressivo na secreção de insulina, associado a obesidade e idade.</p><button onclick="abrirModal('dm2')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="glicemicos"><h2>Cetoacidose Diabética (CAD)</h2><p>Complicação aguda do DM caracterizada por hiperglicemia, cetonemia e acidose metabólica.</p><button onclick="abrirModal('cad')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="glicemicos"><h2>Síndrome Hiperosmolar Hiperglicêmica</h2><p>Hiperglicemia extrema e hiperosmolaridade sem cetose, mais comum em DM2 idosos.</p><button onclick="abrirModal('shh')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="glicemicos"><h2>Hipoglicemia</h2><p>Glicemia baixa com sintomas autonômicos e neurológicos — emergência quando grave.</p><button onclick="abrirModal('hipo')">Leitura detalhada</button></div>
+
+    <div class="card" data-categoria="tireoide"><h2>Hipotireoidismo</h2><p>Deficiência de hormônios tireoidianos — causas primárias (Hashimoto) ou secundárias.</p><button onclick="abrirModal('hipotireoide')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="tireoide"><h2>Hipertireoidismo / Doença de Graves</h2><p>Excesso de hormônios tireoidianos; doença de Graves é causa autoimune comum.</p><button onclick="abrirModal('hipertireoide')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="tireoide"><h2>Tireoidite de Hashimoto</h2><p>Doença autoimune que leva progressivamente ao hipotireoidismo.</p><button onclick="abrirModal('hashimoto')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="tireoide"><h2>Bócio Multinodular</h2><p>Crescimento nodular da tiroide, podendo causar compressão local ou disfunção.</p><button onclick="abrirModal('bocio')">Leitura detalhada</button></div>
+
+    <div class="card" data-categoria="adrenais"><h2>Síndrome de Cushing</h2><p>Exposição crônica a cortisol elevado, endógeno (adenoma) ou exógeno (corticóides).</p><button onclick="abrirModal('cushing')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="adrenais"><h2>Doença de Addison (Insuficiência Adrenal)</h2><p>Deficiência adrenal primária com perda de cortisol e aldosterona; pode ser autoimune.</p><button onclick="abrirModal('addison')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="adrenais"><h2>Hiperaldosteronismo Primário (Síndrome de Conn)</h2><p>Excesso de aldosterona causado por adenoma ou hiperplasia, manifestando-se com hipertensão e hipocalemia.</p><button onclick="abrirModal('conn')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="adrenais"><h2>Feocromocitoma</h2><p>Tumor da medula adrenal que secreta catecolaminas causando hipertensão paroxística.</p><button onclick="abrirModal('feocromo')">Leitura detalhada</button></div>
+
+    <div class="card" data-categoria="paratireoide"><h2>Hipoparatireoidismo</h2><p>Deficiência de PTH levando a hipocalcemia e sintomas neuromusculares.</p><button onclick="abrirModal('hipopara')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="paratireoide"><h2>Hiperparatireoidismo Primário</h2><p>Excesso de PTH, frequentemente por adenoma, causando hipercalcemia e sintomas ósseos/renais.</p><button onclick="abrirModal('hiperpara')">Leitura detalhada</button></div>
+
+    <div class="card" data-categoria="hipofise"><h2>Acromegalia</h2><p>Excesso de GH em adultos, usualmente por adenoma hipofisário, causando crescimento das extremidades e complicações metabólicas.</p><button onclick="abrirModal('acromegalia')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="hipofise"><h2>Gigantismo</h2><p>Excesso de GH em crianças antes do fechamento das epífises, produzendo crescimento excessivo.</p><button onclick="abrirModal('gigantismo')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="hipofise"><h2>Nanismo Hipofisário</h2><p>Deficiência de GH na infância levando a baixa estatura proporcional.</p><button onclick="abrirModal('nanismo')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="hipofise"><h2>Diabetes Insipidus</h2><p>Deficit de ADH (central) ou resistência renal ao ADH (nefrogênico) causando poliúria e polidipsia.</p><button onclick="abrirModal('di')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="hipofise"><h2>Síndrome de Sheehan</h2><p>Insuficiência hipofisária pós-parto por infarto da hipófise; provoca falha lactacional e hipotensão.</p><button onclick="abrirModal('sheehan')">Leitura detalhada</button></div>
+
+    <div class="card" data-categoria="hipofise"><h2>SIADH (Secreção Inapropriada de ADH)</h2><p>Excesso de ADH levando retenção de água e hiponatremia dilucional.</p><button onclick="abrirModal('siadh')">Leitura detalhada</button></div>
+
+    <div class="card" data-categoria="gonadal"><h2>Hipogonadismo Masculino</h2><p>Deficiência de testosterona por causas primárias ou secundárias, afetando libido, massa muscular e densidade óssea.</p><button onclick="abrirModal('hipogonadismo')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="gonadal"><h2>Síndrome dos Ovários Policísticos (SOP)</h2><p>Distúrbio endócrino feminino com hiperandrogenismo, ovários policísticos e irregularidade menstrual.</p><button onclick="abrirModal('sop')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="gonadal"><h2>Menopausa e Deficiência Estrogênica</h2><p>Declínio ovariano natural com sintomas vasomotores, atrofia urogenital e risco ósseo aumentado.</p><button onclick="abrirModal('menopausa')">Leitura detalhada</button></div>
+
+  </main>
+
+  <div id="modal" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal()">&times;</span><div id="modalText"></div></div></div>
+
+  <footer><p>Fontes: Harrison's Principles of Internal Medicine, Guyton & Hall, Endocrine Society Guidelines, UpToDate, WHO.</p></footer>
+
+  <script>
+    const searchInput=document.getElementById('searchInput');
+    const filterSelect=document.getElementById('filterSelect');
+    const cards=document.querySelectorAll('.card');
+    const modal=document.getElementById('modal');
+    const modalText=document.getElementById('modalText');
+    searchInput.addEventListener('input',filtrarCards);
+    filterSelect.addEventListener('change',filtrarCards);
+    function filtrarCards(){const termo=searchInput.value.toLowerCase();const categoria=filterSelect.value;cards.forEach(card=>{const titulo=card.querySelector('h2').textContent.toLowerCase();const texto=card.textContent.toLowerCase();const cardCategoria=card.getAttribute('data-categoria');const correspondeTermo=titulo.includes(termo)||texto.includes(termo);const correspondeCategoria=categoria==='todos'||cardCategoria===categoria;card.style.display=(correspondeTermo&&correspondeCategoria)?'block':'none'})}
+
+    const textosDetalhados={
+      dm1:`<h2>Diabetes Mellitus Tipo 1</h2>
+<h3>Etiologia</h3>
+<p>Doença autoimune mediada por células T que destrói progressivamente as células β do pâncreas; fatores genéticos (HLA), ambientes e viroses podem contribuir.</p>
+<h3>Fisiopatologia</h3>
+<p>Perda da secreção endógena de insulina resulta em defeito absoluto da utilização de glicose, aumento da lipólise e risco de cetogénese.</p>
+<h3>Manifestações</h3>
+<p>Poliúria, polidipsia, perda de peso, fadiga e, se não tratado, cetoacidose diabética.</p>
+<h3>Diagnóstico</h3>
+<p>Glicemia de jejum, hemoglobina glicada, autoanticorpos (GAD65, IA-2) e perfil clínico.</p>
+<h3>Tratamento</h3>
+<p>Insulinoterapia intensiva baseada em múltiplas injeções ou bomba, monitorização glicêmica frequente, educação em diabetes e atenção às hipoglicemias.</p>
+<h3>Prognóstico</h3>
+<p>Crônico; bom controle metabólico reduz complicações micro e macrovasculares.</p>`,
+
+      dm2:`<h2>Diabetes Mellitus Tipo 2</h2>
+<h3>Etiologia</h3>
+<p>Interação de predisposição genética e fatores ambientais (obesidade, sedentarismo, dieta). Insulinorresistência precede falência das células β.</p>
+<h3>Fisiopatologia</h3>
+<p>Resistência periférica à insulina, produção compensatória insuficiente de insulina e disfunção das células β ao longo do tempo.</p>
+<h3>Manifestações</h3>
+<p>Poliúria ocasional, polidipsia, fadiga, neuropatia e complicações crônicas (retinopatia, nefropatia, doença cardiovascular).</p>
+<h3>Diagnóstico</h3>
+<p>Hemoglobina glicada ≥6.5%, glicemia de jejum ≥126 mg/dL ou teste de tolerância à glicose anormal.</p>
+<h3>Tratamento</h3>
+<p>Modificação de estilo de vida, metformina inicial, seguida por terapia adicional (SGLT2i, GLP-1 RA, sulfonilureias, insulina) conforme necessidade e comorbidades.</p>
+<h3>Prognóstico</h3>
+<p>Crônico, progressivo; controle glicêmico e terapias cardiovasculares reduzem morbidade e mortalidade.</p>`,
+
+      cad:`<h2>Cetoacidose Diabética (CAD)</h2>
+<h3>Etiologia</h3>
+<p>Frequentemente em DM1 por falta de insulina, também por intercurrentes (infecção, omissão de insulina).</p>
+<h3>Fisiopatologia</h3>
+<p>Deficit insulínico com aumento de glicagon leva à gliconeogênese, glicogenólise e lipólise, provocando produção de corpos cetônicos e acidose metabólica.</p>
+<h3>Manifestações</h3>
+<p>Poliúria, polidipsia, vômitos, dor abdominal, respiração de Kussmaul, confusão e desidratação.</p>
+<h3>Diagnóstico</h3>
+<p>Hiperglicemia, cetonemia/ cetonúria, acidose metabólica com baixa bicarbonatação.</p>
+<h3>Tratamento</h3>
+<p>Reposição volêmica, correção de eletrólitos (K+), insulina IV e tratamento da causa subjacente.</p>
+<h3>Prognóstico</h3>
+<p>Grave se não tratada, mas reversível com manejo adequado.</p>`,
+
+      shh:`<h2>Síndrome Hiperosmolar Hiperglicêmica</h2>
+<h3>Etiologia</h3>
+<p>Complicação do DM2 em idosos, frequentemente desencadeada por doença intercurrente, desidratação ou medicamentos.</p>
+<h3>Fisiopatologia</h3>
+<p>Hiperglicemia extrema provoca osmose de água extracelular, hiperosmolaridade e desidratação profunda; cetose mínima ou ausente.</p>
+<h3>Manifestações</h3>
+<p>Letargia, confusão, poliúria, polidipsia, desidratação e sinais neurológicos variáveis.</p>
+<h3>Diagnóstico</h3>
+<p>Hiperglicemia grave (>600 mg/dL), osmolaridade sérica aumentada e ausência de acidose importante.</p>
+<h3>Tratamento</h3>
+<p>Reposição volêmica agressiva, correção eletrolítica, insulina em baixas doses e manejo da causa precipitada.</p>
+<h3>Prognóstico</h3>
+<p>Maior mortalidade que CAD, especialmente em idosos e com comorbidades.</p>`,
+
+      hipo:`<h2>Hipoglicemia</h2>
+<h3>Etiologia</h3>
+<p>Medicações antiglicemiantes (insulina, secretagogos), jejum prolongado, insuficiência adrenal, hepatopatias e alterações nutricionais.</p>
+<h3>Fisiopatologia</h3>
+<p>Baixa glicemia cerebral leva a sintomas autonômicos (taquicardia, sudorese) e neuroglucopênicos (confusão, convulsão, coma) quando severa.</p>
+<h3>Manifestações</h3>
+<p>Sudorese, tremores, ansiedade, fome, confusão, alterações comportamentais, perda de consciência.</p>
+<h3>Diagnóstico</h3>
+<p>Glicemia capilar baixa concomitante aos sintomas e alívio após correção (Critério de Whipple).</p>
+<h3>Tratamento</h3>
+<p>Administração de glicose oral se consciente; glicose IV ou glucagon IM/SC se inconsciente; ajustar terapias e investigar causa subjacente.</p>
+<h3>Prognóstico</h3>
+<p>Grave se recorrente sem prevenção; educação e ajustes terapêuticos reduzem risco.</p>`,
+
+      hipotireoide:`<h2>Hipotireoidismo</h2>
+<h3>Etiologia</h3>
+<p>Hashimoto (autoimune) é a causa mais comum em países desenvolvidos; outras causas: iatrogênica, medicamentos e congênita.</p>
+<h3>Fisiopatologia</h3>
+<p>Deficiência de T4/T3 reduz metabolismo basal, afetando múltiplos sistemas (cardíaco, neurológico, metabólico).</p>
+<h3>Manifestações</h3>
+<p>Fadiga, ganho de peso, constipação, bradicardia, pele seca, intolerância ao frio e alteração cognitiva.</p>
+<h3>Diagnóstico</h3>
+<p>TSH elevado com T4 livre baixo em hipotireoidismo primário; investigação de anticorpos e imagem quando indicado.</p>
+<h3>Tratamento</h3>
+<p>Reposição com levotiroxina, ajuste com base em TSH e sintomas; monitorização regular.</p>
+<h3>Prognóstico</h3>
+<p>Excelente com terapia adequada; hipotiroidismo não tratado pode levar a mixedema e complicações.</p>`,
+
+      hipertireoide:`<h2>Hipertireoidismo / Doença de Graves</h2>
+<h3>Etiologia</h3>
+<p>Doença de Graves é autoimune com anticorpos estimuladores do receptor TSH; outras causas incluem adenomas e tireoidite.</p>
+<h3>Fisiopatologia</h3>
+<p>Estimulação excessiva dos receptores TSH aumenta produção de T4/T3, acelerando metabolismo e sensibilizando sistema adrenérgico.</p>
+<h3>Manifestações</h3>
+<p>Perda de peso, palpitações, tremor, intolerância ao calor, sudorese, taquicardia e frequentemente exoftalmia em Graves.</p>
+<h3>Diagnóstico</h3>
+<p>TSH suprimido com T4/T3 elevados, anticorpos anti-TSH receptor, cintilografia em casos selecionados.</p>
+<h3>Tratamento</h3>
+<p>Antitireoidianos (metimazol/propiltiuracil), beta-bloqueadores para sintomas, terapia com iodo radioativo ou cirurgia conforme indicação.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente favorável com tratamento; vigilância para hipotiroidismo pós-tratamento.</p>`,
+
+      hashimoto:`<h2>Tireoidite de Hashimoto</h2>
+<h3>Etiologia</h3>
+<p>Processo autoimune com anticorpos anti-TPO e anti-Tg que causam destruição linfocitária da tireoide.</p>
+<h3>Fisiopatologia</h3>
+<p>Inflamação crônica leva à fibrose e perda da função tireoidiana ao longo do tempo.</p>
+<h3>Manifestações</h3>
+<p>Sintomas de hipotireoidismo, bócio em fases iniciais, fadiga, ganho de peso e alterações menstruais.</p>
+<h3>Diagnóstico</h3>
+<p>TSH elevado, T4 livre baixo, anticorpos positivos e ultrassonografia de tireoide sugestiva.</p>
+<h3>Tratamento</h3>
+<p>Levotiroxina e monitorização; tratamento de manifestações e acompanhamento de anticorpos quando necessário.</p>
+<h3>Prognóstico</h3>
+<p>Controle ótimo com reposição hormonal; acompanhamento de longo prazo necessário.</p>`,
+
+      bocio:`<h2>Bócio Multinodular</h2>
+<h3>Etiologia</h3>
+<p>Resposta adaptativa da tireoide a estímulos (defeito hormonal, iodo), com desenvolvimento de múltiplos nódulos ao longo do tempo.</p>
+<h3>Fisiopatologia</h3>
+<p>Proliferação focal e heterogênea de folículos tireoidianos formando nódulos; ocasionalmente pode haver áreas hipofuncionantes ou hipertireoidizantes (toxicos).</p>
+<h3>Manifestações</h3>
+<p>Assintomático ou massa cervical, disfagia, sensação de pressão, ou sintomas de disfunção se houver autonomia hormonal.</p>
+<h3>Diagnóstico</h3>
+<p>Ultrassonografia, punção por agulha fina para nódulos suspeitos, cintilografia se funcionalmente relevantes.</p>
+<h3>Tratamento</h3>
+<p>Observação para nódulos pequenos; cirurgia se compressão, suspeita de malignidade ou hipertireoidismo nodular; terapias percutâneas em casos selecionados.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente benigno; vigilância necessária.</p>`,
+
+      cushing:`<h2>Síndrome de Cushing</h2>
+<h3>Etiologia</h3>
+<p>Exposição prolongada a cortisol exógeno (corticoterapia) ou endógeno por ACTH ectópico/adenoma hipofisário (Doença de Cushing) ou adenoma adrenal.</p>
+<h3>Fisiopatologia</h3>
+<p>Excesso de cortisol promove catabolismo proteico, redistribuição de gordura, hiperglicemia, imunossupressão e hipertensão.</p>
+<h3>Manifestações</h3>
+<p>Obesidade centrípeta, face em lua, fraqueza muscular proximal, estrias roxas, osteoporose, glicemia alterada e risco cardiovascular.</p>
+<h3>Diagnóstico</h3>
+<p>Teste de supressão com dexametasona, cortisol salivar noturno, dosagem de cortisol urinário de 24h e investigação da fonte (ACTH, imagem).</p>
+<h3>Tratamento</h3>
+<p>Remoção da fonte (cecisão de tumor, cirurgia hipofisária/adrenal), radioterapia, medicamentos bloqueadores da esteroidogênese quando não operável.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com tratamento; risco residual de morbidade metabólica e cardiovascular se crônico.</p>`,
+
+      addison:`<h2>Doença de Addison (Insuficiência Adrenal)</h2>
+<h3>Etiologia</h3>
+<p>Autoimune é a causa principal em países desenvolvidos; outras incluem tuberculose, infiltrações e metastases.</p>
+<h3>Fisiopatologia</h3>
+<p>Destruição do córtex adrenal leva deficiência de cortisol e aldosterona, resultando em hipotensão, hiponatremia e hiperpotassemia.</p>
+<h3>Manifestações</h3>
+<p>Fadiga, perda de peso, hipotensão postural, hiperpigmentação (quando ACTH elevado), náuseas e crise adrenal com risco de vida.</p>
+<h3>Diagnóstico</h3>
+<p>Teste de estímulo com ACTH, cortisol basal, níveis de aldosterona e renina, e pesquisa de etiologia.</p>
+<h3>Tratamento</h3>
+<p>Reposição de glucocorticoide (hidrocortisona) e mineralocorticoide (fludrocortisona); educação sobre crise adrenal e ajuste em stress.</p>
+<h3>Prognóstico</h3>
+<p>Bom com reposição adequada; crise adrenal pode ser fatal se não tratada.</p>`,
+
+      conn:`<h2>Hiperaldosteronismo Primário (Síndrome de Conn)</h2>
+<h3>Etiologia</h3>
+<p>Adenoma da zona glomerulosa (aldosteronoma) ou hiperplasia bilateral das suprarrenais.</p>
+<h3>Fisiopatologia</h3>
+<p>Excesso de aldosterona leva retenção de sódio, hipertensão e perda renal de potássio.</p>
+<h3>Manifestações</h3>
+<p>Hipertensão resistente, fraqueza, poliúria e hipocalemia.</p>
+<h3>Diagnóstico</h3>
+<p>Relação aldosterona/renina elevada, testes de confirmação (supressão) e imagem para localizar lesão.</p>
+<h3>Tratamento</h3>
+<p>Ressecção cirúrgica do adenoma ou tratamento médica com antagonistas da aldosterona (espironolactona, eplerenona) para hiperplasia bilateral.</p>
+<h3>Prognóstico</h3>
+<p>Melhora da pressão arterial e correcção eletrolítica após tratamento adequado; cirurgia pode curar em adenomas unilaterais.</p>`,
+
+      feocromo:`<h2>Feocromocitoma</h2>
+<h3>Etiologia</h3>
+<p>Tumor catecolaminérgico da medula adrenal ou paraganglioma; pode ser esporádico ou associado a síndromes (MEN2).</p>
+<h3>Fisiopatologia</h3>
+<p>Secreção excessiva episódica de noradrenalina/adrenalina produz hipertensão paroxística, taquicardia e sintomas adrenérgicos.</p>
+<h3>Manifestações</h3>
+<p>Crises de cefaleia, sudorese, palpitações, hipertensão resistente e perda de peso.</p>
+<h3>Diagnóstico</h3>
+<p>Dosagem de metanefrinas plasmáticas ou urinárias, imagem (TC/RM) e testes genéticos quando indicado.</p>
+<h3>Tratamento</h3>
+<p>Bloqueio alfa seguido de cirurgia; controle hemodinâmico pré-operatório essencial; acompanhamento para recidiva.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente bom com ressecção completa; malignidade é rara mas possível.</p>`,
+
+      hipopara:`<h2>Hipoparatireoidismo</h2>
+<h3>Etiologia</h3>
+<p>Iatrogênico (após cirurgia de tireoide/paratireoide) é comum; causas autoimunes e genéticas também existem.</p>
+<h3>Fisiopatologia</h3>
+<p>Deficiência de PTH reduz reabsorção óssea e ativação de vitamina D, levando a hipocalcemia e aumento de fosfato.</p>
+<h3>Manifestações</h3>
+<p>Tetania, parestesias, câimbras musculares, convulsões e sinais de excitabilidade neuromuscular.</p>
+<h3>Diagnóstico</h3>
+<p>Hipocalcemia com PTH baixo, hipofosfatemia relativa; investigação da causa.</p>
+<h3>Tratamento</h3>
+<p>Suplementação de cálcio e vitamina D ativa; rhPTH em casos refratários.</p>
+<h3>Prognóstico</h3>
+<p>Crônico; manejo adequado controla sintomas e previne complicações.</p>`,
+
+      hiperpara:`<h2>Hiperparatireoidismo Primário</h2>
+<h3>Etiologia</h3>
+<p>Adenoma paratireoideo é a causa mais comum; hiperplasia e carcinoma são menos frequentes.</p>
+<h3>Fisiopatologia</h3>
+<p>Excesso de PTH provoca reabsorção óssea, hipercalcemia e perda renal de fosfato.</p>
+<h3>Manifestações</h3>
+<p>Pedras (nefrolitíase), ossos (dor óssea, fraturas), groans (constipação, náuseas) e psychic overtones (fadiga, depressão).</p>
+<h3>Diagnóstico</h3>
+<p>Hipercalcemia com PTH inapropriadamente elevado; imagem para localizar adenoma quando indicado.</p>
+<h3>Tratamento</h3>
+<p>Cirurgia é curativa para adenoma; manejo clínico e monitorização em casos assintomáticos e de baixo risco.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente excelente após ressecção do foco.</p>`,
+
+      acromegalia:`<h2>Acromegalia</h2>
+<h3>Etiologia</h3>
+<p>Adenoma hipofisário secretor de GH é a causa principal em adultos.</p>
+<h3>Fisiopatologia</h3>
+<p>Excesso de GH e IGF-1 promove crescimento de tecidos moles e ossos (antes do fechamento das epífises causa gigantismo).</p>
+<h3>Manifestações</h3>
+<p>Aumento de mãos/pés, prognatismo, hipertensão, diabetes, apneia do sono e risco cardiovascular aumentado.</p>
+<h3>Diagnóstico</h3>
+<p>IGF-1 elevado, teste de supressão com sobrecarga de glicose não suprime GH; ressonância magnética da hipófise.</p>
+<h3>Tratamento</h3>
+<p>Ressecção cirúrgica do adenoma, terapia medicamentosa (análogos da somatostatina, pegvisomanto) e radioterapia quando necessário.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com controle; morbidade relacionada a diagnóstico tardio.</p>`,
+
+      gigantismo:`<h2>Gigantismo</h2>
+<h3>Etiologia</h3>
+<p>Excesso de GH na infância por adenoma hipofisário antes do fechamento epifisário.</p>
+<h3>Fisiopatologia</h3>
+<p>Crescimento linear excessivo e aumento de órgãos; manifestações metabólicas semelhantes à acromegalia.</p>
+<h3>Manifestações</h3>
+<p>Estatura muito alta, atraso puberal, complicações ortopédicas e cardiometabólicas.</p>
+<h3>Diagnóstico</h3>
+<p>IGF-1 elevado, investigação hormonal e imagem hipofisária.</p>
+<h3>Tratamento</h3>
+<p>Cirurgia hipofisária, terapia medicamentosa e cuidados multidisciplinares.</p>
+<h3>Prognóstico</h3>
+<p>Melhor quando tratado precocemente; risco de complicações crônicas se não controlado.</p>`,
+
+      nanismo:`<h2>Nanismo Hipofisário</h2>
+<h3>Etiologia</h3>
+<p>Déficit de GH por causas congênitas, tumores, trauma hipofisário ou síndromes genéticas.</p>
+<h3>Fisiopatologia</h3>
+<p>Deficiência de GH leva a baixa estatura proporcional e possíveis efeitos metabólicos.</p>
+<h3>Manifestações</h3>
+<p>Estatura baixa, atraso no crescimento e possíveis comorbidades endócrinas.</p>
+<h3>Diagnóstico</h3>
+<p>Testes de estímulo do GH, avaliação de IGF-1 e imagem hipofisária.</p>
+<h3>Tratamento</h3>
+<p>Reposição de GH na infância quando indicada; monitorização do crescimento e efeitos adversos.</p>
+<h3>Prognóstico</h3>
+<p>Bom quando tratado precocemente; qualidade de vida melhora com intervenção.</p>`,
+
+      di:`<h2>Diabetes Insipidus</h2>
+<h3>Etiologia</h3>
+<p>Central (deficit de ADH por lesão hipotalâmica/hipofisária) ou nefrogênico (resistência renal ao ADH); causas incluem tumores, cirurgia, medicamentos e genéticas.</p>
+<h3>Fisiopatologia</h3>
+<p>Incapacidade de concentrar urina resulta em poliúria intensa, polidipsia e risco de desidratação.</p>
+<h3>Manifestações</h3>
+<p>Produção de grandes volumes de urina diluída, sede intensa e risco de desidratação hipernatrêmica se a ingestão não acompanha.</p>
+<h3>Diagnóstico</h3>
+<p>Teste de privação de água e resposta a desmopressina, osmolaridade urinária e plasmática.</p>
+<h3>Tratamento</h3>
+<p>Desmopressina para DI central; manejo da causa e restrição hídrica/diálise quando necessário no nefrogênico, além de tiazídicos e controle de eletrólitos.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente bom com tratamento adequado; atenção a complicações de desidratação.</p>`,
+
+      sheehan:`<h2>Síndrome de Sheehan</h2>
+<h3>Etiologia</h3>
+<p>Infarto hipofisário pós-parto secundário a hemorragia obstétrica e hipotensão severa.</p>
+<h3>Fisiopatologia</h3>
+<p>Necrose da hipófise anterior causa deficiência de múltiplos hormônios (ACTH, TSH, GH, LH/FSH) levando a hipoadrenalismo e hipotiroidismo secundários.</p>
+<h3>Manifestações</h3>
+<p>Falha de lactação, amenorreia, fadiga, hipotensão e intolerância ao estresse.</p>
+<h3>Diagnóstico</h3>
+<p>Avaliação hormonal, imagem hipofisária e história obstétrica sugestiva.</p>
+<h3>Tratamento</h3>
+<p>Reposição hormonal conforme deficiências (glucocorticoides, levotiroxina, gonadotrofinas) e acompanhamento de longo prazo.</p>
+<h3>Prognóstico</h3>
+<p>Crônico; manejo hormonal melhora sintomas e qualidade de vida.</p>`,
+
+      siadh:`<h2>SIADH (Secreção Inapropriada de ADH)</h2>
+<h3>Etiologia</h3>
+<p>Neoplasias (ex.: carcinoma de pequenas células), medicamentos, doenças pulmonares e neurológicas podem provocar secreção inapropriada de ADH.</p>
+<h3>Fisiopatologia</h3>
+<p>ADH elevado leva retenção de água, expansão de volume extracelular e hiponatremia dilucional.</p>
+<h3>Manifestações</h3>
+<p>Hiponatremia com náuseas, confusão, cefaleia, convulsões; sinais dependem da rapidez e gravidade da queda de sódio.</p>
+<h3>Diagnóstico</h3>
+<p>Hiponatremia com osmolaridade sérica baixa, osmolaridade urinária inadequadamente elevada e ausência de depleção volumétrica.</p>
+<h3>Tratamento</h3>
+<p>Restrição hídrica, correção cuidadosa do sódio, antagonistas V2 (tolvaptan) em casos selecionados e tratamento da causa subjacente.</p>
+<h3>Prognóstico</h3>
+<p>Depende da etiologia e da velocidade de correção do sódio; correção muito rápida pode causar síndrome da desmielinização osmótica.</p>`,
+
+      hipogonadismo:`<h2>Hipogonadismo Masculino</h2>
+<h3>Etiologia</h3>
+<p>Primário (testicular) ou secundário (hipogonadismo hipogonadotrófico), causas: genéticas, traumáticas, medicamentos e doenças crônicas.</p>
+<h3>Fisiopatologia</h3>
+<p>Deficiência de testosterona afeta função reprodutiva, composição corporal, densidade óssea e bem-estar.</p>
+<h3>Manifestações</h3>
+<p>Diminuição da libido, disfunção erétil, perda de massa muscular, ganho de gordura, osteoporose e sintomas psíquicos.</p>
+<h3>Diagnóstico</h3>
+<p>Testosterona total baixa confirmada em jejum, avaliação de LH/FSH para distinguir a etiologia, investigação adicional conforme suspeita.</p>
+<h3>Tratamento</h3>
+<p>Terapia de reposição com testosterona quando indicada, monitorização de efeitos adversos e fertilidade se desejada.</p>
+<h3>Prognóstico</h3>
+<p>Melhora sintomática com reposição; avaliação regular para riscos cardiovasculares e próstata.</p>`,
+
+      sop:`<h2>Síndrome dos Ovários Policísticos (SOP)</h2>
+<h3>Etiologia</h3>
+<p>Multifatorial: predisposição genética, resistência à insulina e alterações hormonais que promovem excesso androgênico.</p>
+<h3>Fisiopatologia</h3>
+<p>Excesso de andrógenos ovarianos e anovulação crônica; resistência à insulina exacerba hiperandrogenismo.</p>
+<h3>Manifestações</h3>
+<p>Irregularidade menstrual, hirsutismo, acne, obesidade e infertilidade; risco aumentado de síndrome metabólica.</p>
+<h3>Diagnóstico</h3>
+<p>Critérios de Rotterdam: 2 de 3 — anovulação, hiperandrogenismo clínico/biomarcador e ovários policísticos na ultrassonografia.</p>
+<h3>Tratamento</h3>
+<p>Mudança de estilo de vida, anticoncepcionais hormonais para regularização, antiandrógenos, metformina para resistência insulínica e manejo da fertilidade com indução ovulatória.</p>
+<h3>Prognóstico</h3>
+<p>Gestão a longo prazo focada em sintomas e riscos metabólicos; muitas mulheres têm boa qualidade de vida com tratamento.</p>`,
+
+      menopausa:`<h2>Menopausa e Deficiência Estrogênica</h2>
+<h3>Etiologia</h3>
+<p>Encerramento fisiológico da função ovariana geralmente por volta dos 45–55 anos; menopausa cirúrgica após ooforectomia.</p>
+<h3>Fisiopatologia</h3>
+<p>Redução dos níveis de estrógeno e progesterona causa alterações vasomotoras, urogenitais e ósseas.</p>
+<h3>Manifestações</h3>
+<p>Fogachos, sudorese noturna, alterações do sono, atrofia urogenital, perda de massa óssea e risco cardiovascular aumentado.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico na maioria dos casos; dosagens hormonais podem auxiliar em situações específicas.</p>
+<h3>Tratamento</h3>
+<p>Terapia hormonal substitutiva para sintomas moderados a graves, terapias não hormonais para sintomas vasomotores e medidas para saúde óssea.</p>
+<h3>Prognóstico</h3>
+<p>Qualidade de vida melhora com manejo adequado; balancear benefícios e riscos da terapia hormonal conforme perfil.</p>`
+    };
+
+    function abrirModal(chave){modalText.innerHTML=textosDetalhados[chave]||'<p>Detalhes não disponíveis.</p>';modal.style.display='block'}
+    function fecharModal(){modal.style.display='none'}
+    window.onclick=function(e){if(e.target===modal)fecharModal()}
+  </script>
+</body>
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

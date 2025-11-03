@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Pulmonar - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #b30000;
+  }
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Pulmonar - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // 30 múltipla escolha (MC)
+  {type:"mc", q:"A asma é caracterizada por:", a:["Inflamação crônica das vias aéreas","Infecção bacteriana","Fibrose pulmonar","Hipertensão pulmonar"], correct:0},
+  {type:"mc", q:"A DPOC inclui:", a:["Enfisema e bronquite crônica","Asma e bronquite aguda","Fibrose pulmonar","Pneumonia"], correct:0},
+  {type:"mc", q:"O enfisema pulmonar causa:", a:["Destruição dos alvéolos","Infecção viral","Edema pulmonar","Hipertensão arterial"], correct:0},
+  {type:"mc", q:"A fibrose pulmonar idiopática envolve:", a:["Formação de tecido fibroso nos pulmões","Infecção bacteriana","Excesso de muco","Broncoconstrição"], correct:0},
+  {type:"mc", q:"A hipertensão pulmonar pode ser causada por:", a:["Doença cardíaca esquerda","Deficiência de insulina","Fibrose hepática","Hipotireoidismo"], correct:0},
+  {type:"mc", q:"A pneumonia bacteriana mais comum é causada por:", a:["Streptococcus pneumoniae","Mycoplasma","Aspergillus","RSV"], correct:0},
+  {type:"mc", q:"A tuberculose pulmonar é causada por:", a:["Mycobacterium tuberculosis","Streptococcus pneumoniae","Influenza","Aspergillus"], correct:0},
+  {type:"mc", q:"A síndrome do desconforto respiratório agudo (SDRA) envolve:", a:["Edema alveolar não cardiogênico","Infecção viral leve","Asma","Hipotireoidismo"], correct:0},
+  {type:"mc", q:"O broncoespasmo caracteriza-se por:", a:["Contração das vias aéreas","Inflamação alveolar","Fibrose intersticial","Edema pulmonar"], correct:0},
+  {type:"mc", q:"A pneumonia viral mais comum em crianças é causada por:", a:["RSV","Streptococcus pneumoniae","Mycobacterium","Aspergillus"], correct:0},
+  {type:"mc", q:"A bronquite crônica é definida por:", a:["Tosse produtiva ≥ 3 meses por 2 anos consecutivos","Tosse seca ocasional","Febre alta","Exposição a pó"], correct:0},
+  {type:"mc", q:"A bronquiolite afeta principalmente:", a:["Lactentes","Adultos","Idosos","Adolescentes"], correct:0},
+  {type:"mc", q:"A apneia obstrutiva do sono envolve:", a:["Colapso das vias aéreas superiores durante o sono","Hiperventilação","Asma","Fibrose pulmonar"], correct:0},
+  {type:"mc", q:"O pneumotórax espontâneo ocorre em:", a:["Adultos jovens e saudáveis","Crianças pequenas","Idosos com pneumonia","Pacientes com DPOC"], correct:0},
+  {type:"mc", q:"A embolia pulmonar geralmente se origina de:", a:["Trombose venosa profunda","Infecção respiratória","Asma","Fibrose pulmonar"], correct:0},
+  {type:"mc", q:"A bronquiectasia é caracterizada por:", a:["Dilatação irreversível dos brônquios","Inflamação alveolar","Edema pulmonar","Fibrose hepática"], correct:0},
+  {type:"mc", q:"O tabagismo é fator de risco principal para:", a:["DPOC","Asma","Fibrose pulmonar","Tuberculose"], correct:0},
+  {type:"mc", q:"A síndrome da apneia central do sono envolve:", a:["Falha na respiração central durante o sono","Obstrução nasal","Broncoespasmo","Fibrose pulmonar"], correct:0},
+  {type:"mc", q:"A pneumonia aspirativa ocorre devido a:", a:["Inalação de conteúdo gástrico","Infecção viral","Exposição a pó","Hipotireoidismo"], correct:0},
+  {type:"mc", q:"A síndrome de Kartagener envolve:", a:["Dextrocardia e bronquiectasias","Fibrose pulmonar","Asma","Tuberculose"], correct:0},
+  {type:"mc", q:"A asbestose é causada por:", a:["Inalação de fibras de amianto","Infecção viral","Deficiência de surfactante","DPOC"], correct:0},
+  {type:"mc", q:"A doença pulmonar intersticial difusa inclui:", a:["Fibrose pulmonar idiopática","Bronquite aguda","Asma","Tuberculose"], correct:0},
+  {type:"mc", q:"A hipoxemia ocorre quando:", a:["O O2 arterial está baixo","O CO2 está alto","Há hipertensão","Há febre"], correct:0},
+  {type:"mc", q:"O teste de espirometria avalia:", a:["Função pulmonar","Função renal","Função cardíaca","Função hepática"], correct:0},
+  {type:"mc", q:"A pneumonia por Pneumocystis jirovecii é comum em:", a:["Pacientes imunossuprimidos","Crianças saudáveis","Adultos jovens","Idosos com DPOC"], correct:0},
+  {type:"mc", q:"A doença pulmonar ocupacional pode ser causada por:", a:["Exposição a poeiras e produtos químicos","Exposição a vírus","Deficiência de vitamina D","Tabagismo passivo apenas"], correct:0},
+  {type:"mc", q:"A fibrose pulmonar pode resultar de:", a:["Asbestose, radioterapia, doenças autoimunes","Asma, bronquite aguda","Tuberculose apenas","DPOC apenas"], correct:0},
+  {type:"mc", q:"A bronquiolite obliterante envolve:", a:["Inflamação e obliteração das pequenas vias aéreas","Infecção bacteriana","Fibrose hepática","Hipotireoidismo"], correct:0},
+  {type:"mc", q:"A tosse crônica é definida como:", a:["Persistente por > 8 semanas","Ocasiona apenas por dias","Ocorre só à noite","Ocorre só após exercício"], correct:0},
+
+  // 20 verdadeiro/falso (VF)
+  {type:"vf", q:"A asma é uma doença inflamatória crônica das vias aéreas.", correct:true},
+  {type:"vf", q:"A DPOC é reversível completamente com broncodilatadores.", correct:false},
+  {type:"vf", q:"O enfisema envolve destruição dos alvéolos.", correct:true},
+  {type:"vf", q:"A fibrose pulmonar idiopática é facilmente reversível.", correct:false},
+  {type:"vf", q:"A hipertensão pulmonar pode ser secundária a doença cardíaca esquerda.", correct:true},
+  {type:"vf", q:"A pneumonia bacteriana mais comum é causada por Streptococcus pneumoniae.", correct:true},
+  {type:"vf", q:"A tuberculose é causada por vírus.", correct:false},
+  {type:"vf", q:"A SDRA envolve edema alveolar não cardiogênico.", correct:true},
+  {type:"vf", q:"A bronquite crônica exige tosse produtiva por 3 meses em 2 anos consecutivos.", correct:true},
+  {type:"vf", q:"A bronquiolite afeta principalmente lactentes.", correct:true},
+  {type:"vf", q:"A apneia obstrutiva do sono envolve colapso das vias aéreas superiores.", correct:true},
+  {type:"vf", q:"O pneumotórax espontâneo ocorre mais em adultos jovens saudáveis.", correct:true},
+  {type:"vf", q:"A embolia pulmonar geralmente se origina de trombose venosa profunda.", correct:true},
+  {type:"vf", q:"A bronquiectasia envolve dilatação irreversível dos brônquios.", correct:true},
+  {type:"vf", q:"O tabagismo não influencia o risco de DPOC.", correct:false},
+  {type:"vf", q:"A pneumonia aspirativa ocorre por inalação de conteúdo gástrico.", correct:true},
+  {type:"vf", q:"A espirometria avalia a função pulmonar.", correct:true},
+  {type:"vf", q:"A fibrose pulmonar nunca pode ser causada por exposição ocupacional.", correct:false},
+  {type:"vf", q:"A hipoxemia significa baixo oxigênio arterial.", correct:true},
+  {type:"vf", q:"A bronquiolite obliterante envolve pequenas vias aéreas.", correct:true}
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a : ["Verdadeiro","Falso"];
+    options.forEach((ans,i)=>{
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?i:(i===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach((btn,i)=>{
+    if((q.type==="mc" && i===q.correct) || (q.type==="vf" && ((i===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === answer || (q.type==="vf" && ((i===0)===answer))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html>

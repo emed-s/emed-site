@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; margin: 0; padding: 0; }
+    header { background-color: #5c0a13; color: #fff; text-align: center; padding: 2rem 1rem; }
+    header h1 { margin: 0; font-size: 2.4rem; }
+    header p { font-size: 1rem; opacity: 0.9; }
+    .search-bar { text-align: center; margin: 1.5rem auto; }
+    .search-bar input, .search-bar select { padding: 0.7rem; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc; width: 220px; margin: 0.3rem; }
+    main { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; }
+    .card { background-color: #fff; border-radius: 14px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 1.8rem; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15); }
+    .card h2 { color: #5c0a13; margin-bottom: 0.6rem; font-size: 1.5rem; border-bottom: 2px solid #5c0a13; padding-bottom: 0.4rem; }
+    .card h3 { color: #222; font-size: 1.1rem; margin-top: 1.2rem; }
+    .card p { text-align: justify; line-height: 1.6; margin-top: 0.3rem; }
+    .card button { margin-top: 1rem; padding: 0.5rem 0.9rem; background-color: #5c0a13; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    .card button:hover { background-color: #7b0f1d; }
+    footer { background-color: #5c0a13; color: #fff; text-align: center; padding: 1rem; font-size: 0.9rem; margin-top: 2rem; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+    .modal-content { background-color: #fff; margin: 5% auto; padding: 2rem; border-radius: 12px; max-width: 800px; position: relative; max-height: 80vh; overflow-y: auto; }
+    .close { position: absolute; top: 10px; right: 20px; color: #5c0a13; font-size: 1.8rem; font-weight: bold; cursor: pointer; }
+    .close:hover { color: #7b0f1d; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Traumáticos</h1>
+    <p>Etiologia, fisiopatologia, manifestações clínicas, diagnóstico e tratamento</p>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="cranianos">Cranianos</option>
+      <option value="medulares">Medulares</option>
+      <option value="ortopedicos">Ortopédicos</option>
+      <option value="multiplos">Múltiplos Traumas</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="cranianos">
+      <h2>Traumatismo Cranioencefálico (TCE)</h2>
+      <p>Lesão cerebral causada por impacto externo, podendo variar de leve a grave...</p>
+      <button onclick="abrirModal('tce')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="medulares">
+      <h2>Lesão Medular Traumática</h2>
+      <p>Lesão da medula espinhal por trauma, resultando em déficit motor e sensitivo...</p>
+      <button onclick="abrirModal('medular')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="ortopedicos">
+      <h2>Fraturas Ósseas</h2>
+      <p>Ruptura de continuidade óssea devido a traumas diretos ou indiretos...</p>
+      <button onclick="abrirModal('fraturas')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="ortopedicos">
+      <h2>Contusões e Lacerações Musculoesqueléticas</h2>
+      <p>Lesões de tecidos moles e musculoesqueléticos que podem comprometer função...</p>
+      <button onclick="abrirModal('contusoes')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="multiplos">
+      <h2>Hematomas Subcutâneos e Internos</h2>
+      <p>Acúmulo de sangue em tecidos devido a ruptura vascular, podendo causar complicações...</p>
+      <button onclick="abrirModal('hematomas')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="multiplos">
+      <h2>Politrauma</h2>
+      <p>Conjunto de lesões graves em diferentes órgãos e sistemas, geralmente por acidentes de alta energia...</p>
+      <button onclick="abrirModal('politrauma')">Leitura detalhada</button>
+    </div>
+  </main>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <div id="modalText"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Fontes: Gray's Anatomy, ATLS Guidelines, UpToDate, OMS.</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const filterSelect = document.getElementById('filterSelect');
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modalText');
+
+    searchInput.addEventListener('input', filtrarCards);
+    filterSelect.addEventListener('change', filtrarCards);
+
+    function filtrarCards() {
+      const termo = searchInput.value.toLowerCase();
+      const categoria = filterSelect.value;
+      cards.forEach(card => {
+        const titulo = card.querySelector('h2').textContent.toLowerCase();
+        const texto = card.textContent.toLowerCase();
+        const cardCategoria = card.getAttribute('data-categoria');
+        const correspondeTermo = titulo.includes(termo) || texto.includes(termo);
+        const correspondeCategoria = categoria === 'todos' || cardCategoria === categoria;
+        card.style.display = (correspondeTermo && correspondeCategoria) ? 'block' : 'none';
+      });
+    }
+
+    const textosDetalhados = {
+      tce: `<h2>Traumatismo Cranioencefálico (TCE)</h2><h3>Etiologia</h3><p>Impacto direto ou indireto no crânio, acidentes de trânsito, quedas e violência.</p><h3>Fisiopatologia</h3><p>Lesão primária por impacto e secundária por edema, hemorragia e isquemia cerebral.</p><h3>Manifestações</h3><p>Perda de consciência, cefaleia, náuseas, vômitos, déficits neurológicos e alterações cognitivas.</p><h3>Diagnóstico</h3><p>Exame neurológico, tomografia computadorizada, ressonância magnética, escala de Glasgow.</p><h3>Tratamento</h3><p>Suporte respiratório e hemodinâmico, controle da pressão intracraniana, cirurgia em casos graves, reabilitação multidisciplinar.</p><h3>Prognóstico</h3><p>Variável; depende da gravidade, idade e rapidez no atendimento.</p>`,
+      medular: `<h2>Lesão Medular Traumática</h2><h3>Etiologia</h3><p>Trauma vertebral por acidentes, quedas ou ferimentos penetrantes.</p><h3>Fisiopatologia</h3><p>Compressão ou ruptura da medula leva a perda de função motora e sensitiva abaixo da lesão.</p><h3>Manifestações</h3><p>Paralisia, perda sensorial, disfunção autonômica, alterações intestinais e vesicais.</p><h3>Diagnóstico</h3><p>Exame neurológico, tomografia e ressonância magnética da coluna.</p><h3>Tratamento</h3><p>Estabilização da coluna, cirurgia, reabilitação, suporte respiratório e fisioterapia.</p><h3>Prognóstico</h3><p>Dependente do nível e extensão da lesão; irreversível em casos completos.</p>`,
+      fraturas: `<h2>Fraturas Ósseas</h2><h3>Etiologia</h3><p>Trauma direto ou indireto, osteoporose ou patologias ósseas prévias.</p><h3>Fisiopatologia</h3><p>Ruptura da continuidade óssea, podendo afetar vasos e tecidos adjacentes.</p><h3>Manifestações</h3><p>Dor intensa, edema, deformidade, incapacidade funcional, crepitação.</p><h3>Diagnóstico</h3><p>Exame clínico, radiografia, tomografia em casos complexos.</p><h3>Tratamento</h3><p>Redução da fratura, imobilização, cirurgia quando necessário, reabilitação funcional.</p><h3>Prognóstico</h3><p>Bom com tratamento adequado; complicações incluem pseudoartrose e infecção.</p>`,
+      contusoes: `<h2>Contusões e Lacerações Musculoesqueléticas</h2><h3>Etiologia</h3><p>Traumas diretos que causam ruptura de fibras musculares e pele.</p><h3>Fisiopatologia</h3><p>Hemorragia local, edema, inflamação e risco de infecção em lacerações.</p><h3>Manifestações</h3><p>Dor, edema, equimoses, sangramentos, limitação funcional.</p><h3>Diagnóstico</h3><p>Exame clínico e, se necessário, ultrassonografia ou ressonância.</p><h3>Tratamento</h3><p>Gelo, elevação, analgésicos, sutura em lacerações, fisioterapia.</p><h3>Prognóstico</h3><p>Boa com tratamento adequado; recuperação funcional total geralmente.</p>`,
+      hematomas: `<h2>Hematomas Subcutâneos e Internos</h2><h3>Etiologia</h3><p>Ruptura vascular por trauma, cirurgias ou distúrbios de coagulação.</p><h3>Fisiopatologia</h3><p>Acúmulo de sangue em tecidos, podendo gerar compressão de estruturas vizinhas.</p><h3>Manifestações</h3><p>Edema, dor local, equimose, comprometimento funcional dependendo do local.</p><h3>Diagnóstico</h3><p>Exame clínico, ultrassonografia, tomografia se necessário.</p><h3>Tratamento</h3><p>Observação, gelo, elevação, drenagem cirúrgica se grande ou compressivo.</p><h3>Prognóstico</h3><p>Geralmente bom; monitorar risco de complicações em casos profundos ou extensos.</p>`,
+      politrauma: `<h2>Politrauma</h2><h3>Etiologia</h3><p>Acidentes graves com múltiplas lesões em diferentes órgãos e sistemas.</p><h3>Fisiopatologia</h3><p>Resposta inflamatória sistêmica, choque, falência de órgãos múltiplos.</p><h3>Manifestações</h3><p>Instabilidade hemodinâmica, múltiplos sinais de trauma, risco vital imediato.</p><h3>Diagnóstico</h3><p>Exame físico, exames laboratoriais, imagens múltiplas (RX, TC, USG).</p><h3>Tratamento</h3><p>Suporte ABCDE, cirurgias emergenciais, reanimação, internação em UTI, abordagem multidisciplinar.</p><h3>Prognóstico</h3><p>Variável; depende da gravidade, número de lesões e rapidez no atendimento.</p>`
+    };
+
+    function abrirModal(chave) {
+      modalText.innerHTML = textosDetalhados[chave] || '<p>Detalhes não disponíveis.</p>';
+      modal.style.display = 'block';
+    }
+
+    function fecharModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        fecharModal();
+      }
+    }
+  </script>
+</body>
+
+
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

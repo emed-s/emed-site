@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="/index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="medicine.html" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-user-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+              <a href="search.html"><i class="ri-search-line" id="searh-button"></i>
+              </a>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+   
+      
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <!--==================== HOME ====================-->
+         <section class="home section" id="home">
+            <div class="home__container container grid">
+
+                <div class="explore-text">Explore Now</div>
+
+               <div class="home__images">
+                  <div class="home__swiper swiper">
+                     <div class="swiper-wrapper">
+                        <article class="home__article swiper-slide">
+                           <a href="fisiologia.html"><img src="assets/img/guyton-edited.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="anatomia.html"><img src="assets/img/anatomia-edited.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="bioquimica.html"><img src="assets/img/bqedited.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+
+                           <a href="fund_genetica.html"><img src="assets/img/fundamentos de genetica.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="harrisson20.html"><img src="assets/img/harrison 20 edit.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="robbins.html"><img src="assets/img/patologia-basica.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="cirurgia.html"><img src="assets/img/cir.png" alt="image" class="home__img"></a>
+                        </article>
+                     </div>
+                  </div>
+
+                  <div class="books-you-may-like">BOOKS YOU MAY LIKE</div>
+
+ <div class="home__swiper swiper">
+                     <div class="swiper-wrapper">
+                        <article class="home__article swiper-slide">
+                           <a href="exame_neuro.html"><img src="assets/img/exame neuroedit.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="adams e victor.html"><img src="assets/img/principiosneuro.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="neuroanatomia.html"><img src="assets/img/neuroanatomia.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+
+                           <a href="cardiologialivro.html"><img src="assets/img/cardio.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="harrisson20.html"><img src="assets/img/harrison 20 edit.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="neuro-clinica.html"><img src="assets/img/neuro.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="fund_imuno.html"><img src="assets/img/imuno.png" alt="image" class="home__img"></a>
+                        </article>
+                     </div>
+                  </div>
+
+
+ <div class="home__swiper swiper">
+                     <div class="swiper-wrapper">
+                        <article class="home__article swiper-slide">
+                           <a href="fisiologia.html"><img src="assets/img/goodmanfarmaco.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="heartdisease.html"><img src="assets/img/heart disease.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="principios de hemato.html"><img src="assets/img/hemato.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+
+                           <a href="#"><img src="assets/img/dermato.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="harrisson20.html"><img src="assets/img/katzung.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="#"><img src="assets/img/harrison 21.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="#"><img src="assets/img/cir.png" alt="image" class="home__img"></a>
+                        </article>
+                     </div>
+                  </div>
+
+                   <div class="home__swiper swiper">
+                     <div class="swiper-wrapper">
+                        <article class="home__article swiper-slide">
+                           <a href="fisiologia.html"><img src="assets/img/cecilmed.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="anatomia.html"><img src="assets/img/acls.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="bioquimica.html"><img src="assets/img/principios de cir.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+
+                           <a href="#"><img src="assets/img/genetica.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="#"><img src="assets/img/harrison 20 edit.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="#"><img src="assets/img/sabiston.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="#"><img src="assets/img/cir.png" alt="image" class="home__img"></a>
+                        </article>
+                     </div>
+                  </div>
+
+               </div>
+            </div>
+         </section>
+
+
+         <!--==================== FEATURED ====================-->
+         <section class="featured section" id="featured">
+            <h2 class="section__title">
+               Featured Books
+            </h2>
+
+            <div class="featured__container container">
+               <div class="featured__swiper swiper">
+                  <div class="swiper-wrapper">
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/cir.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Browse's Cirurgia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">83.0MB</span>
+                        </div>
+
+                        <button class="button">Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/anestesio.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Anestesiologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">56.0MB</span>
+                        </div>
+
+                        <button class="button">Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/dermato.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Dermatologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">45.0MB</span>
+                        </div>
+
+                        <button class="button">Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/orto.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Ortopedia e Traumatologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">87.0MB</span>
+                        </div>
+
+                        <a href="assets/ORTOPEDIA DICAS.pdf"><button class="button">Download</button>
+                         </a>
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/cardio.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Cardiologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">67.0MB</span>
+                        </div>
+
+                        <button class="button">Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/neuro.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Neurologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">78.0MB</span>
+                        </div>
+
+                        <button class="button">Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/pneumo.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Pneumologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">32.0MB</span>
+                        </div>
+
+                        <button class="button">Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/infecto.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Infecciologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">37.0MB</span>
+                        </div>
+
+                        <button class="button">Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/hemato.png" alt="" class="featured__img">
+
+                        <h2 class="featured__title">Hematologia</h2>
+                        <div class="featured__prices">
+                           <span class="featured__discount"></span>
+                           <span class="featured__price">75.0MB</span>
+                        </div>
+
+                        <button class="button"><i class="ri-download-fill"></i>  Download</button>
+
+                        <div class="featured__actions">
+                           <button><i class="ri-heart-3-line"></i></button>
+                           <button><i class="ri-download-cloud-line"></i></button>
+                           <button><i class="ri-download-line"></i></button>
+                        </div>
+                     </article>
+                  </div>
+
+                  <div class="swiper-button-prev">
+                     <i class="ri-arrow-left-s-line"></i>
+                  </div>
+
+                  <div class="swiper-button-next">
+                     <i class="ri-arrow-right-s-line"></i>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+
+         <!--=========EXPLORE==========-->
+
+
+
+ <div class="home__swiper swiper">
+                     <div class="swiper-wrapper">
+                        <article class="home__article swiper-slide">
+                           <a href="fisiologia.html"><img src="assets/img/guyton-edited.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="anatomia.html"><img src="assets/img/anatomia-edited.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="bioquimica.html"><img src="assets/img/bqedited.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+
+                           <a href="#"><img src="assets/img/genetica.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="#"><img src="assets/img/harrison 20 edit.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="#"><img src="assets/img/cardio.png" alt="image" class="home__img"></a>
+                        </article>
+
+                        <article class="home__article swiper-slide">
+                           <a href="cirurgia.html"><img src="assets/img/cir.png" alt="image" class="home__img"></a>
+                        </article>
+                     </div>
+                  </div>
+
+                   
+                     </div>
+                  </div>
+
+
+         <!--==================== DISCOUNT ====================-->
+         <section class="discount section" id="discount">
+            <div class="discount__container container grid">
+               <div class="discount__data">
+                  <h2 class="discount__title section__title">
+                     Seja um expert em semiologia clinica
+                  </h2>
+
+                  <p class="discount__description">
+                     O Bates é um manual clássico e amplamente utilizado que ensina como realizar a anamnese (história clínica) e o exame físico completo de um paciente. 
+                  </p>
+
+                  <a href="assets/Bates, Propedêutica Médica (Bickley) 11. ed. - www.meulivro.mobi.pdf" download class="button">Download Now
+                  </a>
+               </div>
+
+               <div class="discount__images">
+                 <a href="bates.html"><img src="assets/img/bates.jpg" alt="" class="discount__img-1">
+                </a>
+               </div>
+            </div>
+         </section>
+
+         <!--==================== NEW BOOKS ====================-->
+         <section class="new section" id="new">
+            <h2 class="section__title">
+               
+                           
+         </section>
+
+         <!--==================== JOIN ====================-->
+         <section class="join section">
+            <div class="join__container">
+               <img src="assets/img/join-bg.jpg" alt="image" class="join__bg">
+
+               <div class="join__data container grid">
+                  <h2 class="join__title section__title">
+                     Join us To Receive <br>
+                     The Latest Updates
+                  </h2>
+
+                  <form action="" class="join__form">
+                     <input type="email" placeholder="Enter email" class="join__input">
+                     <button type="submit" class="join__button button">Subscribe</button>
+                  </form>
+               </div>
+            </div>
+         </section>
+
+         <!--==================== TESTIMONIAL ====================-->
+         <section class="testimonial section" id="testimonial">
+      
+                     
+
+                  
+                  
+         </section>
+      </main>
+
+      <!--==================== FOOTER ====================-->
+      <footer class="footer">
+         <div class="footer__container grid">
+            <div>
+              <a href="#" class="footer__logo">
+               <i class="ri-book-3-line"></i>E-Book
+              </a>
+
+              <p class="footer__description">
+               Find and explore the best medical eBooks for free.
+              </p>
+            </div>
+
+            <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src="assets/js/scrollreveal.min.js"></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

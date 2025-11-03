@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+
+
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 0; }
+    header { background-color: #5c0a13; color: #fff; text-align: center; padding: 2rem 1rem; }
+    header h1 { margin: 0; font-size: 2.4rem; }
+    header p { font-size: 1rem; opacity: 0.9; }
+    .search-bar { text-align: center; margin: 1.5rem auto; }
+    .search-bar input, .search-bar select { padding: 0.7rem; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc; width: 220px; margin: 0.3rem; }
+    main { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; }
+    .card { background-color: #fff; border-radius: 14px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 1.8rem; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15); }
+    .card h2 { color: #5c0a13; margin-bottom: 0.6rem; font-size: 1.5rem; border-bottom: 2px solid #5c0a13; padding-bottom: 0.4rem; }
+    .card h3 { color: #222; font-size: 1.1rem; margin-top: 1.2rem; }
+    .card p { text-align: justify; line-height: 1.6; margin-top: 0.3rem; }
+    .card button { margin-top: 1rem; padding: 0.5rem 0.9rem; background-color: #5c0a13; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    .card button:hover { background-color: #7b0f1d; }
+    footer { background-color: #5c0a13; color: #fff; text-align: center; padding: 1rem; font-size: 0.9rem; margin-top: 2rem; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+    .modal-content { background-color: #fff; margin: 5% auto; padding: 2rem; border-radius: 12px; max-width: 800px; position: relative; max-height: 80vh; overflow-y: auto; }
+    .close { position: absolute; top: 10px; right: 20px; color: #5c0a13; font-size: 1.8rem; font-weight: bold; cursor: pointer; }
+    .close:hover { color: #7b0f1d; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Hematológicos</h1>
+    <p>Etiologia, fisiopatologia, manifestações clínicas, diagnóstico e tratamento</p>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="anemias">Anemias</option>
+      <option value="leucemias">Leucemias</option>
+      <option value="coagulopatias">Coagulopatias</option>
+      <option value="hemoglobinopatias">Hemoglobinopatias</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="anemias">
+      <h2>Anemia Ferropriva</h2>
+      <p>Deficiência de ferro leva a produção de hemácias pequenas e hipocrômicas...</p>
+      <button onclick="abrirModal('ferropriva')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="anemias">
+      <h2>Anemia Megaloblástica</h2>
+      <p>Deficiência de vitamina B12 ou ácido fólico causa hemácias grandes e imaturas...</p>
+      <button onclick="abrirModal('megaloblastica')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="leucemias">
+      <h2>Leucemia Linfocítica Crônica (LLC)</h2>
+      <p>Neoplasia de linfócitos B maduros com progressão lenta...</p>
+      <button onclick="abrirModal('llc')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="leucemias">
+      <h2>Leucemia Mieloide Aguda (LMA)</h2>
+      <p>Neoplasia de células mieloides imaturas, de evolução rápida...</p>
+      <button onclick="abrirModal('lma')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="coagulopatias">
+      <h2>Trombocitopenia Imune (PTI)</h2>
+      <p>Redução de plaquetas causada por anticorpos autoimunes...</p>
+      <button onclick="abrirModal('pti')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="hemoglobinopatias">
+      <h2>Talassemia</h2>
+      <p>Hemoglobinopatia genética que afeta a síntese de globina, resultando em anemia crônica...</p>
+      <button onclick="abrirModal('talassemia')">Leitura detalhada</button>
+    </div>
+  </main>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <div id="modalText"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Fontes: Harrison's Principles of Internal Medicine, UpToDate, OMS, NIH.</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const filterSelect = document.getElementById('filterSelect');
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modalText');
+
+    searchInput.addEventListener('input', filtrarCards);
+    filterSelect.addEventListener('change', filtrarCards);
+
+    function filtrarCards() {
+      const termo = searchInput.value.toLowerCase();
+      const categoria = filterSelect.value;
+      cards.forEach(card => {
+        const titulo = card.querySelector('h2').textContent.toLowerCase();
+        const texto = card.textContent.toLowerCase();
+        const cardCategoria = card.getAttribute('data-categoria');
+        const correspondeTermo = titulo.includes(termo) || texto.includes(termo);
+        const correspondeCategoria = categoria === 'todos' || cardCategoria === categoria;
+        card.style.display = (correspondeTermo && correspondeCategoria) ? 'block' : 'none';
+      });
+    }
+
+    const textosDetalhados = {
+      ferropriva: `<h2>Anemia Ferropriva</h2><h3>Etiologia</h3><p>Deficiência de ferro por má absorção, perdas sanguíneas ou ingestão insuficiente.</p><h3>Fisiopatologia</h3><p>Redução da síntese de hemoglobina leva a hemácias microcíticas e hipocrômicas.</p><h3>Manifestações</h3><p>Fadiga, palidez, tontura, taquicardia, fraqueza e alterações ungueais.</p><h3>Diagnóstico</h3><p>Hemograma, ferritina, ferro sérico, capacidade total de ligação do ferro.</p><h3>Tratamento</h3><p>Suplementação de ferro oral ou intravenosa, correção da causa subjacente.</p><h3>Prognóstico</h3><p>Bom com reposição adequada e tratamento da causa.</p>`,
+      megaloblastica: `<h2>Anemia Megaloblástica</h2><h3>Etiologia</h3><p>Deficiência de vitamina B12 ou ácido fólico, má absorção ou dietas inadequadas.</p><h3>Fisiopatologia</h3><p>Produção de hemácias grandes e imaturas (megaloblastos) devido à síntese de DNA prejudicada.</p><h3>Manifestações</h3><p>Fadiga, fraqueza, glossite, neuropatia periférica (B12), palidez.</p><h3>Diagnóstico</h3><p>Hemograma, níveis séricos de B12 e folato, mielograma se necessário.</p><h3>Tratamento</h3><p>Suplementação de B12 ou ácido fólico, tratamento da causa subjacente.</p><h3>Prognóstico</h3><p>Bom com reposição adequada; neuropatia pode ser irreversível se prolongada.</p>`,
+      llc: `<h2>Leucemia Linfocítica Crônica (LLC)</h2><h3>Etiologia</h3><p>Neoplasia de linfócitos B maduros, de causa desconhecida; fatores genéticos contribuem.</p><h3>Fisiopatologia</h3><p>Acúmulo lento de linfócitos B anormais na medula óssea, sangue periférico e órgãos linfóides.</p><h3>Manifestações</h3><p>Linfadenopatia, fadiga, perda de peso, infecções recorrentes.</p><h3>Diagnóstico</h3><p>Hemograma, imunofenotipagem, biópsia de medula óssea.</p><h3>Tratamento</h3><p>Observação em fases iniciais, quimioterapia, imunoterapia, terapias alvo.</p><h3>Prognóstico</h3><p>Progressão lenta; sobrevida variável, depende de estágio e características moleculares.</p>`,
+      lma: `<h2>Leucemia Mieloide Aguda (LMA)</h2><h3>Etiologia</h3><p>Neoplasia de células mieloides imaturas; mutações genéticas e fatores ambientais contribuem.</p><h3>Fisiopatologia</h3><p>Proliferação descontrolada de blastos mieloides, substituindo células normais da medula.</p><h3>Manifestações</h3><p>Fadiga, febre, infecções recorrentes, sangramentos, anemia e leucocitose.</p><h3>Diagnóstico</h3><p>Hemograma, mielograma, imunofenotipagem e citogenética.</p><h3>Tratamento</h3><p>Quimioterapia intensiva, transplante de medula óssea em casos selecionados.</p><h3>Prognóstico</h3><p>Grave se não tratada; resposta depende da idade, mutações e terapia.</p>`,
+      pti: `<h2>Trombocitopenia Imune (PTI)</h2><h3>Etiologia</h3><p>Doença autoimune com anticorpos contra plaquetas.</p><h3>Fisiopatologia</h3><p>Destruição acelerada de plaquetas pelo sistema reticuloendotelial.</p><h3>Manifestações</h3><p>Petequias, equimoses, sangramentos mucocutâneos, risco aumentado de hemorragia.</p><h3>Diagnóstico</h3><p>Hemograma, exclusão de causas secundárias, dosagem de anticorpos plaquetários.</p><h3>Tratamento</h3><p>Corticosteroides, imunoglobulina IV, agentes imunossupressores, splenectomia em casos refratários.</p><h3>Prognóstico</h3><p>Geralmente favorável; pode ser crônico em adultos.</p>`,
+           talassemia: `<h2>Talassemia</h2><h3>Etiologia</h3><p>Doença genética autossômica recessiva que afeta a síntese de globina.</p><h3>Fisiopatologia</h3><p>Produção de hemoglobina anormal leva à destruição prematura de hemácias e anemia crônica.</p><h3>Manifestações</h3><p>Anemia, fadiga, icterícia, hepatosplenomegalia, deformidades ósseas e atraso no crescimento.</p><h3>Diagnóstico</h3><p>Hemograma, eletroforese de hemoglobina, testes genéticos.</p><h3>Tratamento</h3><p>Transfusões periódicas, quelantes de ferro, suplementação vitamínica e, em alguns casos, transplante de medula óssea.</p><h3>Prognóstico</h3><p>Crônico; depende da gravidade e adesão ao tratamento; manejo adequado melhora qualidade e expectativa de vida.</p>`
+    };
+
+    function abrirModal(chave) {
+      modalText.innerHTML = textosDetalhados[chave] || '<p>Detalhes não disponíveis.</p>';
+      modal.style.display = 'block';
+    }
+
+    function fecharModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        fecharModal();
+      }
+    }
+  </script>
+</body>
+
+
+
+
+
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

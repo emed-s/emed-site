@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+       <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+       background: var(--body-color);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.1); /* transparent glass effect */
+      backdrop-filter: blur(4px);
+      transition: transform 0.2s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Title overlay inside thumbnail */
+    .title-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+    }
+
+    .video-info {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      align-items: center;
+    }
+
+    .channel-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .info-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0;
+      line-height: 1.4;
+      color: #000;
+    }
+
+    .channel-name, .views {
+      font-size: 14px;
+      color: #555;
+    }
+
+     h1 {
+      font-size: 3rem;
+      color: #754a4a;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeInZoom 2s ease forwards;
+    }
+
+    @keyframes fadeInZoom {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .subtext {
+      font-size: 1.2rem;
+      color: #f0f0f0;
+      margin-top: 10px;
+      opacity: 0;
+      animation: fadeUp 2s ease forwards;
+      animation-delay: 1s;
+      text-align: center;
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+     /* Search Bar */
+    .search-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 25px;
+      padding: 8px 15px;
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.1);
+      width: 80%;
+      max-width: 500px;
+      opacity: 0;
+      animation: fadeUp 2s ease forwards;
+      animation-delay: 2s;
+      margin-bottom: 1rem;
+      margin-left: 2rem;
+    }
+
+    .search-container input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 16px;
+      color: #9b5454;
+      text-align: left;
+    }
+
+    .search-container input::placeholder {
+      color: rgba(139, 101, 101, 0.7);
+    }
+
+    .search-container button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #774f4f;
+      font-size: 18px;
+      padding: 5px 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .search-container button:hover {
+      transform: scale(1.1);
+      color: red;
+    }
+
+
+    .shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .short-card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .short-card:hover {
+    transform: scale(1.05);
+  }
+
+  .short-card video {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #333;
+  }
+
+  .short-title {
+    padding: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #fff;
+  }
+    
+  </style>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <!--==================== HOME ====================-->
+         <section class="home section" id="home">
+ <div>
+    <h1>Welcome to <strong>eMed Play</strong></h1>
+    <p class="subtext">Your space for medical video lessons</p>
+  </div>
+
+   <div class="search-container">
+      <input type="text" placeholder="Search videos...">
+      <button>🔍</button>
+    </div>
+
+            <div class="video-grid">
+    <a href="semiologiaplay.html"><div class="video-card">
+      <img class="thumbnail" src="assets/img/intro a semiologia.jpg" alt="Video thumbnail">
+      <div class="video-info">
+        <div class="channel-icon"></div>
+        <div class="info-text">
+          <p class="title">Introducao a Semiologia
+          <p class="channel-name">eMed
+          </p>
+          <p class="views">0 views • 5 minutes ago</p>
+        </div>
+      </div></a>
+    </div>
+
+<a href="anamnese.html"><div class="video-card">
+      <img class="thumbnail" src="assets/img/anamneseee.jpg" alt="Video thumbnail">
+      <div class="video-info">
+        <div class="channel-icon"></div>
+        <div class="info-text">
+          <p class="title">Anamnese</p>
+          <p class="channel-name">eMed</p>
+          <p class="views">0 views • 3 days ago</p>
+        </div>
+      </div>
+    </div></a>
+
+<div class="shorts-grid">
+  <div class="short-card">
+    <video src="video1.mp4" poster="thumb1.jpg" muted></video>
+    <div class="short-title">Short Video 1</div>
+  </div>
+  <div class="short-card">
+    <video src="video2.mp4" poster="thumb2.jpg" muted></video>
+    <div class="short-title">Short Video 2</div>
+  </div>
+  <div class="short-card">
+    <video src="video3.mp4" poster="thumb3.jpg" muted></video>
+    <div class="short-title">Short Video 3</div>
+  </div>
+  <div class="short-card">
+    <video src="video4.mp4" poster="thumb4.jpg" muted></video>
+    <div class="short-title">Short Video 4</div>
+  </div>
+  <!-- Add more short-cards as needed -->
+</div>
+
+
+
+
+    <div class="video-card">
+      <img class="thumbnail" src="assets/img/exame fisico thumb.png" alt="Video thumbnail">
+      <div class="video-info">
+        <div class="channel-icon"></div>
+        <div class="info-text">
+          <p class="title">Exame Fisico
+          <p class="channel-name">eMed
+          </p>
+          <p class="views">0 views • 5 minutes ago</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <img class="thumbnail" src="assets/img/exame fisico thumb.png" alt="Video thumbnail">
+      <div class="video-info">
+        <div class="channel-icon"></div>
+        <div class="info-text">
+          <p class="title">Exame Fisico
+          <p class="channel-name">eMed
+          </p>
+          <p class="views">0 views • 5 minutes ago</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <img class="thumbnail" src="assets/img/exame fisico thumb.png" alt="Video thumbnail">
+      <div class="video-info">
+        <div class="channel-icon">
+        </div>
+        <div class="info-text">
+          <p class="title">Exame Fisico
+          <p class="channel-name">eMed
+          </p>
+          <p class="views">0 views • 5 minutes ago</p>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Duplicate .video-card blocks for more videos -->
+  </div>
+         </section>
+
+         <!--==================== FEATURED ====================-->
+        
+         <!--==================== NEW BOOKS ====================-->
+        
+
+         <!--==================== JOIN ====================-->
+        
+
+         <!--==================== TESTIMONIAL ====================-->
+         
+      </main>
+
+      <!--==================== FOOTER ====================-->
+      <footer class="footer">
+         <div class="footer__container grid">
+            <div>
+              <a href="#" class="footer__logo">
+               <i class="ri-book-3-line"></i>E-Book
+              </a>
+
+              <p class="footer__description">
+               Find and explore the best medical eBooks for free.
+              </p>
+            </div>
+
+            <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

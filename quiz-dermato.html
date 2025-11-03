@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Dermatológico - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #b30000;
+  }
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Dermatológico - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // 30 múltipla escolha (MC)
+  {type:"mc", q:"A psoríase é caracterizada por:", a:["Placas eritematosas com escama prateada","Infecção bacteriana","Tinta na pele","Verrugas"], correct:0},
+  {type:"mc", q:"O eczema atópico é:", a:["Dermatite inflamatória crônica","Infecção viral","Infecção bacteriana","Câncer de pele"], correct:0},
+  {type:"mc", q:"A dermatite de contato ocorre por:", a:["Exposição a alérgenos ou irritantes","Deficiência vitamínica","Genética","Exposição solar apenas"], correct:0},
+  {type:"mc", q:"O melasma se manifesta como:", a:["Manchas hiperpigmentadas no rosto","Erupções bolhosas","Verrugas","Úlceras"], correct:0},
+  {type:"mc", q:"O vitiligo é:", a:["Perda de melanina resultando em manchas claras","Infecção viral","Dermatite","Melanoma"], correct:0},
+  {type:"mc", q:"A acne vulgar envolve:", a:["Inflamação das glândulas sebáceas","Infecção bacteriana sistêmica","Psoríase","Vitiligo"], correct:0},
+  {type:"mc", q:"O impetigo é:", a:["Infecção bacteriana superficial da pele","Infecção viral","Dermatite de contato","Psoríase"], correct:0},
+  {type:"mc", q:"A celulite é:", a:["Infecção bacteriana profunda da pele e tecido subcutâneo","Infecção viral","Dermatite","Acne"], correct:0},
+  {type:"mc", q:"A dermatofitose é causada por:", a:["Fungos","Bactérias","Vírus","Protozoários"], correct:0},
+  {type:"mc", q:"A pitiríase versicolor é causada por:", a:["Fungo Malassezia","Bactérias","Vírus","Ácaros"], correct:0},
+  {type:"mc", q:"A sífilis secundária pode se manifestar como:", a:["Erupções cutâneas generalizadas","Úlceras crônicas","Acne","Psoríase"], correct:0},
+  {type:"mc", q:"A síndrome de Stevens-Johnson envolve:", a:["Reação grave da pele com necrose epidérmica","Acne","Psoríase","Dermatite de contato"], correct:0},
+  {type:"mc", q:"A urticária se caracteriza por:", a:["Placas elevadas e pruriginosas","Manchas hipopigmentadas","Bolhas","Cicatrizes"], correct:0},
+  {type:"mc", q:"A alopecia androgenética envolve:", a:["Perda de cabelo progressiva","Inflamação da pele","Verrugas","Úlceras"], correct:0},
+  {type:"mc", q:"A queratose actínica é causada por:", a:["Exposição solar crônica","Infecção viral","Deficiência vitamínica","Infecção bacteriana"], correct:0},
+  {type:"mc", q:"O melanoma é:", a:["Câncer de pele maligno originado de melanócitos","Dermatite","Psoríase","Infecção fúngica"], correct:0},
+  {type:"mc", q:"O líquen plano envolve:", a:["Lesões papulares pruriginosas","Úlceras","Câncer de pele","Acne"], correct:0},
+  {type:"mc", q:"O herpes zoster é causado por:", a:["Varicela-zoster vírus","Staphylococcus","Fungos","Vitamina insuficiente"], correct:0},
+  {type:"mc", q:"O molluscum contagiosum é:", a:["Infecção viral","Dermatite","Psoríase","Câncer de pele"], correct:0},
+  {type:"mc", q:"A esclerodermia envolve:", a:["Endurecimento da pele","Acne","Infecção fúngica","Urticária"], correct:0},
+  {type:"mc", q:"O eczema numular se caracteriza por:", a:["Lesões arredondadas e pruriginosas","Manchas hipopigmentadas","Verrugas","Bolhas"], correct:0},
+  {type:"mc", q:"A foliculite envolve:", a:["Inflamação dos folículos pilosos","Dermatite de contato","Psoríase","Melanoma"], correct:0},
+  {type:"mc", q:"A herpes simples se manifesta como:", a:["Bolhas dolorosas na pele e mucosas","Úlceras crônicas","Manchas hipopigmentadas","Cicatrizes"], correct:0},
+  {type:"mc", q:"O carcinoma basocelular se origina de:", a:["Células basais da epiderme","Melanócitos","Queratinócitos profundos","Dermatófitos"], correct:0},
+  {type:"mc", q:"O carcinoma espinocelular se origina de:", a:["Queratinócitos da epiderme","Melanócitos","Células basais","Fungos"], correct:0},
+  {type:"mc", q:"A xerose cutânea é:", a:["Pele seca","Inflamação","Acne","Bolhas"], correct:0},
+  {type:"mc", q:"A dermatite seborréica envolve:", a:["Caspa e descamação oleosa","Infecção viral","Bolhas","Úlceras"], correct:0},
+  {type:"mc", q:"O nevus melanocítico é:", a:["Lesão pigmentada benigna","Infecção","Câncer","Acne"], correct:0},
+  {type:"mc", q:"A esporotricose é causada por:", a:["Fungo Sporothrix schenckii","Bactéria","Vírus","Ácaro"], correct:0},
+
+  // 20 verdadeiro/falso (VF)
+  {type:"vf", q:"A psoríase é uma doença inflamatória crônica da pele.", correct:true},
+  {type:"vf", q:"A dermatite de contato é causada por alérgenos ou irritantes.", correct:true},
+  {type:"vf", q:"O vitiligo causa manchas hiperpigmentadas.", correct:false},
+  {type:"vf", q:"A pitiríase versicolor é causada por fungo Malassezia.", correct:true},
+  {type:"vf", q:"A acne envolve inflamação das glândulas sebáceas.", correct:true},
+  {type:"vf", q:"O melanoma é câncer de pele originado de melanócitos.", correct:true},
+  {type:"vf", q:"A alopecia androgenética é perda progressiva de cabelo.", correct:true},
+  {type:"vf", q:"A síndrome de Stevens-Johnson é uma reação grave da pele.", correct:true},
+  {type:"vf", q:"A urticária envolve placas elevadas e pruriginosas.", correct:true},
+  {type:"vf", q:"A esclerodermia envolve amolecimento da pele.", correct:false},
+  {type:"vf", q:"O eczema atópico é uma dermatite inflamatória crônica.", correct:true},
+  {type:"vf", q:"A queratose actínica é causada por exposição solar crônica.", correct:true},
+  {type:"vf", q:"O herpes zoster é causado por bactéria.", correct:false},
+  {type:"vf", q:"O carcinoma basocelular origina-se das células basais da epiderme.", correct:true},
+  {type:"vf", q:"A xerose cutânea significa pele seca.", correct:true},
+  {type:"vf", q:"A dermatite seborréica envolve descamação oleosa.", correct:true},
+  {type:"vf", q:"A esporotricose é causada por fungo Sporothrix schenckii.", correct:true},
+  {type:"vf", q:"O nevus melanocítico é uma lesão pigmentada benigna.", correct:true},
+  {type:"vf", q:"O molluscum contagiosum é uma infecção viral.", correct:true},
+  {type:"vf", q:"A foliculite envolve inflamação da bursa.", correct:false}
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a : ["Verdadeiro","Falso"];
+    options.forEach((ans,i)=>{
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?i:(i===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach((btn,i)=>{
+    if((q.type==="mc" && i===q.correct) || (q.type==="vf" && ((i===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === answer || (q.type==="vf" && ((i===0)===answer))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  color: #333; margin: 0; padding: 0; }
+    header { background-color: #5c0a13; color: #fff; text-align: center; padding: 2rem 1rem; }
+    header h1 { margin: 0; font-size: 2.4rem; }
+    header p { font-size: 1rem; opacity: 0.9; }
+    .search-bar { text-align: center; margin: 1.5rem auto; }
+    .search-bar input, .search-bar select { padding: 0.7rem; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc; width: 220px; margin: 0.3rem; }
+    main { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; }
+    .card { background-color: #fff; border-radius: 14px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 1.8rem; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15); }
+    .card h2 { color: #5c0a13; margin-bottom: 0.6rem; font-size: 1.5rem; border-bottom: 2px solid #5c0a13; padding-bottom: 0.4rem; }
+    .card h3 { color: #222; font-size: 1.1rem; margin-top: 1.2rem; }
+    .card p { text-align: justify; line-height: 1.6; margin-top: 0.3rem; }
+    .card button { margin-top: 1rem; padding: 0.5rem 0.9rem; background-color: #5c0a13; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    .card button:hover { background-color: #7b0f1d; }
+    footer { background-color: #5c0a13; color: #fff; text-align: center; padding: 1rem; font-size: 0.9rem; margin-top: 2rem; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+    .modal-content { background-color: #fff; margin: 5% auto; padding: 2rem; border-radius: 12px; max-width: 800px; position: relative; max-height: 80vh; overflow-y: auto; }
+    .close { position: absolute; top: 10px; right: 20px; color: #5c0a13; font-size: 1.8rem; font-weight: bold; cursor: pointer; }
+    .close:hover { color: #7b0f1d; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Autoimunes</h1>
+    <p>Etiologia, fisiopatologia, manifestações clínicas, diagnóstico e tratamento</p>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="sistemicos">Sistêmicos</option>
+      <option value="articulares">Articulares</option>
+      <option value="tireoidianos">Tireoidianos</option>
+      <option value="endocrinos">Endócrinos</option>
+      <option value="intestinais">Intestinais</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="sistemicos">
+      <h2>Lúpus Eritematoso Sistêmico (LES)</h2>
+      <p>Doença autoimune sistêmica que afeta múltiplos órgãos, incluindo pele, articulações e rins...</p>
+      <button onclick="abrirModal('les')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="articulares">
+      <h2>Artrite Reumatoide (AR)</h2>
+      <p>Doença inflamatória autoimune que afeta articulações periféricas, causando dor e deformidades...</p>
+      <button onclick="abrirModal('ar')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="neurologicos">
+      <h2>Esclerose Múltipla (EM)</h2>
+      <p>Doença autoimune do sistema nervoso central que leva à desmielinização e déficits neurológicos...</p>
+      <button onclick="abrirModal('em')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="endocrinos">
+      <h2>Diabetes Mellitus Tipo 1 (DM1)</h2>
+      <p>Destruição autoimune das células beta pancreáticas, resultando em deficiência de insulina...</p>
+      <button onclick="abrirModal('dm1')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="tireoidianos">
+      <h2>Tireoidite de Hashimoto</h2>
+      <p>Doença autoimune da tireoide caracterizada por hipotireoidismo progressivo...</p>
+      <button onclick="abrirModal('hashimoto')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="intestinais">
+      <h2>Doença Inflamatória Intestinal (Crohn e Retocolite Ulcerativa)</h2>
+      <p>Transtornos autoimunes que causam inflamação crônica do trato gastrointestinal...</p>
+      <button onclick="abrirModal('dii')">Leitura detalhada</button>
+    </div>
+  </main>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <div id="modalText"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Fontes: Harrison's Principles of Internal Medicine (21ª ed.), Goldman-Cecil Medicine (27ª ed.), Mayo Clinic, NIH, OMS.</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const filterSelect = document.getElementById('filterSelect');
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modalText');
+
+    searchInput.addEventListener('input', filtrarCards);
+    filterSelect.addEventListener('change', filtrarCards);
+
+    function filtrarCards() {
+      const termo = searchInput.value.toLowerCase();
+      const categoria = filterSelect.value;
+      cards.forEach(card => {
+        const titulo = card.querySelector('h2').textContent.toLowerCase();
+        const texto = card.textContent.toLowerCase();
+        const cardCategoria = card.getAttribute('data-categoria');
+        const correspondeTermo = titulo.includes(termo) || texto.includes(termo);
+        const correspondeCategoria = categoria === 'todos' || cardCategoria === categoria;
+        card.style.display = (correspondeTermo && correspondeCategoria) ? 'block' : 'none';
+      });
+    }
+
+    const textosDetalhados = {
+      les: `<h2>Lúpus Eritematoso Sistêmico (LES)</h2><h3>Etiologia</h3><p>Doença autoimune multifatorial; predisposição genética, hormônios e fatores ambientais.</p><h3>Fisiopatologia</h3><p>Produção de autoanticorpos que formam complexos imunes, causando inflamação e dano tecidual sistêmico.</p><h3>Manifestações</h3><p>Erupções cutâneas, artralgia, nefropatia, febre, fadiga e envolvimento de múltiplos órgãos.</p><h3>Diagnóstico</h3><p>Exames laboratoriais: ANA, anti-dsDNA, complemento; critérios clínicos do ACR.</p><h3>Tratamento</h3><p>Anti-inflamatórios, corticosteroides, imunossupressores, controle de comorbidades e acompanhamento multidisciplinar.</p><h3>Prognóstico</h3><p>Variável; manejo adequado reduz morbidade e melhora qualidade de vida.</p>`,
+      ar: `<h2>Artrite Reumatoide (AR)</h2><h3>Etiologia</h3><p>Autoimune; fatores genéticos e ambientais contribuem para ativação sinovial crônica.</p><h3>Fisiopatologia</h3><p>Inflamação persistente da membrana sinovial, formação de pannus e destruição da cartilagem e osso.</p><h3>Manifestações</h3><p>Dor articular simétrica, edema, rigidez matinal prolongada, fadiga.</p><h3>Diagnóstico</h3><p>Exames laboratoriais: fator reumatoide, anti-CCP; imagem: ultrassom e radiografia.</p><h3>Tratamento</h3><p>DMARDs, biológicos, corticosteroides, fisioterapia e manejo multidisciplinar.</p><h3>Prognóstico</h3><p>Crônica; controle precoce diminui deformidades e melhora funcionalidade.</p>`,
+      em: `<h2>Esclerose Múltipla (EM)</h2><h3>Etiologia</h3><p>Autoimune; fatores genéticos e ambientais levam à destruição da mielina do SNC.</p><h3>Fisiopatologia</h3><p>Inflamação desmielinizante com ativação de linfócitos T e B, resultando em lesões axonais e déficit neurológico.</p><h3>Manifestações</h3><p>Fraqueza muscular, distúrbios sensitivos, fadiga, alterações visuais, espasticidade e problemas de coordenação.</p><h3>Diagnóstico</h3><p>Ressonância magnética, análise do líquido cefalorraquidiano, exames neurológicos clínicos e critérios de McDonald.</p><h3>Tratamento</h3><p>Imunomoduladores (interferon beta, acetato de glatirâmero), corticosteroides em surtos, fisioterapia e manejo sintomático.</p><h3>Prognóstico</h3><p>Crônico e progressivo; tratamento precoce melhora qualidade de vida e retarda incapacidade.</p>`,
+      dm1: `<h2>Diabetes Mellitus Tipo 1 (DM1)</h2><h3>Etiologia</h3><p>Autoimune; destruição das células beta pancreáticas, frequentemente com predisposição genética e fatores ambientais.</p><h3>Fisiopatologia</h3><p>Deficiência absoluta de insulina, levando a hiperglicemia e alterações metabólicas sistêmicas.</p><h3>Manifestações</h3><p>Poliúria, polidipsia, perda de peso, fadiga, cetoacidose diabética em casos agudos.</p><h3>Diagnóstico</h3><p>Glicemia de jejum, hemoglobina glicada, presença de autoanticorpos (GAD, IA-2, ZnT8).</p><h3>Tratamento</h3><p>Insulinoterapia, monitoramento glicêmico, educação em diabetes, dieta e exercício físico.</p><h3>Prognóstico</h3><p>Crônico; bom controle reduz complicações micro e macrovasculares.</p>`,
+      hashimoto: `<h2>Tireoidite de Hashimoto</h2><h3>Etiologia</h3><p>Autoimune; produção de anticorpos antitireoideanos (anti-TPO, anti-Tg) destrói gradualmente o tecido tireoidiano.</p><h3>Fisiopatologia</h3><p>Inflamação crônica da tireoide levando a fibrose e hipotireoidismo progressivo.</p><h3>Manifestações</h3><p>Fadiga, ganho de peso, constipação, pele seca, queda de cabelo, intolerância ao frio.</p><h3>Diagnóstico</h3><p>Exames laboratoriais: TSH elevado, T4 livre diminuído, anticorpos específicos; ultrassonografia tireoidiana.</p><h3>Tratamento</h3><p>Reposição de hormônio tireoidiano (levotiroxina) e acompanhamento regular.</p><h3>Prognóstico</h3><p>Crônico; controle hormonal adequado permite vida normal.</p>`,
+      dii: `<h2>Doença Inflamatória Intestinal (Crohn e Retocolite Ulcerativa)</h2><h3>Etiologia</h3><p>Autoimune; interação entre predisposição genética, microbiota intestinal e resposta imunológica exacerbada.</p><h3>Fisiopatologia</h3><p>Inflamação crônica da mucosa intestinal, com citocinas pró-inflamatórias e dano tecidual.</p><h3>Manifestações</h3><p>Diarreia crônica, dor abdominal, perda de peso, sangramento retal, febre e fadiga.</p><h3>Diagnóstico</h3><p>Endoscopia, colonoscopia com biópsia, exames laboratoriais e imagem (RM, TC).</p><h3>Tratamento</h3><p>Anti-inflamatórios, imunossupressores, biológicos, cirurgia em casos graves, dieta e suporte nutricional.</p><h3>Prognóstico</h3><p>Crônico; tratamento adequado melhora sintomas e previne complicações, mas recaídas são comuns.</p>`
+    };
+
+    function abrirModal(chave) {
+      modalText.innerHTML = textosDetalhados[chave] || '<p>Detalhes não disponíveis.</p>';
+      modal.style.display = 'block';
+    }
+
+    function fecharModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        fecharModal();
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

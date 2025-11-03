@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Verdana,sans-serif;color:#333;margin:0;padding:0}
+    header{background:#5c0a13;color:#fff;text-align:center;padding:2rem 1rem}
+    header h1{margin:0;font-size:2.4rem; margin-top: 5rem;}
+    header p{opacity:.9}
+    .search-bar{text-align:center;margin:1.5rem auto}
+    .search-bar input,.search-bar select{padding:.7rem;font-size:1rem;border-radius:8px;border:1px solid #ccc;width:220px;margin:.3rem}
+    main{max-width:1200px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.8rem}
+    .card{background:#fff;border-radius:14px;box-shadow:0 4px 10px rgba(0,0,0,.1);padding:1.8rem;transition:transform .3s,box-shadow .3s}
+    .card:hover{transform:translateY(-5px);box-shadow:0 8px 18px rgba(0,0,0,.15)}
+    .card h2{color:#5c0a13;margin-bottom:.6rem;font-size:1.3rem;border-bottom:2px solid #5c0a13;padding-bottom:.4rem}
+    .card p{text-align:justify;line-height:1.6;margin-top:.3rem}
+    .card button{margin-top:1rem;padding:.5rem .9rem;background:#5c0a13;color:#fff;border:0;border-radius:6px;cursor:pointer}
+    .card button:hover{background:#7b0f1d}
+    footer{background:#5c0a13;color:#fff;text-align:center;padding:1rem;font-size:.9rem;margin-top:2rem}
+    .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,.6)}
+    .modal-content{background:#fff;margin:4% auto;padding:2rem;border-radius:12px;max-width:900px;position:relative;max-height:82vh;overflow-y:auto}
+    .close{position:absolute;top:10px;right:20px;color:#5c0a13;font-size:1.8rem;font-weight:700;cursor:pointer}
+    .close:hover{color:#7b0f1d}
+    .modal h3{margin-top:1rem}
+    .modal p{line-height:1.6;text-align:justify}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Dermatológicos</h1>
+    <p>Resumo e leitura detalhada clínica, diagnóstica e terapêutica</p>
+  </header>
+
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="inflamatorios">Inflamatórios</option>
+      <option value="infecciosos">Infecciosos</option>
+      <option value="autoimunes">Autoimunes</option>
+      <option value="neoplasicos">Neoplásicos</option>
+      <option value="outros">Outros</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="inflamatorios"><h2>Dermatite Atópica</h2><p>Dermatite crónica inflamatória com prurido intenso, áreas de eczema e relapsos.</p><button onclick="abrirModal('atopica')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="inflamatorios"><h2>Psoríase</h2><p>Doença inflamatória cutânea com placas eritematosas e escamosas; associação sistêmica.</p><button onclick="abrirModal('psoriase')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="infecciosos"><h2>Impetigo</h2><p>Infecção bacteriana superficial (Staph/Strep) com crostas melicericas e lesões exsudativas.</p><button onclick="abrirModal('impetigo')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="infecciosos"><h2>Herpes Zoster</h2><p>Reativação do vírus varicela-zoster com erupção dolorosa em dermátomos.</p><button onclick="abrirModal('zoster')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="autoimunes"><h2>Lúpus Cutâneo</h2><p>Manifestações cutâneas do lúpus com placas eritematosas, fotosensibilidade e cicatrizes.</p><button onclick="abrirModal('lupuscutaneo')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="autoimunes"><h2>Penfigoide Bolhoso</h2><p>Doença autoimune subepidérmica com bolhas tensas e prurido.</p><button onclick="abrirModal('penfigoide')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neoplasicos"><h2>Carcinoma Basocelular</h2><p>Neoplasia cutânea localmente invasiva, mais comum em áreas fotoexpostas.</p><button onclick="abrirModal('cbc')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="neoplasicos"><h2>Melanoma</h2><p>Neoplasia maligna de melanócitos com potencial metastático elevado; ABCDE do melanoma.</p><button onclick="abrirModal('melanoma')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="infecciosos"><h2>Pitiríase Versicolor</h2><p>Infecção superficial por Malassezia spp. causando máculas hipocrômicas ou hiperpigmentadas.</p><button onclick="abrirModal('pityriasis')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="outros"><h2>Síndrome de Stevens-Johnson / Necrose Epidérmica Tóxica (NET)</h2><p>Reação cutâneo-mucosa grave, geralmente por fármacos, com necrose epidérmica extensa.</p><button onclick="abrirModal('sjs')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="outros"><h2>Acne Vulgar</h2><p>Inflamação das unidades pilossebáceas; comedões, pápulas, pústulas e possível cicatrização.</p><button onclick="abrirModal('acne')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="outros"><h2>Urticária</h2><p>Reação cutânea pruriginosa com pápulas evanescentes (vergões) e possível angioedema.</p><button onclick="abrirModal('urticaria')">Leitura detalhada</button></div>
+  </main>
+
+  <div id="modal" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal()">&times;</span><div id="modalText"></div></div></div>
+
+  <footer><p>Fontes: Fitzpatrick's Dermatology, Rook's Textbook of Dermatology, WHO, UpToDate, Mayo Clinic.</p></footer>
+
+  <script>
+    const searchInput=document.getElementById('searchInput');
+    const filterSelect=document.getElementById('filterSelect');
+    const cards=document.querySelectorAll('.card');
+    const modal=document.getElementById('modal');
+    const modalText=document.getElementById('modalText');
+    searchInput.addEventListener('input',filtrarCards);
+    filterSelect.addEventListener('change',filtrarCards);
+    function filtrarCards(){const termo=searchInput.value.toLowerCase();const categoria=filterSelect.value;cards.forEach(card=>{const titulo=card.querySelector('h2').textContent.toLowerCase();const texto=card.textContent.toLowerCase();const cardCategoria=card.getAttribute('data-categoria');const correspondeTermo=titulo.includes(termo)||texto.includes(termo);const correspondeCategoria=categoria==='todos'||cardCategoria===categoria;card.style.display=(correspondeTermo&&correspondeCategoria)?'block':'none'});} 
+
+    const textosDetalhados={
+      atopica:`<h2>Dermatite Atópica</h2>
+<h3>Etiologia</h3>
+<p>Doença inflamatória cutânea crónica associada a predisposição genética (barreira cutânea alterada: mutações FLG), história familiar de atopia, sensibilização alérgica e factores ambientais (irritantes, clima, infecções e stress).</p>
+<h3>Fisiopatologia</h3>
+<p>Defeito na barreira epidérmica e resposta imunológica Th2 predominante nas fases agudas; produção de citocinas (IL-4, IL-13) e aumento da permeabilidade cutânea favorecem perda de água transepidérmica e entrada de alérgenos.</p>
+<h3>Manifestações clínicas</h3>
+<p>Prurido intenso, placas eritematosas, liquenificação nas regiões de flexão em adultos e face em lactentes; infecções secundárias por S. aureus são comuns.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico, baseado em história e exame; critérios de Hanifin e Rajka usados em pesquisa; exames auxiliares apenas quando necessários.</p>
+<h3>Tratamento</h3>
+<p>Higiene suave, emolientes diários, corticosteroides tópicos conforme gravidade, inibidores de calcineurina tópicos, fototerapia e agentes sistêmicos (ciclosporina, dupilumabe em casos graves). Educação do paciente é essencial.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente crónica, com períodos de remissão; controle adequado melhora qualidade de vida.</p>`,
+
+      psoriase:`<h2>Psoríase</h2>
+<h3>Etiologia</h3>
+<p>Multifatorial: predisposição genética (HLA-Cw6), factores ambientais (infecção estreptocócica, trauma, medicamentos) e disfunção imune.</p>
+<h3>Fisiopatologia</h3>
+<p>Imunomediada com ativação de células T (Th17, Th1), citocinas (IL-17, IL-23, TNF-α) e hiperproliferação queratinocitária produzindo placas escamosas.</p>
+<h3>Manifestações</h3>
+<p>Placas eritematosas bem delimitadas com escama prateada, comum em couro cabeludo, cotovelos e joelhos; pode haver artrite psoriásica.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; biópsia para casos duvidosos; avaliar extensão (PASI) e envolvimento articular.</p>
+<h3>Tratamento</h3>
+<p>Tópicos: corticosteroides, vitamina D analógicos; fototerapia; sistêmicos: metotrexato, ciclosporina, e biológicos (anti-TNF, anti-IL17, anti-IL23) para casos moderados a graves.</p>
+<h3>Prognóstico</h3>
+<p>Crônica com flutuações; terapias modernas melhoram controle e qualidade de vida.</p>`,
+
+      impetigo:`<h2>Impetigo</h2>
+<h3>Etiologia</h3>
+<p>Infecção superficial por Staphylococcus aureus e/ou Streptococcus pyogenes; forma bullosa associada a toxinas estafilocócicas.</p>
+<h3>Fisiopatologia</h3>
+<p>Colonização da pele, ruptura da barreira seguida por infecção local e formação de crostas melicericas (não-bullosa) ou bolhas (bullosa).</p>
+<h3>Manifestações</h3>
+<p>Lesões vesículo-pustulosas que evoluem para crostas amareladas; comum em crianças, áreas expostas.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; cultura em casos complicados ou falha terapêutica.</p>
+<h3>Tratamento</h3>
+<p>Higiene, pomadas antibióticas tópicas (mupirocina) em casos limitados; antibióticos orais se extenso ou sistêmico.</p>
+<h3>Prognóstico</h3>
+<p>Favorável com tratamento; preven��o com higiene e cuidado de feridas.</p>`,
+
+      zoster:`<h2>Herpes Zoster</h2>
+<h3>Etiologia</h3>
+<p>Reativação do vírus varicela-zoster latente nos gânglios sensoriais.</p>
+<h3>Fisiopatologia</h3>
+<p>Viral migra ao longo das fibras sensitivas para a pele causando inflamação neurógena e erupção vesicular em dermátomos.</p>
+<h3>Manifestações</h3>
+<p>Dor neuropática intensa seguida por erupção vesicular unilateral em dermátomo; pode evoluir para neuralgia pós-herpética.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; PCR ou raspado vesicular em casos atípicos.</p>
+<h3>Tratamento</h3>
+<p>Antivirais (aciclovir, valaciclovir) iniciados precocemente reduzem duração e risco de complicações; analgesia adequada e, se necessário, terapias para dor neuropática.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente bom; a neuralgia pós-herpética é a complicação mais temida, especialmente em idosos.</p>`,
+
+      lupuscutaneo:`<h2>Lúpus Cutâneo</h2>
+<h3>Etiologia</h3>
+<p>Manifestações cutâneas do espectro do lúpus eritematoso, com factores genéticos, hormonais e ambientais (luz UV).</p>
+<h3>Fisiopatologia</h3>
+<p>Autoanticorpos e complexos imunes induzem inflamação e dano cutâneo; fotosensibilidade é comum.</p>
+<h3>Manifestações</h3>
+<p>Placas eritematosas, rash malar, úlceras mucosas, alopecia e lesões discóides que cicatrizam.</p>
+<h3>Diagnóstico</h3>
+<p>História clínica, ANA e autoanticorpos; biópsia cutânea se necessário.</p>
+<h3>Tratamento</h3>
+<p>Proteção solar rigorosa, corticoterapia tópica, antimaláricos (hidroxicloroquina) e imunossupressores em casos sistêmicos.</p>
+<h3>Prognóstico</h3>
+<p>Variável; lesões cutâneas podem cicatrizar com sequela estética; controle sistêmico reduz morbidade.</p>`,
+
+      penfigoide:`<h2>Penfigoide Bolhoso</h2>
+<h3>Etiologia</h3>
+<p>Doença autoimune da junção dermoepidérmica, mais comum em idosos.</p>
+<h3>Fisiopatologia</h3>
+<p>Autoanticorpos dirigidos contra hemidesmossomos (BP180/BP230) provocam separação subepidérmica e formação de bolhas tensas.</p>
+<h3>Manifestações</h3>
+<p>Prurido intenso seguido por bolhas tensas, erosões e doença mucosa menos frequente.</p>
+<h3>Diagnóstico</h3>
+<p>Biópsia para histologia + imunofluorescência direta demonstrando depósito linear de IgG e complemento na junção dermoepidérmica.</p>
+<h3>Tratamento</h3>
+<p>Corticosteróides tópicos/ sistêmicos, imunossupressores (azatioprina, metotrexato), e terapias biológicas em casos refratários (rituximabe).</p>
+<h3>Prognóstico</h3>
+<p>Crônico; mortalidade reduzida com tratamento adequado, mas recidivas são comuns.</p>`,
+
+      cbc:`<h2>Carcinoma Basocelular</h2>
+<h3>Etiologia</h3>
+<p>Exposição cumulativa a radiação ultravioleta (UV) é o principal fator de risco; predisposição genética contribui.</p>
+<h3>Fisiopatologia</h3>
+<p>Proliferação neoplástica de queratinócitos basais com crescimento local invasivo e raras metástases.</p>
+<h3>Manifestações</h3>
+<p>Nódulos perlados, ulcerações que sangram, telangiectasias; geralmente em áreas expostas ao sol.</p>
+<h3>Diagnóstico</h3>
+<p>Biópsia cutânea; dermatoscopia ajuda na avaliação.</p>
+<h3>Tratamento</h3>
+<p>Excisão cirúrgica, curetagem e electrocautério, terapia fotodinâmica ou Mohs para lesões de risco ou recidivantes.</p>
+<h3>Prognóstico</h3>
+<p>Excelente quando tratado precocemente; recidiva local possível se incompleto.</p>`,
+
+      melanoma:`<h2>Melanoma</h2>
+<h3>Etiologia</h3>
+<p>Exposição intermitente intensa a UV e predisposição genética (mutções BRAF, CDKN2A) são fatores importantes.</p>
+<h3>Fisiopatologia</h3>
+<p>Neoplasia maligna de melanócitos com potencial de invasão e metástase; alterações moleculares determinam comportamento biológico.</p>
+<h3>Manifestações</h3>
+<p>Lesões pigmentadas novas ou que mudam: assimetria, bordas irregulares, variação de cor, diâmetro >6mm e evolução (ABCDE).</p>
+<h3>Diagnóstico</h3>
+<p>Excisão com margens diagnósticas para histologia; estadiamento por Breslow e investigações para metástase.</p>
+<h3>Tratamento</h3>
+<p>Excisão ampla, linfadenectomia se indicada; terapias alvo (inibidores BRAF/MEK) e imunoterapia (anti-PD-1) em estágios avançados.</p>
+<h3>Prognóstico</h3>
+<p>Depende da profundidade (Breslow) e estadiamento; diagnóstico precoce melhora significativamente a sobrevida.</p>`,
+
+      pityriasis:`<h2>Pitiríase (Pityriasis) Versicolor</h2>
+<h3>Etiologia</h3>
+<p>Infecção por leveduras do género Malassezia (M. furfur e outros), colonizadores cutâneos que se tornam patogénicos em condições de calor e humidade.</p>
+<h3>Fisiopatologia</h3>
+<p>Desordem de pigmentação provocada pela produção de azelaína e alteração da queratinização superficial; afeta estrato córneo provocando máculas hipocrômicas, hiperpigmentadas ou eritematosas.</p>
+<h3>Manifestações</h3>
+<p>Máculas macias, ligeiramente descamativas, mais visíveis após exposição solar devido a falha na pigmentação; frequentemente tronco e ombros.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; exame com lâmpada de Wood e KOH que evidencia hifas e esporos (aspecto "spaghetti and meatballs").</p>
+<h3>Tratamento</h3>
+<p>Antifúngicos tópicos (cetoconazol, miconazol, sulfeto de selénio) por 2–4 semanas; formas extensas podem requerer fluconazol oral. Recaídas são comuns em climas quentes.</p>
+<h3>Prognóstico</h3>
+<p>Boa resposta ao tratamento, mas alteração da pigmentação pode persistir semanas ou meses após erradicação.</p>`,
+
+      sjs:`<h2>Síndrome de Stevens-Johnson (SJS) / Necrose Epidérmica Tóxica (NET)</h2>
+<h3>Etiologia</h3>
+<p>Geralmente reação adversa a fármacos (allopurinol, sulfonamidas, carbamazepina, anticonvulsivantes, alguns AINEs) ou infeções (Mycoplasma).</p>
+<h3>Fisiopatologia</h3>
+<p>Resposta imune medicada por linfócitos T citotóxicos que induzem apoptose queratinocitária extensa levando a necrose epidérmica e desprendimento cutâneo.</p>
+<h3>Manifestações</h3>
+<p>Febre, lesões mucosas dolorosas, bolhas e descolamento cutâneo extensivo; SJS envolve <10% da superfície corporal, NET >30%.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico e histológico; biópsia mostra necrose epidérmica extensa e interface dermatitis.</p>
+<h3>Tratamento</h3>
+<p>Interrupção imediata do fármaco suspeito, suporte intensivo (similar a queimados), fluidoterapia, controle infeccioso, cuidados de superfície e, em alguns centros, imunosupressão controlada (IVIG, ciclosporina).</p>
+<h3>Prognóstico</h3>
+<p>Alta morbilidade e mortalidade proporcional à extensão; sobreviventes podem ter sequelas oculares e cicatrizes.</p>`,
+
+      acne:`<h2>Acne Vulgar</h2>
+<h3>Etiologia</h3>
+<p>Multifatorial: hiperprodução de sebo, hiperqueratinização folicular, colonização por Cutibacterium acnes e inflamação.</p>
+<h3>Fisiopatologia</h3>
+<p>Obstrução do folículo pilo-sebáceo formando comedões; inflamação leva a pápulas, pústulas e nódulos.</p>
+<h3>Manifestações</h3>
+<p>Comedões abertos e fechados, pápulas, pústulas, nódulos e possíveis cicatrizes atróficas ou hipertróficas.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; avaliar tipo de lesões e extensão para orientar tratamento.</p>
+<h3>Tratamento</h3>
+<p>Tópicos: retinoides, peróxido de benzoílo, antibióticos; sistêmicos: isotretinoína em casos graves, antibióticos orais e terapias hormonais em mulheres.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com tratamento adequado; prevenção de cicatrizes é objetivo principal.</p>`,
+
+      urticaria:`<h2>Urticária</h2>
+<h3>Etiologia</h3>
+<p>Reações mediadas por histamina (IgE dependente ou independente), fármacos, alimentos, infecções, causas físicas ou idiopáticas.</p>
+<h3>Fisiopatologia</h3>
+<p>Desgranulação de mastócitos leva a aumento da permeabilidade vascular resultando em edema superficial (pápulas pruriginosas) e por vezes angioedema mais profundo.</p>
+<h3>Manifestações</h3>
+<p>Pápulas edematosas pruriginosas que migram em horas; angioedema pode comprometer vias aéreas.</p>
+<h3>Diagnóstico</h3>
+<p>Clínico; investigar causas, testes alergológicos quando indicado.</p>
+<h3>Tratamento</h3>
+<p>Anti-histamínicos de 2ª geração em doses maiores, corticoterapia breve em crises, investigar e evitar desencadeantes; terapias avançadas (omalizumabe) para urticária crônica refratária.</p>
+<h3>Prognóstico</h3>
+<p>Muitas resoluções espontâneas; crônica em alguns casos exigindo manejo prolongado.</p>`
+    };
+
+    function abrirModal(chave){modalText.innerHTML=textosDetalhados[chave]||'<p>Detalhes não disponíveis.</p>';modal.style.display='block';}
+    function fecharModal(){modal.style.display='none'}
+    window.onclick=function(e){if(e.target===modal)fecharModal()}
+  </script>
+</body>
+
+
+
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

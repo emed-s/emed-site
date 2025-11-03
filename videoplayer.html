@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+   
+      <style>
+.player{
+background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
+border-radius:16px;
+overflow:hidden;
+box-shadow:0 8px 30px rgba(2,6,23,0.6);
+}
+
+
+.video-wrap{position:relative;background:black}
+video{width:100%;height:auto;display:block;background:#000;max-height:calc(100vh - 180px);}
+
+
+.big-play{
+position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+}
+.big-play button{
+pointer-events:auto;
+background:rgba(2,6,23,0.6);
+border:1px solid rgba(255,255,255,0.06);
+color:var(--text);
+padding:18px;
+border-radius:999px;
+font-size:18px;
+backdrop-filter:blur(4px);
+cursor:pointer;
+}
+
+
+.controls{display:flex;flex-direction:column;gap:8px;padding:12px}
+.progress{
+position:relative;height:8px;background:var(--track);border-radius:999px;cursor:pointer;overflow:hidden
+}
+.progress .buffer{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));}
+.progress .bar{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px;}
+
+
+.controls-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.left, .center, .right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.center{flex:1;justify-content:center}
+
+
+button.ctrl{background:transparent;border:0;color:var(--text);padding:8px;border-radius:8px;cursor:pointer;font-size:18px}
+.time{font-size:13px;color:var(--muted);min-width:64px;text-align:center}
+
+
+input[type=range]{-webkit-appearance:none;width:110px;height:28px;background:transparent}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:var(--track)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--primary);margin-top:-4px}
+
+
+select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px;border-radius:8px;color:var(--text)}
+.small{font-size:13px;color:var(--muted)}
+
+
+/* Responsive for iPhone 13 */
+@media (max-width:430px){
+body{padding:12px;}
+.player{width:100%;border-radius:0;box-shadow:none;}
+.controls{padding:8px;gap:6px;}
+.big-play button{padding:12px;font-size:16px}
+.controls-row{gap:6px}
+button.ctrl{padding:6px;font-size:16px}
+input[type=range]{width:90px}
+.time{font-size:12px;min-width:50px}
+select{font-size:14px;padding:4px}
+}
+
+@media (max-width:1024px){
+   .player{}
+}
+
+.video-grid {
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:16px;
+margin-top: ;
+margin: 8rem;
+padding: 20%;
+}
+
+
+.video-card {
+background:#fff;
+border-radius:18px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+overflow:hidden;
+display:flex;
+flex-direction:column;
+cursor:pointer;
+transition:transform .2s ease, box-shadow .2s ease;
+}
+.video-card:hover {
+transform:translateY(-4px);
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+
+.thumb {
+position:relative;
+width:100%;
+aspect-ratio:16/9;
+background:#e2e8f0;
+}
+.thumb img {
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+.play-icon {
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:48px;
+height:48px;
+background:rgba(0,0,0,0.5);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.play-icon svg {
+fill:white;
+width:22px;
+height:22px;
+}
+
+
+.video-info {
+padding:12px 14px 16px;
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+.video-title {
+font-size:0.95rem;
+}
+
+.home__title{
+   margin-top: 3rem;
+}
+
+      </style>
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed-play.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <!--==================== HOME ====================-->
+
+      <div class="home__data">
+                  <h1 class="home__title">
+                     eMed <br>
+                                    PLAY      </h1>
+
+                  <p class="home__description">
+                      Welcome to our medical video lessons — learn with clarity and confidence.
+                  </p>
+
+                  
+
+
+
+         <div class="player" id="player">
+<div class="video-wrap">
+<video id="video" preload="metadata" crossorigin="anonymous">
+<source src="assets/videos/Avril Lavigne  Wish You Were Here Official Video_720pFH.mp4" type="video/mp4">
+Sorry — your browser doesn't support HTML5 video.
+</video>
+<div class="big-play" id="bigPlay">
+<button id="bigPlayBtn" aria-label="Play">▶</button>
+</div>
+</div>
+
+
+<div class="controls" role="group" aria-label="Video controls">
+<div class="progress" id="progress" aria-label="Video progress">
+<div class="buffer" id="buffer"></div>
+<div class="bar" id="bar"></div>
+</div>
+
+
+<div class="controls-row">
+<div class="left">
+<button class="ctrl" id="playPause" aria-label="Play/Pause">▶</button>
+<button class="ctrl" id="stop" aria-label="Stop">■</button>
+<div class="time" id="time">0:00 / 0:00</div>
+</div>
+
+
+<div class="center">
+<input type="range" id="seekThumb" min="0" max="100" value="0" aria-label="Seek"/>
+</div>
+
+
+<div class="right">
+<button class="ctrl" id="mute" aria-label="Mute">🔊</button>
+<input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"/>
+<label class="small">Speed
+<select id="speed" aria-label="Playback speed">
+<option value="0.5">0.5x</option>
+<option value="0.75">0.75x</option>
+<option value="1" selected>1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+<option value="2">2x</option>
+</select>
+</label>
+<button class="ctrl" id="pip" aria-label="Picture in Picture">PIP</button>
+<button class="ctrl" id="fs" aria-label="Fullscreen">⤢</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<a href="videoexplorer.html" class="button">Explore Now</a>
+               
+
+</div>
+
+<section class="video-grid">
+<article class="video-card">
+<div class="thumb">
+<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80" alt="Video thumbnail 1" />
+<div class="play-icon">
+<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+</div>
+</div>
+<div class="video-info">
+<h3 class="video-title">Exploring Nature</h3>
+<span class="video-meta">3:42 • 2.1k views</span>
+</div>
+</article>
+
+
+<article class="video-card">
+<div class="thumb">
+<img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&q=80" alt="Video thumbnail 2" />
+<div class="play-icon">
+<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+</div>
+</div>
+<div class="video-info">
+<h3 class="video-title">Calm Ocean Waves</h3>
+<span class="video-meta">5:05 • 3.4k views</span>
+</div>
+</article>
+
+
+<article class="video-card">
+<div class="thumb">
+<img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?w=800&q=80" alt="Video thumbnail 3" />
+<div class="play-icon">
+<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+</div>
+</div>
+<div class="video-info">
+<h3 class="video-title">Mountain Hike</h3>
+<span class="video-meta">7:21 • 1.8k views</span>
+</div>
+</article>
+
+
+<article class="video-card">
+<div class="thumb">
+<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Video thumbnail 4" />
+<div class="play-icon">
+<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+</div>
+</div>
+<div class="video-info">
+<h3 class="video-title">Sunset Over Lake</h3>
+<span class="video-meta">4:18 • 5.9k views</span>
+</div>
+</article>
+</section>
+
+
+         <!--==================== FEATURED ====================-->
+         
+         <!--==================== NEW BOOKS ====================-->
+         
+
+         <!--==================== JOIN ====================-->
+       
+         <!--==================== TESTIMONIAL ====================-->
+         
+      <!--==================== FOOTER ====================-->
+      <footer class="footer">
+         <div class="footer__container grid">
+            <div>
+              <a href="#" class="footer__logo">
+               <i class="ri-book-3-line"></i>E-Book
+              </a>
+
+              <p class="footer__description">
+               Find and explore the best medical eBooks for free.
+              </p>
+            </div>
+
+            <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+
+      <!--====PLAYER====-->
+
+
+      <!--=============== SCROLLREVEAL ===============-->
+      
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+
+
+      <script>
+// Robust, touch-friendly script with defensive checks and fallbacks
+document.addEventListener('DOMContentLoaded', ()=>{
+const video = document.getElementById('video');
+const playPause = document.getElementById('playPause');
+const bigPlayBtn = document.getElementById('bigPlayBtn');
+const bigPlay = document.getElementById('bigPlay');
+const stopBtn = document.getElementById('stop');
+const timeEl = document.getElementById('time');
+const progress = document.getElementById('progress');
+const bar = document.getElementById('bar');
+const buffer = document.getElementById('buffer');
+const seekThumb = document.getElementById('seekThumb');
+const muteBtn = document.getElementById('mute');
+const volume = document.getElementById('volume');
+const speed = document.getElementById('speed');
+const fsBtn = document.getElementById('fs');
+const pipBtn = document.getElementById('pip');
+const player = document.getElementById('player');
+
+let isPointerDown = false;
+
+
+function dbg(...args){ if(window.location.search.includes('debug')) console.log(...args); }
+
+
+function formatTime(s){
+if(!isFinite(s)) return '0:00';
+const m = Math.floor(s/60);
+const sec = Math.floor(s%60).toString().padStart(2,'0');
+return `${m}:${sec}`;
+}
+
+
+function setCurrentFromPercent(pct){
+if(!isFinite(video.duration) || video.duration <= 0) return;
+pct = Math.max(0, Math.min(1, pct));
+video.currentTime = pct * video.duration;
+}
+
+
+function updateTime(){
+if(!isFinite(video.duration) || video.duration <= 0){
+timeEl.textContent = `0:00 / 0:00`;
+bar.style.width = '0%';
+seekThumb.value = 0;
+return;
+}
+
+timeEl.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+const percent = (video.currentTime / video.duration) * 100;
+bar.style.width = isFinite(percent) ? percent + '%' : '0%';
+seekThumb.value = isFinite(percent) ? percent : 0;
+}
+
+
+function updateBuffer(){
+try{
+if(video.buffered && video.buffered.length){
+const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+const percent = (bufferedEnd / video.duration) * 100;
+buffer.style.width = isFinite(percent) ? percent + '%' : '0%';
+}
+}catch(e){ dbg('buffer calc failed', e); }
+}
+
+
+async function togglePlay(){
+try{
+if(video.paused || video.ended){
+await video.play();
+} else {
+video.pause();
+}
+}catch(err){
+console.warn('play() rejected', err);
+}
+}
+
+function updatePlayUI(){
+const icon = video.paused ? '▶' : '⏸';
+playPause.textContent = icon;
+bigPlayBtn.textContent = video.paused ? '▶' : '';
+bigPlay.style.display = video.paused ? 'flex' : 'none';
+}
+
+
+playPause.addEventListener('click', togglePlay);
+bigPlayBtn.addEventListener('click', togglePlay);
+stopBtn.addEventListener('click', ()=>{ video.pause(); video.currentTime = 0; updateTime(); });
+
+
+video.addEventListener('play', updatePlayUI);
+video.addEventListener('pause', updatePlayUI);
+video.addEventListener('timeupdate', updateTime);
+video.addEventListener('progress', updateBuffer);
+video.addEventListener('loadedmetadata', ()=>{ updateTime(); updateBuffer(); });
+video.addEventListener('error', (e)=>{ console.error('Video element error:', e); });
+
+
+// pointer/touch friendly seeking on the progress bar
+function seekByClientX(clientX){
+const rect = progress.getBoundingClientRect();
+const pct = (clientX - rect.left) / rect.width;
+setCurrentFromPercent(pct);
+}
+
+progress.addEventListener('pointerdown', (e)=>{ e.preventDefault(); isPointerDown = true; seekByClientX(e.clientX); });
+progress.addEventListener('touchmove', (e)=>{ if(!isPointerDown) return; if(e.touches && e.touches[0]){ seekByClientX(e.touches[0].clientX); } }, {passive:false});
+document.addEventListener('touchend', ()=>{ isPointerDown = false; });
+
+
+// Seek via range: update visually on input, commit on change
+seekThumb.addEventListener('input', (e)=>{
+const pct = e.target.value / 100;
+bar.style.width = (pct * 100) + '%';
+});
+seekThumb.addEventListener('change', (e)=>{
+const pct = e.target.value / 100;
+setCurrentFromPercent(pct);
+});
+
+
+// Volume control
+volume.addEventListener('input', ()=>{ video.volume = parseFloat(volume.value); muteBtn.textContent = video.volume==0 ? '🔈' : '🔊'; });
+muteBtn.addEventListener('click', ()=>{ video.muted = !video.muted; muteBtn.textContent = video.muted ? '🔈' : '🔊'; });
+
+
+// Speed control
+speed.addEventListener('change', ()=>{ video.playbackRate = parseFloat(speed.value); });
+
+
+// Fullscreen with fallbacks for iOS Safari
+fsBtn.addEventListener('click', async ()=>{
+try{
+if(document.fullscreenElement || document.webkitFullscreenElement){
+if(document.exitFullscreen) await document.exitFullscreen();
+else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+} else {
+if(player.requestFullscreen) await player.requestFullscreen();
+else if(player.webkitRequestFullscreen) player.webkitRequestFullscreen();
+else if(video.webkitEnterFullscreen) video.webkitEnterFullscreen(); // older iOS fallback
+}
+}catch(e){ console.warn('fullscreen failed', e); }
+});
+
+
+// Picture-in-picture with safe feature detection
+pipBtn.addEventListener('click', async ()=>{
+try{
+if('pictureInPictureEnabled' in document && document.pictureInPictureElement){
+await document.exitPictureInPicture();
+} else if('pictureInPictureEnabled' in document && video.requestPictureInPicture){
+await video.requestPictureInPicture();
+} else if(typeof video.webkitSupportsPresentationMode === 'function' && video.webkitSupportsPresentationMode('picture-in-picture')){
+try{ video.webkitSetPresentationMode('picture-in-picture'); }catch(e){ console.warn('webkit PIP failed', e); }
+} else {
+alert('Picture-in-Picture not available on this device/browser.');
+}
+}catch(err){ console.warn('PIP error', err); }
+});
+
+
+// Keyboard shortcuts (mostly for desktop)
+document.addEventListener('keydown', (e)=>{
+const tag = document.activeElement.tagName.toLowerCase();
+if(tag === 'input' || tag === 'select' || tag === 'textarea') return;
+switch(e.key.toLowerCase()){
+case ' ':
+e.preventDefault(); togglePlay(); break;
+case 'arrowleft': video.currentTime = Math.max(0, video.currentTime - 5); break;
+case 'arrowright': video.currentTime = Math.min(video.duration, video.currentTime + 5); break;
+case 'arrowup': video.volume = Math.min(1, video.volume + 0.05); volume.value = video.volume; break;
+case 'arrowdown': video.volume = Math.max(0, video.volume - 0.05); volume.value = video.volume; break;
+case 'f': fsBtn.click(); break;
+case 'm': muteBtn.click(); break;
+}
+});
+
+
+// initial states
+video.volume = parseFloat(volume.value);
+video.playbackRate = parseFloat(speed.value);
+updatePlayUI();
+
+
+// small UX: reveal controls on touch/mouse
+let hideTimeout;
+player.addEventListener('mousemove', ()=>{
+player.style.boxShadow = '0 12px 40px rgba(2,6,23,0.7)';
+clearTimeout(hideTimeout);
+hideTimeout = setTimeout(()=>{ player.style.boxShadow = ''; }, 2400);
+});
+
+
+dbg('player initialized');
+});
+
+</script>
+   </body>
+</html>

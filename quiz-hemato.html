@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Hematológico - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #b30000;
+  }
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+  input[type=text] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+  body.dark input[type=text] {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Hematológico - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // 30 múltipla escolha (MC)
+  {type:"mc", q:"Qual é a causa mais comum de anemia ferropriva?", a:["Perda sanguínea crônica","Deficiência de vitamina B12","Doença renal","Infecção viral"], correct:0},
+  {type:"mc", q:"A talassemia é caracterizada por:", a:["Produção anormal de hemoglobina","Hemorragia intensa","Deficiência de ferro","Deficiência de ácido fólico"], correct:0},
+  {type:"mc", q:"A anemia megaloblástica geralmente resulta de:", a:["Deficiência de vitamina B12 ou ácido fólico","Deficiência de ferro","Perda sanguínea","Doença renal"], correct:0},
+  {type:"mc", q:"O teste de Coombs direto é usado para:", a:["Detectar anemia hemolítica autoimune","Diagnosticar anemia ferropriva","Avaliar coagulação","Medir plaquetas"], correct:0},
+  {type:"mc", q:"A hemofilia A é causada por deficiência de:", a:["Fator VIII","Fator IX","Fator X","Fator II"], correct:0},
+  {type:"mc", q:"A leucemia mieloide crônica é caracterizada por:", a:["Translocação BCR-ABL","Excesso de plaquetas","Deficiência de neutrófilos","Deficiência de hemoglobina"], correct:0},
+  {type:"mc", q:"A púrpura trombocitopênica idiopática apresenta:", a:["Plaquetas baixas","Hemoglobina baixa","Neutropenia","Excesso de glóbulos vermelhos"], correct:0},
+  {type:"mc", q:"A anemia aplástica resulta de:", a:["Falência da medula óssea","Perda de sangue aguda","Deficiência de ferro","Deficiência de vitamina B12"], correct:0},
+  {type:"mc", q:"O diagnóstico de anemia falciforme é confirmado por:", a:["Eletroforese de hemoglobina","Hemograma","Teste de Coombs","Dosagem de ferro"], correct:0},
+  {type:"mc", q:"A policitemia vera é caracterizada por:", a:["Aumento de glóbulos vermelhos","Deficiência de hemoglobina","Plaquetas baixas","Neutropenia"], correct:0},
+  {type:"mc", q:"A doença de Von Willebrand envolve:", a:["Defeito no fator de von Willebrand","Deficiência de ferro","Deficiência de vitamina B12","Hemoglobina anormal"], correct:0},
+  {type:"mc", q:"A anemia hemolítica autoimune pode ser causada por:", a:["Doença autoimune","Deficiência de ferro","Deficiência de ácido fólico","Infecção viral"], correct:0},
+  {type:"mc", q:"Qual é o principal tratamento da anemia ferropriva?", a:["Suplementação de ferro","Transfusão de plaquetas","Vitamina B12","Fisioterapia"], correct:0},
+  {type:"mc", q:"O sangramento gengival pode indicar:", a:["Deficiência de vitamina K","Deficiência de ferro","Anemia aplástica","Leucemia"], correct:0},
+  {type:"mc", q:"A trombocitose essencial envolve:", a:["Produção excessiva de plaquetas","Plaquetas baixas","Deficiência de ferro","Hemoglobina baixa"], correct:0},
+  {type:"mc", q:"A neutropenia aumenta risco de:", a:["Infecções bacterianas","Sangramentos","Anemia","Trombose"], correct:0},
+  {type:"mc", q:"A anemia de doença crônica é geralmente:", a:["Normocítica e normocrômica","Microcítica","Macrocítica","Hemolítica"], correct:0},
+  {type:"mc", q:"O reticulócito indica:", a:["Produção de glóbulos vermelhos","Plaquetas","Hemoglobina","Neutrófilos"], correct:0},
+  {type:"mc", q:"A hemoglobina S é característica de:", a:["Anemia falciforme","Talassemia","Anemia ferropriva","Anemia megaloblástica"], correct:0},
+  {type:"mc", q:"O fator V de Leiden está associado a:", a:["Trombofilia","Hemofilia","Anemia","Leucemia"], correct:0},
+  {type:"mc", q:"O exame de medula óssea é útil em:", a:["Leucemias e aplasia","Deficiência de ferro","Deficiência de vitamina B12","Trombocitopenia leve"], correct:0},
+  {type:"mc", q:"A anemia ferropriva pode causar:", a:["Fadiga e palidez","Hipertensão","Febre","Trombose"], correct:0},
+  {type:"mc", q:"A coagulação intravascular disseminada envolve:", a:["Consumo de fatores de coagulação","Deficiência de ferro","Excesso de hemoglobina","Neutropenia"], correct:0},
+  {type:"mc", q:"A heparina pode causar:", a:["Trombocitopenia induzida","Anemia ferropriva","Hemofilia","Policitemia"], correct:0},
+  {type:"mc", q:"O sangramento nasal recorrente pode indicar:", a:["Distúrbio de coagulação","Deficiência de ferro","Anemia aplástica","Policitemia"], correct:0},
+  {type:"mc", q:"A anemia sideroblástica envolve:", a:["Acúmulo de ferro na medula óssea","Deficiência de vitamina B12","Deficiência de ferro","Leucemia"], correct:0},
+  {type:"mc", q:"O teste de Coombs indireto é usado em:", a:["Triagem pré-natal","Deficiência de ferro","Leucemia","Trombocitopenia"], correct:0},
+  {type:"mc", q:"A anemia perniciosa é causada por:", a:["Deficiência de vitamina B12","Deficiência de ferro","Deficiência de vitamina K","Excesso de hemoglobina"], correct:0},
+  {type:"mc", q:"O tromboembolismo venoso pode ser prevenido com:", a:["Anticoagulação","Transfusão de plaquetas","Suplemento de ferro","Vitamina B12"], correct:0},
+
+  // 20 verdadeiro/falso (VF)
+  {type:"vf", q:"A anemia ferropriva é a forma mais comum de anemia.", correct:true},
+  {type:"vf", q:"A hemofilia é uma doença autoimune.", correct:false},
+  {type:"vf", q:"A talassemia é caracterizada por produção anormal de hemoglobina.", correct:true},
+  {type:"vf", q:"A anemia megaloblástica pode ser causada por deficiência de ácido fólico.", correct:true},
+  {type:"vf", q:"O fator de von Willebrand é importante na coagulação.", correct:true},
+  {type:"vf", q:"A leucemia afeta a medula óssea e glóbulos brancos.", correct:true},
+  {type:"vf", q:"A anemia aplástica envolve falência da medula óssea.", correct:true},
+  {type:"vf", q:"A anemia ferropriva não causa fadiga.", correct:false},
+  {type:"vf", q:"O teste de Coombs detecta anemia hemolítica autoimune.", correct:true},
+  {type:"vf", q:"A hemoglobina S está associada à talassemia.", correct:false},
+  {type:"vf", q:"A trombocitopenia aumenta risco de sangramento.", correct:true},
+  {type:"vf", q:"A policitemia vera é caracterizada por diminuição de glóbulos vermelhos.", correct:false},
+  {type:"vf", q:"A neutropenia aumenta risco de infecções.", correct:true},
+  {type:"vf", q:"A anemia de doença crônica é normocítica e normocrômica.", correct:true},
+  {type:"vf", q:"O reticulócito indica produção de glóbulos vermelhos.", correct:true},
+  {type:"vf", q:"O fator V de Leiden está associado a trombose.", correct:true},
+  {type:"vf", q:"A coagulação intravascular disseminada consome fatores de coagulação.", correct:true},
+  {type:"vf", q:"A heparina nunca causa trombocitopenia.", correct:false},
+  {type:"vf", q:"A anemia sideroblástica envolve acúmulo de ferro na medula óssea.", correct:true},
+  {type:"vf", q:"A anemia perniciosa resulta de deficiência de vitamina B12.", correct:true}
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a : ["Verdadeiro","Falso"];
+    options.forEach((ans,i)=>{
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?i:(i===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach((btn,i)=>{
+    if((q.type==="mc" && i===q.correct) || (q.type==="vf" && ((i===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === answer || (q.type==="vf" && ((i===0)===answer))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html>

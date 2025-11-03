@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Psiquiátrico - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #b30000;
+  }
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Psiquiátrico - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // 30 múltipla escolha (MC) com embaralhamento
+  {type:"mc", q:"Qual é uma característica principal do transtorno depressivo maior?", a:["Humor deprimido, perda de interesse","Alucinações visuais","Hiperatividade","Compulsão alimentar"], correct:0},
+  {type:"mc", q:"O transtorno bipolar envolve:", a:["Episódios de mania e depressão","Ansiedade constante","Perda de memória","Alucinações auditivas"], correct:0},
+  {type:"mc", q:"A esquizofrenia é caracterizada por:", a:["Delírios e alucinações","Dor muscular","Problemas de visão","Inflamação articular"], correct:0},
+  {type:"mc", q:"O transtorno obsessivo-compulsivo envolve:", a:["Pensamentos intrusivos e rituais repetitivos","Esquecimento de nomes","Tiques motores","Fobias sociais"], correct:0},
+  {type:"mc", q:"O transtorno de ansiedade generalizada apresenta:", a:["Preocupação excessiva","Euforia extrema","Alucinações","Compulsões sexuais"], correct:0},
+  {type:"mc", q:"O transtorno de estresse pós-traumático (TEPT) inclui:", a:["Revivescência do trauma","Hipotensão","Depressão osteomuscular","Cãibras musculares"], correct:0},
+  {type:"mc", q:"O transtorno de pânico envolve:", a:["Ataques súbitos de medo intenso","Depressão crônica","Ansiedade leve","Fobia social"], correct:0},
+  {type:"mc", q:"A fobia social caracteriza-se por:", a:["Medo intenso de situações sociais","Delírios","Mania","Compulsões"], correct:0},
+  {type:"mc", q:"A anorexia nervosa é:", a:["Restrição alimentar com medo de ganhar peso","Excesso alimentar sem controle","Transtorno de personalidade","Esquizofrenia"], correct:0},
+  {type:"mc", q:"A bulimia nervosa envolve:", a:["Episódios de compulsão seguidos de purgação","Fuga de casa","Ataques de pânico","Insônia crônica"], correct:0},
+  {type:"mc", q:"O transtorno de personalidade borderline apresenta:", a:["Instabilidade emocional e comportamental","Alucinações auditivas","Depressão osteomuscular","Fobia social"], correct:0},
+  {type:"mc", q:"O transtorno de personalidade narcisista caracteriza-se por:", a:["Grandiosidade e necessidade de admiração","Ansiedade generalizada","Ataques de pânico","Fobias"], correct:0},
+  {type:"mc", q:"O transtorno de personalidade antissocial envolve:", a:["Desrespeito pelos direitos alheios","Timidez extrema","Ansiedade leve","Tristeza ocasional"], correct:0},
+  {type:"mc", q:"O transtorno do espectro autista envolve:", a:["Déficits na comunicação social","Delírios","Depressão major","Fobia social"], correct:0},
+  {type:"mc", q:"O transtorno do déficit de atenção e hiperatividade (TDAH) inclui:", a:["Desatenção e hiperatividade","Depressão profunda","Mania","Fobia intensa"], correct:0},
+  {type:"mc", q:"A catatonia é caracterizada por:", a:["Imobilidade ou movimentos repetitivos","Ansiedade leve","Depressão osteomuscular","Delírios auditivos"], correct:0},
+  {type:"mc", q:"A esquizoafetiva combina:", a:["Sintomas de esquizofrenia e transtorno do humor","Apenas ansiedade","Apenas depressão","Apenas mania"], correct:0},
+  {type:"mc", q:"A síndrome de Tourette envolve:", a:["Tiques motores e vocais","Ansiedade crônica","Fobias","Depressão osteomuscular"], correct:0},
+  {type:"mc", q:"O transtorno dissociativo de identidade envolve:", a:["Múltiplas identidades","Depressão osteomuscular","Fobias sociais","Ataques de pânico"], correct:0},
+  {type:"mc", q:"O transtorno de ajustamento ocorre após:", a:["Evento estressor significativo","Exposição a vírus","Inflamação","Deficiência de vitaminas"], correct:0},
+  {type:"mc", q:"O transtorno de personalidade esquiva caracteriza-se por:", a:["Evitar situações sociais por medo de crítica","Mania","Hiperatividade","Depressão osteomuscular"], correct:0},
+  {type:"mc", q:"O transtorno de personalidade dependente envolve:", a:["Necessidade excessiva de cuidado dos outros","Grandiosidade","Fobias","Mania"], correct:0},
+  {type:"mc", q:"O transtorno de personalidade obsessivo-compulsiva envolve:", a:["Perfeccionismo e controle","Tiques vocais","Ansiedade leve","Ataques de pânico"], correct:0},
+  {type:"mc", q:"O transtorno de insônia primária é:", a:["Dificuldade crônica para dormir","Sonolência excessiva","Fobias","Tiques motores"], correct:0},
+  {type:"mc", q:"O transtorno de hipersonia envolve:", a:["Excesso de sono diurno","Insônia","Mania","Depressão osteomuscular"], correct:0},
+  {type:"mc", q:"O transtorno do sono REM é caracterizado por:", a:["Comportamentos durante o sono REM","Perda de massa óssea","Fobia","Ansiedade leve"], correct:0},
+  {type:"mc", q:"O transtorno de somatização inclui:", a:["Múltiplos sintomas físicos sem causa médica","Alucinações","Depressão osteomuscular","Mania"], correct:0},
+  {type:"mc", q:"O transtorno conversivo envolve:", a:["Sintomas neurológicos sem causa orgânica","Ansiedade leve","Insônia","Ataques de pânico"], correct:0},
+  {type:"mc", q:"O transtorno factício implica:", a:["Fingir doença para atenção","Depressão major","Mania","Fobia social"], correct:0},
+
+  // 20 verdadeiro/falso (VF)
+  {type:"vf", q:"O transtorno depressivo maior pode incluir perda de interesse nas atividades.", correct:true},
+  {type:"vf", q:"A esquizofrenia envolve delírios e alucinações.", correct:true},
+  {type:"vf", q:"O transtorno bipolar não envolve episódios de mania.", correct:false},
+  {type:"vf", q:"O transtorno obsessivo-compulsivo envolve rituais repetitivos.", correct:true},
+  {type:"vf", q:"O transtorno de ansiedade generalizada apresenta preocupação excessiva.", correct:true},
+  {type:"vf", q:"O TEPT ocorre sem relação com trauma.", correct:false},
+  {type:"vf", q:"A anorexia nervosa envolve restrição alimentar.", correct:true},
+  {type:"vf", q:"A bulimia nervosa inclui episódios de purgação.", correct:true},
+  {type:"vf", q:"O transtorno de personalidade borderline apresenta instabilidade emocional.", correct:true},
+  {type:"vf", q:"O transtorno de personalidade narcisista envolve necessidade de admiração.", correct:true},
+  {type:"vf", q:"O TDAH inclui desatenção e hiperatividade.", correct:true},
+  {type:"vf", q:"A catatonia envolve imobilidade ou movimentos repetitivos.", correct:true},
+  {type:"vf", q:"O transtorno dissociativo de identidade envolve múltiplas identidades.", correct:true},
+  {type:"vf", q:"O transtorno de ajustamento ocorre sem estressores.", correct:false},
+  {type:"vf", q:"O transtorno de personalidade esquiva envolve evitar críticas sociais.", correct:true},
+  {type:"vf", q:"O transtorno de personalidade dependente envolve autonomia excessiva.", correct:false},
+  {type:"vf", q:"O transtorno de personalidade obsessivo-compulsiva envolve perfeccionismo.", correct:true},
+  {type:"vf", q:"O transtorno de insônia primária é dificuldade para dormir.", correct:true},
+  {type:"vf", q:"O transtorno de hipersonia envolve sono excessivo.", correct:true},
+  {type:"vf", q:"O transtorno somatoforme envolve múltiplos sintomas sem causa médica.", correct:true}
+];
+
+// Função para embaralhar array
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a.map((text,i)=>({text,index:i})) : [{text:"Verdadeiro",index:0},{text:"Falso",index:1}];
+    options = shuffle(options); // embaralha alternativas
+    options.forEach(opt=>{
+      const btn = document.createElement("button");
+      btn.textContent = opt.text;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?opt.index:(opt.index===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach(btn=>{
+    const btnIndex = Array.from(buttons).indexOf(btn);
+    if((q.type==="mc" && btnIndex===q.correct) || (q.type==="vf" && ((btnIndex===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === btn.textContent && ((q.type==="mc" && answer===q.correct) || (q.type==="vf" && answer===q.correct))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html>

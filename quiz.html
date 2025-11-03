@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emed Play Quiz</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: var(--body-color);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .quiz-container {
+    background-color: #1e1e1e;
+    padding: 20px 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    animation: fadeIn 0.5s ease;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .answer-btn {
+    display: block;
+    width: 100%;
+    background-color: #2c2c2c;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .answer-btn:hover {
+    background-color: #3a3a3a;
+  }
+
+  .answer-btn.correct {
+    background-color: #28a745;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .answer-btn.wrong {
+    background-color: #dc3545;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+ <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed-play.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+     
+
+
+
+<div class="quiz-container">
+  <h2 id="question">Loading question...</h2>
+  <div id="answers"></div>
+</div>
+
+<script>
+const quizData = [
+  {
+    question: "1. Em relação a osteomielite hematogênica aguda, são diagnósticas diferenciais,  excepto: ",
+    answers: ["Artrite séptica", "Metafisite sifílica", "Tumor ósseo", "Osteomalácea", "Escorbuto"],
+    correct: "Metafisite sifílica"
+  },
+  {
+    question: "São complicações da  osteomielite hematogênica aguda ",
+    answers: ["Osteomielite crónica", "Fístula persistente", "Afeção da físe levando a encurtamento", "Deformidade do membro", "Todas as afirmações são corretas", "Todas as afirmações estão erradas"],
+    correct: "Todas as afirmações são corretas"
+  },
+  {
+    question: "Na osteomielite hematogênica aguda, os achados  radiológicos são:",
+    answers: ["Lesões osteolíticas nas primeiras 72h", "Edema dos tecidos moles adjanteces a zona metafisária", "Esclerose óssea", "Periostite"],
+    correct: "Edema dos tecidos moles adjanteces a zona metafisária"
+  },
+
+   {
+    question: "Sobre as infeções osteoarticulares, todas são corretas,  excepto :",
+    answers: ["É fundamental o diagnóstico precoce", "Geram complicações que afetam o crescimento na parte afetada ", "São frequentes em indivíduos idosos", "Febre e dor no membro, pensar sempre numa infeção"],
+    correct: "São frequentes em indivíduos idosos"
+  },
+  {
+    question: "São complicações da  osteomielite hematogênica aSão complicações das infeções articulares,  excepto:",
+    answers: ["Destruição da cartilagem", "Luxação patológica", "Epifisiólise", "Anquilose"],
+    correct: "Todas as afirmações são corretas"
+  },
+  {
+    question: "Na osteomielite hematogênica aguda, os achados  radiológicos são:",
+    answers: ["Lesões osteolíticas nas primeiras 72h", "Edema dos tecidos moles adjanteces a zona metafisária", "Esclerose óssea", "Periostite"],
+    correct: "Edema dos tecidos moles adjanteces a zona metafisária"
+  },
+   {
+    question: "1. Em relação a osteomielite hematogênica aguda, são diagnósticas diferenciais,  excepto: ",
+    answers: ["Artrite séptica", "Metafisite sifílica", "Tumor ósseo", "Osteomalácea", "Escorbuto"],
+    correct: "Metafisite sifílica"
+  },
+  {
+    question: "São complicações da  osteomielite hematogênica aguda ",
+    answers: ["Osteomielite crónica", "Fístula persistente", "Afeção da físe levando a encurtamento", "Deformidade do membro", "Todas as afirmações são corretas", "Todas as afirmações estão erradas"],
+    correct: "Todas as afirmações são corretas"
+  },
+  {
+    question: "Na osteomielite hematogênica aguda, os achados  radiológicos são:",
+    answers: ["Lesões osteolíticas nas primeiras 72h", "Edema dos tecidos moles adjanteces a zona metafisária", "Esclerose óssea", "Periostite"],
+    correct: "Edema dos tecidos moles adjanteces a zona metafisária"
+  },
+
+];
+
+let currentQuestion = 0;
+
+function loadQuestion() {
+  const questionEl = document.getElementById('question');
+  const answersEl = document.getElementById('answers');
+  questionEl.textContent = quizData[currentQuestion].question;
+  answersEl.innerHTML = '';
+
+  quizData[currentQuestion].answers.forEach(answer => {
+    const btn = document.createElement('button');
+    btn.textContent = answer;
+    btn.classList.add('answer-btn');
+    btn.onclick = () => checkAnswer(btn, answer);
+    answersEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(btn, answer) {
+  const correct = quizData[currentQuestion].correct;
+
+  if (answer === correct) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    // Highlight the correct answer
+    document.querySelectorAll('.answer-btn').forEach(b => {
+      if (b.textContent === correct) {
+        b.classList.add('correct');
+      }
+    });
+  }
+
+  // Move to next question after delay
+  setTimeout(() => {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      document.querySelector('.quiz-container').innerHTML = "<h2>Quiz Completed!</h2>";
+    }
+  }, 1500);
+}
+
+// Initialize quiz
+loadQuestion();
+</script>
+
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

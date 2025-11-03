@@ -16,7 +16,7 @@
       <!--=============== CSS ===============-->
       <link rel="stylesheet" href="assets/css/styles.css">
 
-      <title>emed</title>
+      <title>Responsive book website - Bedimcode</title>
    </head>
    <body>
       <!--==================== HEADER ====================-->
@@ -29,7 +29,7 @@
              <div class="nav__menu">
                <ul class="nav__list">
                   <li class="nav__item">
-                     <a href="#home" class="nav__link active-link">
+                     <a href="index.html" class="nav__link active-link">
                         <i class="ri-home-2-line"></i>
                         <span>Home</span>
                      </a>
@@ -43,37 +43,30 @@
                   </li> 
 
                   <li class="nav__item">
-                     <a href="medicine.html" class="nav__link active-link">
+                     <a href="#stetho" class="nav__link active-link">
                          <i class="ri-stethoscope-line"></i>
                         <span>Health</span>
                      </a>
                   </li>
 
                   <li class="nav__item">
-                     <a href="quiz_welcome.html" class="nav__link">
-                        <i class="ri-brain-line"></i>
-                        <span>Quiz</span>
-                     </a>
-                  </li>
-                <li class="nav__item">
-                     <a href="grid.html" class="nav__link">
-                       <i class="ri-play-circle-fill"></i>
-                        <span>emedplay</span>
-                     </a>
-                  </li>
-                  <li class="nav__item">
-                     <a href="profile.html" class="nav__link">
-                        <i class="ri-profile-line"></i>
-                        <span>Profile</span>
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
                      </a>
                   </li>
 
-                  
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
                </ul>
              </div>
              <div class="nav__actions">
       <!--------------search-------------->
-               <a href="search.html"><i class="ri-search-line search-button" id="search-button"></i></a>
+               <i class="ri-search-line search-button" id="search-button"></i>
       <!---------login-------------------->
                <i class="ri-user-line login-button" id="login-button"></i>
       <!---------theme button------------->
@@ -85,8 +78,7 @@
       <!--==================== SEARCH ====================-->
       <div class="search" id="search-content">
          <form action="#" class="search">
-            <a href="search.html"><i class="ri-search-line search__icon"></i>
-            </a>
+            <i class="ri-search-line search__icon"></i>
             <input type="search" placeholder="What are you looking for?" class="search__input">
          </form>
 
@@ -131,78 +123,26 @@
          <!--==================== HOME ====================-->
          <section class="home section" id="home">
             <div class="home__container container grid">
-               <div class="home__data">
-                  <h1 class="home__title">
-                     Your Free Medical  <br>
-                           Library Online
-                  </h1>
-
-                  <p class="home__description">
-                     Acess and download essential med books in one click. 
-                  </p>
-
-                  <a href="plans.html"><button class="button" id="btn">Plans</button>
-                   </a>
-                  <a href="explore.html" class="button">Explore Now</a>
-               </div>
+               
 
                <div class="home__images">
-                  <div class="home__swiper swiper">
+                  
                      <div class="swiper-wrapper">
-                        <article class="home__article swiper-slide">
-                           <a href="fisiologia.html"><img src="assets/img/guyton-edited.png" alt="image" class="home__img"></a>
+                        
+                        <article class="home__article">
+                           <a href="#"><img src="assets/img/patologia-basica.png" alt="image" class="home__img"></a>
+                           <h1 class="book-title">Robbin's Basic Pathology</h1>
                         </article>
+                        
+                        <a href="#" class="button">Download</a>
 
-                        <article class="home__article swiper-slide">
-                           <a href="anatomia.html"><img src="assets/img/anatomia-edited.png" alt="image" class="home__img"></a>
-                        </article>
 
-                        <article class="home__article swiper-slide">
-                           <a href="bioquimica.html"><img src="assets/img/bqedited.png" alt="image" class="home__img"></a>
-                        </article>
-
-                        <article class="home__article swiper-slide">
-
-                           <a href="deoncas_infecto.html"><img src="assets/img/doencas infecciosas.png" alt="image" class="home__img"></a>
-                        </article>
-
-                        <article class="home__article swiper-slide">
-                           <a href="harrisson20.html"><img src="assets/img/harrison 20 edit.png" alt="image" class="home__img"></a>
-                        </article>
-
-                        <article class="home__article swiper-slide">
-                           <a href="farmaco.html"><img src="assets/img/farmacologia terapeutica.png" alt="image" class="home__img"></a>
-                        </article>
-
-                        <article class="home__article swiper-slide">
-                           <a href="fund_genetica.html"><img src="assets/img/fundamentos de genetica.png" alt="image" class="home__img"></a>
-                        </article>
                      </div>
-                  </div>
+
+                     <div class="book-description">Pensa em um livro que é tipo o guia definitivo para entender o que dá errado no corpo humano — esse é o Robbins Básico. Ele é o livro que todo estudante de medicina (e outras áreas da saúde) conhece ou vai conhecer cedo ou tarde. É quase um “mapa das doenças”: mostra o que acontece quando as células e os órgãos deixam de funcionar normalmente.
+                     </div>
+                  
                </div>
-            </div>
-         </section>
-
-         <!--==================== SERVICES ====================-->
-         <section class="services section">
-            <div class="services__container container grid">
-               <article class="services__card">
-                  <i class="ri-arrow-down-line"></i>
-                  <h3 class="services_title">Free Download</h3>
-                  <p class="services__description">Your library, unlimited and free</p>
-               </article>
-
-               <article class="services__card">
-                  <i class="ri-cloudy-line"></i>
-                  <h3 class="services_title">Cloud</h3>
-                  <p class="services__description">Save your favorite to the Cloud</p>
-               </article>
-
-               <article class="services__card">
-                  <i class="ri-customer-service-2-line"></i>
-                  <h3 class="services_title">24/7 Support</h3>
-                  <p class="services__description">Call us anytime</p>
-               </article>
             </div>
          </section>
 
@@ -216,9 +156,9 @@
                <div class="featured__swiper swiper">
                   <div class="swiper-wrapper">
                      <article class="featured__card swiper-slide">
-                        <img src="assets/img/cir.png" alt="" class="featured__img">
+                        <img src="assets/img/histo.png" alt="" class="featured__img">
 
-                        <h2 class="featured__title">Browse's Cirurgia</h2>
+                        <h2 class="featured__title">Histologia</h2>
                         <div class="featured__prices">
                            <span class="featured__discount"></span>
                            <span class="featured__price">83.0MB</span>
@@ -233,9 +173,8 @@
                         </div>
                      </article>
 
-                  <article class="featured__card swiper-slide">
-                          <a href="anestesiologia.html"><img src="assets/img/anestesio.png" alt="" class="featured__img">
-                          </a>
+                     <article class="featured__card swiper-slide">
+                        <img src="assets/img/anestesio.png" alt="" class="featured__img">
 
                         <h2 class="featured__title">Anestesiologia</h2>
                         <div class="featured__prices">
@@ -390,36 +329,6 @@
             </div>
          </section>
 
-         <!--==================== DISCOUNT ====================-->
-         <section class="discount section" id="discount">
-            <div class="discount__container container grid">
-               <div class="discount__data">
-                  <h2 class="discount__title section__title">
-                     Combo da Medicina Interna
-                  </h2>
-
-                  <p class="discount__description">
-                     Take advantage of the discount days we 
-have for you, buy books from your favorite 
-writers, the more you buy, the more 
-discounts we have for you.
-                  </p>
-
-                  <a href="assets/img/harrison 20.jpg" download class="button">Download Now
-                  </a>
-               </div>
-
-               <div class="discount__images">
-                 <a href="harrisson20.html" class="img-1"><img src="assets/img/harrison 20 edit.png" alt="" class="discount__img-1">
-                 </a>
-
-
-                 <a href="harisson21.html" class="img-2"><img src="assets/img/harrison 21.png" alt="" class="discount__img-2">
-                 </a>
-               </div>
-            </div>
-         </section>
-
          <!--==================== NEW BOOKS ====================-->
          <section class="new section" id="new">
             <h2 class="section__title">
@@ -429,7 +338,7 @@ discounts we have for you.
             <div class="new__container container">
                <div class="new__swiper swiper">
                   <div class="swiper-wrapper">
-                     <a href="#" class="new__card swiper-slide">
+                     <a href="anatomia.html" class="new__card swiper-slide">
                         <img src="assets/img/anatomia-edited.png" alt="image" class="new__img">
                         <div>
                            <h2 class="new__title">Netter Anatomia Humana</h2>
@@ -986,7 +895,7 @@ discounts we have for you.
       </a>
 
       <!--=============== SCROLLREVEAL ===============-->
-      <script src="assets/js/scrollreveal.min.js"></script>
+      <script src=""></script>
 
       <!--=============== SWIPER JS ===============-->
       <script src="assets/js/swiper-bundle.min.js"></script>

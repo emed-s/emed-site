@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz - Distúrbios Traumáticos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-color: #f4f4f4;
+    --card-bg: #fff;
+    --text-color: #222;
+    --accent-color: #8B0000;
+    --correct-color: #4CAF50;
+    --wrong-color: #F44336;
+  }
+
+  [data-theme="dark"] {
+    --bg-color: #1e1e1e;
+    --card-bg: #2c2c2c;
+    --text-color: #f4f4f4;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: all 0.3s ease;
+  }
+
+  .quiz-container {
+    width: 90%;
+    max-width: 700px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    padding: 30px;
+    animation: fadeIn 0.6s ease;
+    position: relative;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  h2 {
+    margin-top: 0;
+    color: var(--accent-color);
+  }
+
+  .options {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .options li {
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .options li:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+  }
+
+  .options li.correct {
+    background-color: var(--correct-color);
+    color: #fff;
+    border-color: var(--correct-color);
+  }
+
+  .options li.wrong {
+    background-color: var(--wrong-color);
+    color: #fff;
+    border-color: var(--wrong-color);
+  }
+
+  .explanation {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    background: #eee;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: var(--accent-color);
+    border: none;
+    background: none;
+  }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+  <button class="theme-toggle">🌓</button>
+  <h2 id="question">Carregando pergunta...</h2>
+  <ul class="options" id="options"></ul>
+  <div class="explanation" id="explanation"></div>
+  <div class="buttons">
+    <button id="prevBtn">Anterior</button>
+    <button id="nextBtn">Próxima</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {q: "Qual é a causa mais comum de insuficiência renal aguda pré-renal?", options: ["Hipovolemia", "Glomerulonefrite", "Nefrite intersticial", "Obstrução urinária"], answer: 0, explanation: "Hipovolemia reduz perfusão renal, causando insuficiência renal aguda pré-renal."},
+  {q: "Verdadeiro ou Falso: Glomerulonefrite pode causar hematúria.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Inflamação glomerular frequentemente leva à presença de sangue na urina."},
+  {q: "Qual exame é padrão ouro para diagnóstico de litíase renal?", options: ["TC sem contraste", "Ultrassonografia", "Radiografia simples", "Ressonância magnética"], answer: 0, explanation: "A TC sem contraste é sensível para detectar cálculos renais."},
+  {q: "Verdadeiro ou Falso: Infecção do trato urinário afeta mais mulheres do que homens.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Anatomia feminina facilita a colonização bacteriana do trato urinário."},
+  {q: "Qual é a bactéria mais comum em infecção urinária?", options: ["Escherichia coli", "Klebsiella pneumoniae", "Proteus mirabilis", "Enterococcus faecalis"], answer: 0, explanation: "E. coli é responsável pela maioria das infecções urinárias."},
+  {q: "Verdadeiro ou Falso: Síndrome nefrótica caracteriza-se por proteinúria, edema e hipoalbuminemia.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Proteinúria intensa leva a perda de albumina e edema característico."},
+  {q: "Qual é a causa mais comum de doença renal crônica?", options: ["Diabetes mellitus", "Hipertensão arterial", "Glomerulonefrite", "Policistose renal"], answer: 0, explanation: "Diabetes mellitus é a principal causa de doença renal crônica."},
+  {q: "Verdadeiro ou Falso: Hemodiálise substitui todas as funções renais.", options: ["Verdadeiro", "Falso"], answer: 1, explanation: "Hemodiálise remove toxinas e excesso de líquido, mas não replica todas as funções renais."},
+  {q: "Qual é o principal sintoma da litíase ureteral?", options: ["Dor lombar intensa", "Edema periférico", "Hematuria microscópica", "Poliúria"], answer: 0, explanation: "Cólica renal causa dor intensa e súbita na região lombar ou flanco."},
+  {q: "Verdadeiro ou Falso: Hidronefrose é causada sempre por cálculo renal.", options: ["Verdadeiro", "Falso"], answer: 1, explanation: "Hidronefrose pode ser causada por qualquer obstrução urinária, não apenas cálculos."},
+  {q: "Qual exame detecta proteinúria em síndrome nefrótica?", options: ["Urina de 24 horas", "Exame de sangue", "Ultrassonografia", "TC abdominal"], answer: 0, explanation: "Urina de 24 horas quantifica a proteinúria de forma precisa."},
+  {q: "Verdadeiro ou Falso: Nefrite intersticial aguda é frequentemente causada por medicamentos.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Alguns fármacos provocam reação inflamatória intersticial nos rins."},
+  {q: "Qual é a causa mais comum de hematúria indolor em adultos?", options: ["Câncer de bexiga", "Infecção urinária", "Litíase renal", "Glomerulonefrite"], answer: 0, explanation: "Câncer de bexiga deve ser considerado em hematúria indolor em adultos."},
+  {q: "Verdadeiro ou Falso: Hipertensão pode ser causa e consequência de doença renal crônica.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "A hipertensão pode danificar rins e também resultar de doença renal crônica."},
+  {q: "Qual marcador laboratorial indica lesão renal aguda?", options: ["Creatinina sérica", "Hemoglobina", "Albumina", "Bilirrubina"], answer: 0, explanation: "Elevação da creatinina indica diminuição da função renal."},
+  {q: "Verdadeiro ou Falso: Glomerulonefrite rapidamente progressiva pode levar à insuficiência renal terminal.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Essa forma agressiva de glomerulonefrite pode evoluir rapidamente para diálise."},
+  {q: "Qual é a característica do sedimento urinário na síndrome nefrítica?", options: ["Cilindros hemáticos e hematúria", "Proteinúria maciça", "Cristais de ácido úrico", "Bactérias"], answer: 0, explanation: "A síndrome nefrítica apresenta hematúria e cilindros hemáticos."},
+  {q: "Verdadeiro ou Falso: Nefrolitíase pode ser assintomática.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Cálculos pequenos podem passar sem causar sintomas."},
+  {q: "Qual é a causa mais comum de insuficiência renal crônica em crianças?", options: ["Anomalias congênitas", "Glomerulonefrite", "Hipertensão", "Litíase renal"], answer: 0, explanation: "Anomalias congênitas do trato urinário são frequentes em crianças."},
+  {q: "Verdadeiro ou Falso: Infecção urinária recorrente pode levar a pielonefrite crônica.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Infecções repetidas podem causar cicatrizes renais e perda de função."},
+  {q: "Qual é a indicação mais comum de hemodiálise em insuficiência renal aguda?", options: ["Hiperpotassemia grave", "Hipotensão leve", "Febre", "Proteinúria"], answer: 0, explanation: "Hiperpotassemia grave representa risco de arritmias fatais, exigindo diálise."},
+  {q: "Verdadeiro ou Falso: Síndrome de Alport está associada a surdez e doença renal.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Mutação genética afeta glomérulos e cóclea, causando sintomas renais e auditivos."},
+  {q: "Qual achado indica glomerulonefrite pós-estreptocócica?", options: ["Hematúria e edema periorbital", "Proteinúria maciça", "Litíase renal", "Infecção urinária recorrente"], answer: 0, explanation: "Caracteriza-se por hematúria e edema após infecção estreptocócica."},
+  {q: "Verdadeiro ou Falso: Hipercalcemia aumenta risco de formação de cálculos renais.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Altos níveis de cálcio favorecem a precipitação de cristais nos rins."},
+  {q: "Qual é a causa mais comum de obstrução urinária em homens adultos?", options: ["Hiperplasia prostática benigna", "Cálculo ureteral", "Tumor renal", "Estreitamento uretral congênito"], answer: 0, explanation: "Hiperplasia prostática causa obstrução do fluxo urinário em homens idosos."},
+  {q: "Verdadeiro ou Falso: Nefropatia diabética é uma causa importante de doença renal crônica.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Diabetes é a principal causa de doença renal crônica no mundo."},
+  {q: "Qual exame avalia função renal e filtração glomerular?", options: ["Clearance de creatinina", "Urocultura", "Hemograma", "Ressonância magnética"], answer: 0, explanation: "Clearance de creatinina estima a taxa de filtração glomerular."},
+  {q: "Verdadeiro ou Falso: Cistite intersticial é causada por infecção bacteriana.", options: ["Verdadeiro", "Falso"], answer: 1, explanation: "É uma síndrome crônica não infecciosa de dor vesical."},
+  {q: "Qual é a complicação mais grave da insuficiência renal crônica não tratada?", options: ["Uremia terminal", "Proteinúria leve", "Hipertensão leve", "Edema periférico"], answer: 0, explanation: "Acúmulo de toxinas leva à uremia, exigindo diálise ou transplante."},
+  {q: "Verdadeiro ou Falso: Litíase renal recorrente pode levar à insuficiência renal crônica.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "Obstruções repetidas e infecções podem prejudicar a função renal a longo prazo."},
+  {q: "Qual exame detecta infecção urinária de forma rápida?", options: ["Urocultura", "TC abdominal", "Ultrassom renal", "Ressonância magnética"], answer: 0, explanation: "Urocultura identifica o agente causal e sensibilidade antibiótica."},
+  {q: "Verdadeiro ou Falso: Síndrome nefrótica pode causar hipercoagulabilidade.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "A perda de proteínas anticoagulantes na urina aumenta risco de trombose."},
+  {q: "Qual marcador indica lesão tubular aguda?", options: ["Proteinúria de baixo peso molecular", "Hemoglobina", "Bilirrubina", "Albumina"], answer: 0, explanation: "Proteínas de baixo peso molecular aumentam na urina em lesão tubular."},
+  {q: "Verdadeiro ou Falso: Obstrução ureteral pode levar a hidronefrose.", options: ["Verdadeiro", "Falso"], answer: 0, explanation: "A obstrução causa acúmulo de urina e dilatação do rim."}
+];
+
+
+// Randomiza a ordem das perguntas
+let shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+let currentQuestion = 0;
+
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const explanationEl = document.getElementById('explanation');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const themeToggle = document.querySelector('.theme-toggle');
+
+function loadQuestion(index) {
+  const q = shuffledQuestions[index];
+  questionEl.textContent = q.q;
+  optionsEl.innerHTML = '';
+  explanationEl.style.display = 'none';
+  q.options.forEach((option, i) => {
+    const li = document.createElement('li');
+    li.textContent = option;
+    li.addEventListener('click', () => selectOption(i));
+    optionsEl.appendChild(li);
+  });
+}
+
+function selectOption(i) {
+  const q = shuffledQuestions[currentQuestion];
+  [...optionsEl.children].forEach((li, idx) => {
+    li.classList.remove('correct', 'wrong');
+    if(idx === q.answer) li.classList.add('correct');
+  });
+  if(i !== q.answer) optionsEl.children[i].classList.add('wrong');
+  explanationEl.textContent = q.explanation;
+  explanationEl.style.display = 'block';
+}
+
+prevBtn.addEventListener('click', () => {
+  if(currentQuestion > 0) currentQuestion--;
+  loadQuestion(currentQuestion);
+});
+
+nextBtn.addEventListener('click', () => {
+  if(currentQuestion < shuffledQuestions.length - 1) currentQuestion++;
+  loadQuestion(currentQuestion);
+});
+
+themeToggle.addEventListener('click', () => {
+  document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+});
+
+// Inicializa quiz
+loadQuestion(currentQuestion);
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Categorias de Distúrbios Médicos</title>
+  <style>
+    :root {
+      --primary-color: #8b0000;
+      --bg-light: #f8f8f8;
+      --bg-dark: #1e1e1e;
+      --text-light: #000;
+      --text-dark: #f1f1f1;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 80px;
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--primary-color);
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(180deg);
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    body.dark .card {
+      background: #2c2c2c;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      border-color: var(--primary-color);
+      box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+    }
+
+    .card h2 {
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+  <div class="theme-toggle" id="themeToggle"><ion-icon name="sunny-outline"></ion-icon></div>
+  <h1>Escolha uma Categoria de Distúrbios</h1>
+  <div class="cards">
+    <div class="card" onclick="location.href='quiz-cardio.html'"><h2>🫀 Cardiovasculares</h2><p>Infarto, arritmias, hipertensão e mais.</p></div>
+    <div class="card" onclick="location.href='quiz-neuro.html'"><h2>🧠 Neurológicos</h2><p>AVC, epilepsia, Alzheimer, Parkinson...</p></div>
+    <div class="card" onclick="location.href='quiz-hemato.html'"><h2>🩸 Hematológicos</h2><p>Anemias, leucemias e distúrbios sanguíneos.</p></div>
+    <div class="card" onclick="location.href='quiz-geneticos.html'"><h2>🧬 Genéticos</h2><p>Síndromes hereditárias e mutações.</p></div>
+    <div class="card" onclick="location.href='quiz-endocrinos.html'"><h2>🩺 Endócrinos</h2><p>Diabetes, tireoide, distúrbios hormonais.</p></div>
+    <div class="card" onclick="location.href='quiz-pulmonar.html'"><h2>💨 Pulmonares</h2><p>Asma, DPOC, pneumonia e outros.</p></div>
+    <div class="card" onclick="location.href='quiz-musculo.html'"><h2>🧍‍♂️ Musculoesqueléticos</h2><p>Artrite, osteoporose, distrofias.</p></div>
+    <div class="card" onclick="location.href='quiz-dermato.html'"><h2>🧴 Dermatológicos</h2><p>Psoríase, eczema, acne, vitiligo.</p></div>
+    <div class="card" onclick="location.href='quiz-psiquiatria.html'"><h2>🧠 Psiquiátricos</h2><p>Depressão, ansiedade, bipolaridade.</p></div>
+    <div class="card" onclick="location.href='quiz-sensoriais.html'"><h2>👁️‍🗨️ Sensoriais</h2><p>Visão e audição: catarata, surdez...</p></div>
+    <div class="card" onclick="location.href='quiz-traumaticos.html'"><h2>⚡ Traumáticos</h2><p>Fraturas, TCE, queimaduras.</p></div>
+    <div class="card" onclick="location.href='quiz-infecciosos.html'"><h2>🧫 Infecciosos</h2><p>HIV, meningite, tuberculose, malária.</p></div>
+    <div class="card" onclick="location.href='quiz-gastro.html'"><h2>🍽️ Gastrointestinais</h2><p>Úlceras, gastrite, Crohn, colite.</p></div>
+    <div class="card" onclick="location.href='quiz-renais.html'"><h2>💧 Renais e Urinários</h2><p>IRC, cálculos renais, infecções.</p></div>
+    <div class="card" onclick="location.href='quiz-reprodutivos.html'"><h2>🤰 Reprodutivos</h2><p>Endometriose, SOP, infertilidade.</p></div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.onclick = () => {
+      document.body.classList.toggle('dark');
+      const icon = themeToggle.querySelector('ion-icon');
+      icon.setAttribute('name', document.body.classList.contains('dark') ? 'moon-outline' : 'sunny-outline');
+    };
+  </script>
+</body>
+</html>

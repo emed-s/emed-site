@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+      <main class="main">
+         <!--==================== HOME ====================-->
+      <div class="accordion">
+         <div>
+            <input type="checkbox" name="example_accordion" id="section1" class="accordion__input">
+            <label for="section1" class="accordion__label">Introdução à Medicina</label>
+            <div class="accordion__content">
+               <p class="med__title">Introdução à Medicina</p>
+               <p>A medicina é a ciência e a prática dedicadas à prevenção, diagnóstico, tratamento e cura de doenças que afetam os seres humanos. Seu objetivo principal é manter e restaurar a saúde por meio do estudo do corpo humano, da aplicação de conhecimento científico e do cuidado com o paciente.</p>
+               <p class="med__title">O que é Medicina?</p>
+               <p>É uma ciência aplicada com base em biologia, fisiologia, anatomia, química e farmacologia.
+Envolve habilidades técnicas (como exames e cirurgias) e habilidades humanas (como escuta, empatia e comunicação).
+A medicina pode ser clínica (baseada em consulta e prescrição), cirúrgica, preventiva, psicológica, entre outras áreas.</p>
+               <p class="med__title">Principais Ramos da Medicina</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Área</th>
+        <th>Descricao</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Clínica Médica</td>
+        <td>Diagnóstico e tratamento de doenças em adultos</td>
+      </tr>
+      <tr>
+        <td>Cirurgia</td>
+
+        <td>Tratamento por meio de intervenções operatórias</td>
+      </tr>
+      <tr>
+        <td>Pediatria</td>
+        <td>Saúde de bebês, crianças e adolescentes</td>
+      </tr>
+      <tr>
+        <td>Ginecologia/Obstetrícia</td>
+        <td>Saúde da mulher e gestação</td>
+      </tr>
+      <tr>
+        <td>Psiquiatria</td>
+        <td>Doenças mentais e emocionais</td>
+      </tr>
+      <tr>
+        <td>Cardiologia</td>
+        <td>Coração e sistema circulatório</td>
+      </tr>
+      <tr>
+        <td>Neurologia</td>
+        <td>Sistema nervoso</td>
+      </tr>
+      <tr>
+        <td>Medicina Preventiva</td>
+        <td>Promoção da saúde e prevenção de doenças</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+ 
+   <p class="med__title">A Medicina como Ciência e Arte</p>
+   <p>Ciência: usa evidências, estudos clínicos e tecnologia para tomar decisões.
+   Arte: envolve julgamento, sensibilidade e empatia no cuidado com as pessoas.
+   </p>
+
+             <p class="med__title">Importância da Medicina</p>
+             <p>Prolonga e melhora a qualidade de vida.</p>
+             <p>Controla epidemias e doenças infecciosas.</p>
+             <p>Ajuda a prevenir doenças por meio de vacinas, educação em saúde e políticas públicas.</p>
+            </div>
+         </div>
+
+          <div>
+            <input type="checkbox" name="example_accordion" id="section2" class="accordion__input">
+            <label for="section2" class="accordion__label">História da Medicina</label>
+            <div class="accordion__content">
+               <p class="med__title">História da Medicina</p>
+               <p>A história da medicina é a narrativa do desenvolvimento do conhecimento médico e das práticas de cura ao longo do tempo. Ela mostra como a humanidade tentou entender e tratar doenças, dores e o corpo humano em diferentes culturas e períodos históricos. Abaixo está um resumo dividido por períodos:</p>
+
+               <div class="container">
+
+    <section>
+      <h2 class="period-title">Antiguidade</h2>
+      <p>
+        A medicina na Antiguidade era fortemente ligada à religião e à magia. No Egito e na Mesopotâmia, doenças eram frequentemente vistas como punições divinas. No entanto, havia também um início de prática científica, com uso de plantas medicinais, cirurgias simples e registros escritos. Na Grécia Antiga, Hipócrates introduziu a ideia de que as doenças tinham causas naturais, iniciando a medicina racional baseada na teoria dos quatro humores.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="period-title">Idade Média</h2>
+      <p>
+        Durante a Idade Média, a medicina voltou a ser dominada por visões religiosas. A maioria dos cuidados médicos era oferecida por monges em mosteiros. No mundo islâmico, médicos como Avicena mantiveram o estudo científico com obras importantes, como o "Cânone da Medicina", que influenciou a medicina europeia por séculos.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="period-title">Renascimento</h2>
+      <p>
+        O Renascimento trouxe uma nova abordagem à medicina, com base em observação direta e experimentação. Andreas Vesalius revolucionou a anatomia ao realizar dissecações em cadáveres humanos, corrigindo erros antigos. A ciência médica começou a se libertar da influência da Igreja.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="period-title">Idade Moderna</h2>
+      <p>
+        Entre os séculos XVII e XIX, a medicina avançou com a descoberta da circulação do sangue por William Harvey e o uso do microscópio. No século XIX, a teoria germinal de Pasteur e as descobertas de Koch sobre bactérias mudaram completamente a forma de entender e tratar doenças. Surgiram também anestesia e antissepsia nas cirurgias.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="period-title">Século XX e XXI</h2>
+      <p>
+        No século XX, a medicina passou por uma revolução com o uso de antibióticos, vacinas, tecnologias de imagem e transplantes. No século XXI, avanços em genética, inteligência artificial e medicina personalizada estão moldando o futuro da saúde. A medicina moderna integra ciência, tecnologia e humanismo para melhorar a qualidade de vida.
+      </p>
+    </section>
+            </div>
+         </div>
+
+      </div>
+        
+      <div>
+            <input type="checkbox" name="example_accordion" id="section3" class="accordion__input">
+            <label for="section3" class="accordion__label">O que é ser médico?</label>
+            <div class="accordion__content">
+               <p class="med__title">O que é ser médico?</p>
+           <section class="perfil-medico">
+  <h2>Perfil do Médico</h2>
+  <p>O médico é um profissional essencial na promoção, prevenção, diagnóstico e tratamento de doenças. Seu trabalho exige não apenas conhecimento técnico e científico, mas também habilidades humanas como empatia, escuta ativa e ética.</p>
+
+  <div class="cards-container">
+    <div class="card">
+      <h3> Formação</h3>
+      <p>Para se tornar médico, é necessário cursar uma graduação em Medicina (geralmente de 6 anos), seguida de residência médica ou especializações.</p>
+    </div>
+    <div class="card">
+      <h3> Habilidades</h3>
+      <p>O médico deve ser observador, responsável, resiliente, ético e capaz de tomar decisões rápidas, sempre colocando o paciente em primeiro lugar.</p>
+    </div>
+    <div class="card">
+      <h3> Relacionamento</h3>
+      <p>Um bom médico constrói uma relação de confiança com o paciente, comunicando-se com clareza e respeitando os princípios da dignidade humana.</p>
+    </div>
+  </div>
+</section>
+  
+         </div>
+<section class="categorias-disturbios">
+  <h2>Principais Categorias de Distúrbios</h2>
+  <p class="intro">
+    A medicina classifica os distúrbios e doenças em categorias específicas, facilitando o diagnóstico e o tratamento. Veja abaixo as principais:
+  </p>
+
+  <div class="cards-disturbios">
+
+    <!-- CARD 1 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card1">
+      <label for="card1" class="card-label">
+        <h3>Cardiovasculares</h3>
+        <p class="short-text">Incluem hipertensão, infarto e insuficiência cardíaca.</p>
+        <div class="expanded-text">
+          <p>Esses distúrbios afetam o coração e os vasos sanguíneos. São as principais causas de morte no mundo e muitas vezes estão ligados ao estilo de vida, como sedentarismo, má alimentação e estresse.</p>
+        </div>
+        <a href="dist_cardio2.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card2">
+      <label for="card2" class="card-label">
+        <h3>Neurológicos</h3>
+        <p class="short-text">Envolvem AVC, epilepsia, Parkinson e outros.</p>
+        <div class="expanded-text">
+          <p>Esses distúrbios afetam o cérebro, medula e nervos. Muitas vezes têm sintomas complexos e exigem acompanhamento neurológico especializado.</p>
+        </div>
+        <a href="dist_neuro.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card3">
+      <label for="card3" class="card-label">
+        <h3>Respiratórios</h3>
+        <p class="short-text">Afetam pulmões e vias aéreas, como asma e bronquite.</p>
+        <div class="expanded-text">
+          <p>Esses distúrbios dificultam a respiração e podem ser crônicos ou infecciosos. A poluição e o tabagismo são fatores de risco importantes.</p>
+        </div>
+        <a href="dist_respiratorio.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+
+    <!-- CARD 4 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card4">
+      <label for="card4" class="card-label">
+        <h3>Endócrinos e Metabólicos</h3>
+        <p class="short-text">Distúrbios das glândulas e do metabolismo, como diabetes, hipotireoidismo e obesidade.</p>
+        <div class="expanded-text">
+          <p>Envolvem alterações nas glândulas que regulam o corpo, como a tireoide, pâncreas e hipófise. Podem afetar o crescimento, o peso, o sono e o funcionamento de vários órgãos.</p>
+        </div>
+        <a href="dist_endocrino.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    
+    <!-- CARD 5 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card5">
+      <label for="card5" class="card-label">
+        <h3>Musculoesqueléticos</h3>
+        <p class="short-text">Afetam ossos, músculos e articulações. Incluem artrite, osteoporose e tendinites.</p>
+        <div class="expanded-text">
+          <p>Causam dor, rigidez ou limitação de movimentos. Podem ser degenerativos (como artrose), inflamatórios ou por lesão física. Afetam a qualidade de vida e mobilidade.</p>
+        </div>
+        <a href="dist_musculo.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    
+    <!-- CARD 6 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card6">
+      <label for="card6" class="card-label">
+        <h3>Psiquiátricos</h3>
+        <p class="short-text">Doenças mentais como depressão, ansiedade, esquizofrenia e transtorno bipolar.</p>
+        <div class="expanded-text">
+          <p>Alteram o humor, pensamento ou comportamento. Podem ser leves ou graves e precisam de tratamento com medicamentos, psicoterapia e apoio multidisciplinar.</p>
+        </div>
+        <a href="dist_psiq.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    
+    <!-- CARD 7 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card7">
+      <label for="card7" class="card-label">
+        <h3>Autoimunes</h3>
+        <p class="short-text">Sistema imunológico ataca o próprio corpo. Exemplos: lúpus, artrite reumatoide, esclerose múltipla.</p>
+        <div class="expanded-text">
+          <p>O corpo perde a capacidade de diferenciar células próprias de invasores. Isso gera inflamações crônicas em órgãos e tecidos, com sintomas variados e complexos.</p>
+        </div>
+        <a href="dist_autoimune.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+
+    
+    <!-- CARD 8 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card8">
+      <label for="card8" class="card-label">
+        <h3>Infecciosos</h3>
+        <p class="short-text">Causados por vírus, bactérias ou fungos. Incluem gripe, HIV, tuberculose, COVID-19.</p>
+        <div class="expanded-text">
+          <p>São transmissíveis e podem variar de leves a fatais. O tratamento inclui antibióticos, antivirais ou antifúngicos, além de medidas de prevenção como vacinas e higiene.</p>
+        </div>
+        <a href="dist_infecciosos.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card9">
+      <label for="card9" class="card-label">
+        <h3>Genéticos ou Congênitos</h3>
+        <p class="short-text">Presentes desde o nascimento, como Síndrome de Down, fibrose cística e talassemia.</p>
+        <div class="expanded-text">
+          <p>Resultam de alterações nos genes ou no desenvolvimento embrionário. Podem causar malformações, atrasos no desenvolvimento ou doenças crônicas.</p>
+        </div>
+        <a href="didt_geneticos.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card10">
+      <label for="card10" class="card-label">
+        <h3>Hematológicos</h3>
+        <p class="short-text">Afetam o sangue e a medula óssea. Ex.: anemia, leucemia, hemofilia.</p>
+        <div class="expanded-text">
+          <p>Afetam glóbulos vermelhos, brancos, plaquetas ou a coagulação. Podem ser hereditários, infecciosos ou cancerígenos, e necessitam de acompanhamento especializado.</p>
+        </div>
+        <a href="dist_hemato.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    <!-- CARD 11 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card11">
+      <label for="card11" class="card-label">
+        <h3>Sensorial (Visão e Audição)</h3>
+        <p class="short-text">Problemas nos sentidos: cegueira, surdez, glaucoma, catarata.</p>
+        <div class="expanded-text">
+          <p>Alterações nos olhos, ouvidos ou vias nervosas que prejudicam a percepção sensorial. Podem ser genéticos, traumáticos ou degenerativos, com impacto funcional e social.</p>
+        </div>
+        <a href="dist_sensoriais.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+    <!-- CARD 12 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card12">
+      <label for="card12" class="card-label">
+        <h3>Distúrbios Traumáticos</h3>
+        <p class="short-text">Lesões provocadas por quedas, acidentes ou impactos, como fraturas e traumatismo craniano.</p>
+        <div class="expanded-text">
+          <p>Ocorrem por quedas, acidentes ou agressões. Afetam ossos, músculos, órgãos internos ou o cérebro. Tratamento varia de primeiros socorros até cirurgia e reabilitação.</p>
+        </div>
+        <a href="dist_traumaticos.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+      <!-- CARD 13 -->
+    <div class="card-expand">
+      <input type="checkbox" id="card13">
+      <label for="card13" class="card-label">
+        <h3>Dermatológicos</h3>
+        <p class="short-text">Afetam a pele, cabelo e unhas. Como acne e psoríase.</p>
+        <div class="expanded-text">
+          <p>Incluem doenças inflamatórias, infecciosas e autoimunes que alteram a aparência e função da pele. Muitas vezes afetam também a autoestima e o bem-estar emocional.</p>
+        </div>
+        <a href="dist_dermato.html"><button class="btn">Explorar</button></a>
+      </label>
+    </div>
+
+
+    <!-- Adicione mais cards seguindo esse padrão -->
+    
+  </div>
+</section>
+
+<div class="download-page">
+    <h1>Download Our App</h1>
+    <p class="description">Get the latest version of our application. Fast, secure, and free.</p>
+
+    <div class="download-card">
+      <h2>Version 2.3.1</h2>
+      <p>Updated: August 28, 2025</p>
+      <img src="" alt="">
+      <p>Size: 45 MB</p>
+      <a href="yourfile.zip" class="download-btn" download>Download Now</a>
+    </div>
+  </div>
+       
+      </main>
+
+      <!--==================== FOOTER ====================-->
+      <footer class="footer">
+         <div class="footer__container grid">
+            <div>
+              <a href="#" class="footer__logo">
+               <i class="ri-book-3-line"></i>E-Book
+              </a>
+
+              <p class="footer__description">
+               Find and explore the best medical eBooks for free.
+              </p>
+            </div>
+
+            <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Custom Video Player</title>
+  <style>
+    /* Minimal, modern styling */
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --primary:#06b6d4;
+      --muted:#94a3b8;
+      --accent:#7c3aed;
+      --track:#334155;
+      --text:#e6eef6;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{background:linear-gradient(180deg,var(--bg),#071122);color:var(--text);display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:24px}
+
+    .player{
+      width:min(980px,95%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
+      border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(2,6,23,0.6);
+    }
+
+    .video-wrap{position:relative;background:black}
+    video{width:100%;height:auto;display:block;background:#000}
+
+    /* Big center play button */
+    .big-play{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+    }
+    .big-play button{pointer-events:auto;background:rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:18px;border-radius:999px;font-size:18px;backdrop-filter:blur(4px);cursor:pointer}
+
+    /* Controls */
+    .controls{display:flex;flex-direction:column;gap:8px;padding:12px}
+    .progress{
+      position:relative;height:8px;background:var(--track);border-radius:999px;cursor:pointer;overflow:hidden
+    }
+    .progress .buffer{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));}
+    .progress .bar{position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px;}
+
+    .controls-row{display:flex;align-items:center;gap:10px}
+    .left, .center, .right{display:flex;align-items:center;gap:8px}
+    .center{flex:1}
+
+    button.ctrl{background:transparent;border:0;color:var(--text);padding:8px;border-radius:8px;cursor:pointer}
+    .time{font-size:13px;color:var(--muted);min-width:64px;text-align:center}
+
+    input[type=range]{-webkit-appearance:none;width:110px;height:28px;background:transparent}
+    input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:var(--track)}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--primary);margin-top:-4px}
+
+    select{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:6px;border-radius:8px;color:var(--text)}
+
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:540px){
+      .controls{padding:8px}
+      .big-play button{padding:12px;font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="player" id="player">
+    <div class="video-wrap">
+      <!-- Replace the src with your own video or use multiple <source> tags -->
+      <video id="video" preload="metadata" crossorigin="anonymous">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        Sorry — your browser doesn't support HTML5 video.
+      </video>
+
+      <div class="big-play" id="bigPlay">
+        <button id="bigPlayBtn" aria-label="Play">▶</button>
+      </div>
+    </div>
+
+    <div class="controls" role="group" aria-label="Video controls">
+      <div class="progress" id="progress" aria-label="Video progress">
+        <div class="buffer" id="buffer"></div>
+        <div class="bar" id="bar"></div>
+      </div>
+
+      <div class="controls-row">
+        <div class="left">
+          <button class="ctrl" id="playPause" aria-label="Play/Pause">▶</button>
+          <button class="ctrl" id="stop" aria-label="Stop">■</button>
+          <div class="time" id="time">0:00 / 0:00</div>
+        </div>
+
+        <div class="center">
+          <input type="range" id="seekThumb" min="0" max="100" value="0" aria-label="Seek"/>
+        </div>
+
+        <div class="right">
+          <button class="ctrl" id="mute" aria-label="Mute">🔊</button>
+          <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" aria-label="Volume"/>
+          <label class="small">Speed
+            <select id="speed" aria-label="Playback speed">
+              <option value="0.5">0.5x</option>
+              <option value="0.75">0.75x</option>
+              <option value="1" selected>1x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2">2x</option>
+            </select>
+          </label>
+          <button class="ctrl" id="pip" aria-label="Picture in Picture">PIP</button>
+          <button class="ctrl" id="fs" aria-label="Fullscreen">⤢</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple, well-commented JS for the custom player
+    const video = document.getElementById('video');
+    const playPause = document.getElementById('playPause');
+    const bigPlayBtn = document.getElementById('bigPlayBtn');
+    const bigPlay = document.getElementById('bigPlay');
+    const stopBtn = document.getElementById('stop');
+    const timeEl = document.getElementById('time');
+    const progress = document.getElementById('progress');
+    const bar = document.getElementById('bar');
+    const buffer = document.getElementById('buffer');
+    const seekThumb = document.getElementById('seekThumb');
+    const muteBtn = document.getElementById('mute');
+    const volume = document.getElementById('volume');
+    const speed = document.getElementById('speed');
+    const fsBtn = document.getElementById('fs');
+    const pipBtn = document.getElementById('pip');
+    const player = document.getElementById('player');
+
+    // Utilities
+    function formatTime(s){
+      if(isNaN(s)) return '0:00';
+      const m = Math.floor(s/60);
+      const sec = Math.floor(s%60).toString().padStart(2,'0');
+      return `${m}:${sec}`;
+    }
+
+    // Update time display
+    function updateTime(){
+      timeEl.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+      const percent = (video.currentTime / video.duration) * 100;
+      bar.style.width = percent + '%';
+      seekThumb.value = isFinite(percent) ? percent : 0;
+    }
+
+    // Buffer progress
+    function updateBuffer(){
+      if(video.buffered.length){
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+        const percent = (bufferedEnd / video.duration) * 100;
+        buffer.style.width = percent + '%';
+      }
+    }
+
+    // Play/pause toggle
+    function togglePlay(){
+      if(video.paused || video.ended){
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+
+    // Update play/pause button states
+    function updatePlayUI(){
+      const icon = video.paused ? '▶' : '⏸';
+      playPause.textContent = icon;
+      bigPlayBtn.textContent = video.paused ? '▶' : '';
+      bigPlay.style.display = video.paused ? 'flex' : 'none';
+    }
+
+    // Event listeners
+    playPause.addEventListener('click', togglePlay);
+    bigPlayBtn.addEventListener('click', togglePlay);
+    stopBtn.addEventListener('click', ()=>{ video.pause(); video.currentTime = 0; updateTime(); });
+
+    video.addEventListener('play', updatePlayUI);
+    video.addEventListener('pause', updatePlayUI);
+    video.addEventListener('timeupdate', updateTime);
+    video.addEventListener('progress', updateBuffer);
+    video.addEventListener('loadedmetadata', ()=>{ updateTime(); updateBuffer(); });
+
+    // Seek by clicking on progress bar
+    progress.addEventListener('click', (e)=>{
+      const rect = progress.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      video.currentTime = pct * video.duration;
+    });
+
+    // Seek via range input
+    seekThumb.addEventListener('input', (e)=>{
+      const pct = e.target.value / 100;
+      video.currentTime = pct * video.duration;
+    });
+
+    // Volume control
+    volume.addEventListener('input', ()=>{ video.volume = volume.value; muteBtn.textContent = video.volume==0 ? '🔈' : '🔊'; });
+    muteBtn.addEventListener('click', ()=>{ video.muted = !video.muted; muteBtn.textContent = video.muted ? '🔈' : '🔊'; });
+
+    // Playback speed
+    speed.addEventListener('change', ()=>{ video.playbackRate = parseFloat(speed.value); });
+
+    // Fullscreen
+    fsBtn.addEventListener('click', async ()=>{
+      if(!document.fullscreenElement){
+        await player.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    });
+
+    // Picture-in-picture (if supported)
+    pipBtn.addEventListener('click', async ()=>{
+      try{
+        if(document.pictureInPictureElement){
+          await document.exitPictureInPicture();
+        } else {
+          if(video.requestPictureInPicture) await video.requestPictureInPicture();
+        }
+      }catch(e){ alert('PIP not available in this browser'); }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e)=>{
+      // don't catch when typing in inputs
+      const tag = document.activeElement.tagName.toLowerCase();
+      if(tag === 'input' || tag === 'select' || tag === 'textarea') return;
+
+      switch(e.key.toLowerCase()){
+        case ' ':
+          e.preventDefault(); togglePlay(); break;
+        case 'arrowleft': video.currentTime = Math.max(0, video.currentTime - 5); break;
+        case 'arrowright': video.currentTime = Math.min(video.duration, video.currentTime + 5); break;
+        case 'arrowup': video.volume = Math.min(1, video.volume + 0.05); volume.value = video.volume; break;
+        case 'arrowdown': video.volume = Math.max(0, video.volume - 0.05); volume.value = video.volume; break;
+        case 'f': fsBtn.click(); break;
+        case 'm': muteBtn.click(); break;
+      }
+    });
+
+    // Accessibility: hide big play after first interaction
+    video.addEventListener('play', ()=>{ bigPlay.style.display = 'none'; });
+
+    // Set initial states
+    video.volume = parseFloat(volume.value);
+    video.playbackRate = parseFloat(speed.value);
+    updatePlayUI();
+
+    // Helpful: show controls when user moves mouse (optional)
+    let hideTimeout;
+    player.addEventListener('mousemove', ()=>{
+      player.style.boxShadow = '0 12px 40px rgba(2,6,23,0.7)';
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(()=>{ player.style.boxShadow = ''; }, 2400);
+    });
+
+    // End of script
+  </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distúrbios Genéticos</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 0; }
+    header { background-color: #5c0a13; color: #fff; text-align: center; padding: 2rem 1rem; }
+    header h1 { margin: 0; font-size: 2.4rem; }
+    header p { font-size: 1rem; opacity: 0.9; }
+    .search-bar { text-align: center; margin: 1.5rem auto; }
+    .search-bar input, .search-bar select { padding: 0.7rem; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc; width: 220px; margin: 0.3rem; }
+    main { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.8rem; }
+    .card { background-color: #fff; border-radius: 14px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 1.8rem; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15); }
+    .card h2 { color: #5c0a13; margin-bottom: 0.6rem; font-size: 1.5rem; border-bottom: 2px solid #5c0a13; padding-bottom: 0.4rem; }
+    .card h3 { color: #222; font-size: 1.1rem; margin-top: 1.2rem; }
+    .card p { text-align: justify; line-height: 1.6; margin-top: 0.3rem; }
+    .card button { margin-top: 1rem; padding: 0.5rem 0.9rem; background-color: #5c0a13; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    .card button:hover { background-color: #7b0f1d; }
+    footer { background-color: #5c0a13; color: #fff; text-align: center; padding: 1rem; font-size: 0.9rem; margin-top: 2rem; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+    .modal-content { background-color: #fff; margin: 5% auto; padding: 2rem; border-radius: 12px; max-width: 800px; position: relative; max-height: 80vh; overflow-y: auto; }
+    .close { position: absolute; top: 10px; right: 20px; color: #5c0a13; font-size: 1.8rem; font-weight: bold; cursor: pointer; }
+    .close:hover { color: #7b0f1d; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Genéticos</h1>
+    <p>Etiologia, fisiopatologia, manifestações clínicas, diagnóstico e tratamento</p>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="cromossomicos">Cromossômicos</option>
+      <option value="monogenicos">Monogênicos</option>
+      <option value="multifatoriais">Multifatoriais</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="cromossomicos">
+      <h2>Síndrome de Down</h2>
+      <p>Trissomia do cromossomo 21, causando atraso intelectual e características físicas típicas...</p>
+      <button onclick="abrirModal('down')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="monogenicos">
+      <h2>Fibrose Cística</h2>
+      <p>Doença autossômica recessiva causada por mutações no gene CFTR, afetando pulmões e pâncreas...</p>
+      <button onclick="abrirModal('fc')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="monogenicos">
+      <h2>Distrofia Muscular de Duchenne</h2>
+      <p>Doença ligada ao X, causada por mutações no gene da distrofina, levando a fraqueza muscular progressiva...</p>
+      <button onclick="abrirModal('duchenne')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="monogenicos">
+      <h2>Hemofilia</h2>
+      <p>Doença ligada ao X, caracterizada por deficiência de fatores de coagulação e sangramentos prolongados...</p>
+      <button onclick="abrirModal('hemofilia')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="monogenicos">
+      <h2>Síndrome de Marfan</h2>
+      <p>Doença autossômica dominante causada por mutações no gene FBN1, afetando tecido conjuntivo...</p>
+      <button onclick="abrirModal('marfan')">Leitura detalhada</button>
+    </div>
+    <div class="card" data-categoria="monogenicos">
+      <h2>Anemia Falciforme</h2>
+      <p>Doença autossômica recessiva causada por mutação no gene da beta-globina, provocando hemácias em foice...</p>
+      <button onclick="abrirModal('falciforme')">Leitura detalhada</button>
+    </div>
+  </main>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <div id="modalText"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Fontes: Harrison's Principles of Internal Medicine, Genetics Home Reference, OMIM, NIH, Mayo Clinic.</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const filterSelect = document.getElementById('filterSelect');
+    const cards = document.querySelectorAll('.card');
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modalText');
+
+    searchInput.addEventListener('input', filtrarCards);
+    filterSelect.addEventListener('change', filtrarCards);
+
+    function filtrarCards() {
+      const termo = searchInput.value.toLowerCase();
+      const categoria = filterSelect.value;
+      cards.forEach(card => {
+        const titulo = card.querySelector('h2').textContent.toLowerCase();
+        const texto = card.textContent.toLowerCase();
+        const cardCategoria = card.getAttribute('data-categoria');
+        const correspondeTermo = titulo.includes(termo) || texto.includes(termo);
+        const correspondeCategoria = categoria === 'todos' || cardCategoria === categoria;
+        card.style.display = (correspondeTermo && correspondeCategoria) ? 'block' : 'none';
+      });
+    }
+
+    const textosDetalhados = {
+      down: `<h2>Síndrome de Down</h2><h3>Etiologia</h3><p>Trissomia do cromossomo 21, geralmente por não-disjunção materna durante a meiose.</p><h3>Fisiopatologia</h3><p>Excesso de material genético altera expressão de genes, afetando desenvolvimento cerebral e físico.</p><h3>Manifestações</h3><p>Retardo intelectual, hipotonia, face achatada, fenda palpebral oblíqua, cardiopatia congênita.</p><h3>Diagnóstico</h3><p>Cariótipo, análise pré-natal (amniocentese, biópsia de vilo corial), ultrassom fetal.</p><h3>Tratamento</h3><p>Intervenção precoce, fisioterapia, fonoaudiologia, suporte educacional e cardiológico.</p><h3>Prognóstico</h3><p>Esperança de vida aumentada com acompanhamento multidisciplinar; qualidade de vida depende de suporte familiar e social.</p>`,
+      fc: `<h2>Fibrose Cística</h2><h3>Etiologia</h3><p>Autossômica recessiva; mutações no gene CFTR afetam transporte de cloro nas células epiteliais.</p><h3>Fisiopatologia</h3><p>Mucosa espessa nos pulmões e pâncreas leva a infecções recorrentes e insuficiência pancreática exócrina.</p><h3>Manifestações</h3><p>Tosse crônica, infecções respiratórias, insuficiência pancreática, má absorção, atraso no crescimento.</p><h3>Diagnóstico</h3><p>Teste do suor, análise genética, história familiar e sintomas clínicos.</p><h3>Tratamento</h3><p>Fisioterapia respiratória, antibióticos, enzimas pancreáticas, controle nutricional e novos moduladores de CFTR.</p><h3>Prognóstico</h3><p>Crônico; sobrevida melhorou significativamente com terapias modernas e acompanhamento intensivo.</p>`,
+      duchenne: `<h2>Distrofia Muscular de Duchenne</h2><h3>Etiologia</h3><p>Ligada ao X; mutações no gene DMD causam ausência da distrofina.</p><h3>Fisiopatologia</h3><p>Fraqueza muscular progressiva devido à degeneração das fibras musculares e substituição por tecido fibroadiposo.</p><h3>Manifestações</h3><p>Dificuldade para andar, quedas frequentes, marcha anserina, hipertrofia de panturrilhas, fraqueza proximal.</p><h3>Diagnóstico</h3><p>Dosagem de CK, análise genética, biópsia muscular.</p><h3>Tratamento</h3><p>Fisioterapia, suporte ortopédico, corticosteroides e novos tratamentos genéticos em pesquisa.</p><h3>Prognóstico</h3><p>Progressivo; sobrevida melhorou com suporte respiratório e cardiológico.</p>`,
+           hemofilia: `<h2>Hemofilia</h2><h3>Etiologia</h3><p>Ligada ao X; deficiência de fator VIII (Hemofilia A) ou IX (Hemofilia B).</p><h3>Fisiopatologia</h3><p>Alteração na cascata de coagulação leva a sangramentos prolongados e hematomas.</p><h3>Manifestações</h3><p>Sangramentos espontâneos ou após traumas, hemartroses, hematomas extensos e hemorragias internas.</p><h3>Diagnóstico</h3><p>Dosagem de fatores de coagulação, tempo de sangramento, história familiar.</p><h3>Tratamento</h3><p>Reposição dos fatores deficiente, profilaxia, fisioterapia e monitoramento de complicações articulares.</p><h3>Prognóstico</h3><p>Crônico; adesão ao tratamento profilático melhora qualidade de vida e previne complicações.</p>`,
+      marfan: `<h2>Síndrome de Marfan</h2><h3>Etiologia</h3><p>Autossômica dominante; mutações no gene FBN1 que codifica fibrilina-1.</p><h3>Fisiopatologia</h3><p>Deficiência de fibrilina causa fragilidade do tecido conjuntivo, afetando esqueleto, olhos e coração.</p><h3>Manifestações</h3><p>Estatura alta, membros longos, alterações esqueléticas, luxação de lente, aneurismas da aorta.</p><h3>Diagnóstico</h3><p>Critérios de Ghent, exame clínico, ecocardiograma, exames oftalmológicos e genéticos.</p><h3>Tratamento</h3><p>Controle cardiovascular, cirurgia para aorta ou olhos, fisioterapia e acompanhamento multidisciplinar.</p><h3>Prognóstico</h3><p>Com acompanhamento adequado, expectativa de vida próxima ao normal; risco de complicações cardiovasculares graves.</p>`,
+      falciforme: `<h2>Anemia Falciforme</h2><h3>Etiologia</h3><p>Autossômica recessiva; mutação no gene da beta-globina provoca hemácias em forma de foice.</p><h3>Fisiopatologia</h3><p>Hemácias deformadas levam a obstrução vascular, hemólise e anemia crônica.</p><h3>Manifestações</h3><p>Anemia, dor óssea, crises vaso-oclusivas, infecções recorrentes e icterícia.</p><h3>Diagnóstico</h3><p>Hemograma, eletroforese de hemoglobina, teste genético e histórico familiar.</p><h3>Tratamento</h3><p>Hidratação, analgésicos, transfusões, hidroxiureia e transplante de medula óssea em casos selecionados.</p><h3>Prognóstico</h3><p>Crônico; tratamento adequado reduz crises e melhora qualidade de vida.</p>`
+    };
+
+    function abrirModal(chave) {
+      modalText.innerHTML = textosDetalhados[chave] || '<p>Detalhes não disponíveis.</p>';
+      modal.style.display = 'block';
+    }
+
+    function fecharModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        fecharModal();
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

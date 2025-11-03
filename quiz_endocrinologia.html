@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz de Endocrinologia - Hard</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+body {
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1581091870625-3e05e1544a9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+}
+
+.quiz-container {
+  background: rgba(255,255,255,0.05);
+  padding: 30px 40px;
+  border-radius: 20px;
+  max-width: 700px;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 10px 30px rgba(255,0,0,0.3);
+  animation: fadeIn 1s ease forwards;
+}
+
+h1 { text-align:center; margin-bottom:20px; font-weight:700; font-size:2rem; }
+
+.question { font-size:1.3rem; margin-bottom:20px; }
+
+.answers { display: flex; flex-direction: column; gap: 12px; }
+
+.answers button {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  transition: 0.3s;
+}
+
+.answers button:hover { background: rgba(255,255,255,0.2); }
+
+.answers button.correct { background: rgba(0,255,150,0.6); color:#000; }
+.answers button.wrong { background: rgba(255,50,50,0.6); color:#000; }
+
+.score-container { text-align:center; font-size:1.5rem; margin-top:20px; }
+
+.next-btn, .skip-btn {
+  margin-top:20px;
+  padding:10px 25px;
+  font-size:1rem;
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+  background: linear-gradient(135deg, #00bcd4, #4caf50);
+  color:#fff;
+  transition:0.3s;
+  margin-right:10px;
+}
+
+.next-btn:hover, .skip-btn:hover { transform: scale(1.05); }
+
+.buttons { display:flex; justify-content:flex-end; gap:10px; }
+
+@keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h1>Quiz de Endocrinologia - Hard</h1>
+  <div id="quiz">
+    <div class="question" id="question">Pergunta aqui</div>
+    <div class="answers" id="answers">
+      <!-- Botões de respostas aparecerão aqui -->
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="skip-btn" id="skip-btn">Pular</button>
+    <button class="next-btn" id="next-btn" style="display:none;">Próxima</button>
+  </div>
+  <div class="score-container" id="score-container" style="display:none;">
+    Você acertou <span id="score">0</span> de 20 perguntas!
+  </div>
+</div>
+
+<script>
+const quizData = [
+{q:"Qual hormônio da hipófise anterior estimula a produção de cortisol pelo córtex adrenal?", a:["TSH","ACTH","GH","LH"], correct:1},
+{q:"O hormônio calcitonina é produzido em qual glândula?", a:["Tireóide","Paratireoide","Pâncreas","Hipófise"], correct:0},
+{q:"Qual é a principal ação da aldosterona?", a:["Aumentar glicemia","Reabsorção de sódio e água","Estimular tireóide","Inibir GH"], correct:1},
+{q:"A deficiência de ADH causa:", a:["Diabetes mellitus","Diabetes insípido","Hipotireoidismo","Feocromocitoma"], correct:1},
+{q:"O hormônio paratireoideano (PTH) aumenta o nível de:", a:["Cálcio sérico","Sódio sérico","Potássio sérico","Magnésio sérico"], correct:0},
+{q:"O aumento de prolactina geralmente causa:", a:["Galactorreia","Hipotensão","Hiperglicemia","Hiperpigmentação"], correct:0},
+{q:"Qual hormônio regula o ritmo circadiano e é produzido pela glândula pineal?", a:["Melatonina","Cortisol","Adrenalina","Insulina"], correct:0},
+{q:"A secreção de T3 e T4 é estimulada principalmente por:", a:["TSH","ACTH","Somatostatina","LH"], correct:0},
+{q:"Qual é a principal função do hormônio do crescimento (GH)?", a:["Reduzir glicemia","Estimular crescimento e síntese proteica","Produzir cortisol","Estimular tireóide"], correct:1},
+{q:"Feocromocitoma é um tumor da:", a:["Tireóide","Adrenal medula","Paratireoide","Pâncreas"], correct:1},
+{q:"Hipotireoidismo congênito não tratado leva a:", a:["Gigantismo","Cretenismo","Diabetes insípido","Síndrome de Cushing"], correct:1},
+{q:"O excesso de cortisol causa:", a:["Doença de Addison","Síndrome de Cushing","Hipotireoidismo","Acromegalia"], correct:1},
+{q:"A resistência periférica à insulina caracteriza:", a:["Diabetes tipo 1","Diabetes tipo 2","Hipoglicemia","Hipercalcemia"], correct:1},
+{q:"A calcitriol (vitamina D ativa) é produzida principalmente no:", a:["Fígado","Rim","Pele","Pâncreas"], correct:1},
+{q:"O hormônio leptina tem como função principal:", a:["Estimular fome","Inibir apetite","Aumentar cortisol","Aumentar GH"], correct:1},
+{q:"O excesso de GH em adultos causa:", a:["Gigantismo","Acromegalia","Hipopituitarismo","Síndrome de Cushing"], correct:1},
+{q:"O aumento de TSH com T3/T4 normal caracteriza:", a:["Hipotireoidismo primário","Hipotireoidismo subclínico","Hipertireoidismo","Eutireoidismo"], correct:1},
+{q:"A insulina é secretada pelas células:", a:["Alfa","Beta","Delta","PP"], correct:1},
+{q:"A hormona adrenocorticotrófica (ACTH) é secretada pela:", a:["Tireóide","Hipófise anterior","Glândula adrenal","Hipófise posterior"], correct:1},
+{q:"O aumento de cortisol e aldosterona, mas com supressão de ACTH, sugere:", a:["Tumor hipofisário","Tumor adrenal primário","Feocromocitoma","Hipotireoidismo"], correct:1},
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("next-btn");
+const skipBtn = document.getElementById("skip-btn");
+const scoreContainer = document.getElementById("score-container");
+const scoreEl = document.getElementById("score");
+
+function loadQuestion() {
+  answersEl.innerHTML = "";
+  nextBtn.style.display = "none";
+  const q = quizData[currentQuestion];
+  questionEl.textContent = `${currentQuestion+1}. ${q.q}`;
+  q.a.forEach((answer,index)=>{
+    const btn = document.createElement("button");
+    btn.textContent = answer;
+    btn.addEventListener("click",()=> selectAnswer(index,btn));
+    answersEl.appendChild(btn);
+  });
+}
+
+function showCorrect(){
+  const buttons = answersEl.querySelectorAll("button");
+  buttons.forEach((b,i)=>{
+    if(i===quizData[currentQuestion].correct){ b.classList.add("correct"); }
+  });
+}
+
+function selectAnswer(index,btn){
+  const q = quizData[currentQuestion];
+  const buttons = answersEl.querySelectorAll("button");
+  buttons.forEach(b=>b.disabled=true);
+
+  if(index===q.correct){ score++; btn.classList.add("correct"); }
+  else{ btn.classList.add("wrong"); showCorrect(); }
+  nextBtn.style.display="block";
+}
+
+nextBtn.addEventListener("click",nextQuestion);
+skipBtn.addEventListener("click",()=>{
+  const buttons = answersEl.querySelectorAll("button");
+  buttons.forEach(b=>b.disabled=true);
+  showCorrect();
+  nextBtn.style.display="block";
+});
+
+function nextQuestion(){
+  currentQuestion++;
+  if(currentQuestion < quizData.length){ loadQuestion(); }
+  else{
+    document.getElementById("quiz").style.display="none";
+    nextBtn.style.display="none";
+    skipBtn.style.display="none";
+    scoreContainer.style.display="block";
+    scoreEl.textContent=score;
+  }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>

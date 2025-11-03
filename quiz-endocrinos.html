@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Endócrino - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #b30000;
+  }
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+  input[type=text] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+  body.dark input[type=text] {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Endócrino - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // 30 múltipla escolha (MC)
+  {type:"mc", q:"O hipertireoidismo é caracterizado por:", a:["Excesso de hormônios tireoidianos","Deficiência de insulina","Deficiência de cortisol","Excesso de prolactina"], correct:0},
+  {type:"mc", q:"A doença de Addison envolve deficiência de:", a:["Cortisol e aldosterona","Insulina","Hormônio tireoidiano","Paratormônio"], correct:0},
+  {type:"mc", q:"O diabetes mellitus tipo 1 é causado por:", a:["Destruição autoimune das células beta","Resistência periférica à insulina","Excesso de cortisol","Deficiência de TSH"], correct:0},
+  {type:"mc", q:"O hipertireoidismo de Graves é associado a:", a:["Exoftalmia","Hipoglicemia","Hipotensão","Amenorreia"], correct:0},
+  {type:"mc", q:"A síndrome de Cushing resulta de:", a:["Excesso de cortisol","Deficiência de cortisol","Excesso de TSH","Deficiência de insulina"], correct:0},
+  {type:"mc", q:"A doença de Hashimoto é:", a:["Hipotireoidismo autoimune","Hipertireoidismo","Diabetes tipo 2","Hipopituitarismo"], correct:0},
+  {type:"mc", q:"O gigantismo ocorre devido a:", a:["Excesso de GH antes da puberdade","Deficiência de GH","Excesso de cortisol","Deficiência de TSH"], correct:0},
+  {type:"mc", q:"A acromegalia ocorre devido a:", a:["Excesso de GH após puberdade","Deficiência de GH","Hipotireoidismo","Excesso de prolactina"], correct:0},
+  {type:"mc", q:"A hipocalcemia pode ser causada por deficiência de:", a:["Paratormônio","Calcitonina","Cortisol","T3/T4"], correct:0},
+  {type:"mc", q:"O hipertiroidismo pode causar:", a:["Taquicardia e perda de peso","Bradicardia e ganho de peso","Hipotensão","Hipoglicemia"], correct:0},
+  {type:"mc", q:"O hipotireoidismo congênito causa:", a:["Cretinismo se não tratado","Gigantismo","Hipoglicemia","Acromegalia"], correct:0},
+  {type:"mc", q:"O diabetes insípido é caracterizado por:", a:["Deficiência de ADH","Deficiência de insulina","Excesso de GH","Deficiência de TSH"], correct:0},
+  {type:"mc", q:"A hiperplasia adrenal congênita envolve:", a:["Defeito na síntese de cortisol","Excesso de insulina","Deficiência de T3/T4","Excesso de prolactina"], correct:0},
+  {type:"mc", q:"A síndrome de Sheehan resulta de:", a:["Infarto da hipófise pós-parto","Deficiência de insulina","Hipertiroidismo","Hipercortisolismo"], correct:0},
+  {type:"mc", q:"O hiperparatireoidismo primário causa:", a:["Hipercalcemia","Hipocalcemia","Hipotireoidismo","Hipoglicemia"], correct:0},
+  {type:"mc", q:"A resistência à insulina é característica de:", a:["Diabetes tipo 2","Diabetes tipo 1","Hipopituitarismo","Hipotireoidismo"], correct:0},
+  {type:"mc", q:"O prolactinoma causa:", a:["Galactorreia e amenorreia","Hipoglicemia","Exoftalmia","Hipercalcemia"], correct:0},
+  {type:"mc", q:"O bócio pode ser causado por:", a:["Deficiência de iodo","Excesso de GH","Excesso de cortisol","Deficiência de prolactina"], correct:0},
+  {type:"mc", q:"O hipotireoidismo secundário é devido a:", a:["Deficiência de TSH","Deficiência de insulina","Deficiência de cortisol","Excesso de GH"], correct:0},
+  {type:"mc", q:"O hipertireoidismo subclínico apresenta:", a:["TSH baixo, T4 normal","TSH alto, T4 baixo","TSH normal, T4 baixo","TSH alto, T4 alto"], correct:0},
+  {type:"mc", q:"O hiperaldosteronismo primário é causado por:", a:["Adenoma adrenal","Insuficiência pituitária","Hipotireoidismo","Deficiência de cortisol"], correct:0},
+  {type:"mc", q:"A hipoglicemia pode ser causada por:", a:["Excesso de insulina","Deficiência de insulina","Hipotireoidismo","Hipercortisolismo"], correct:0},
+  {type:"mc", q:"A síndrome de Conn envolve:", a:["Excesso de aldosterona","Excesso de cortisol","Deficiência de GH","Deficiência de TSH"], correct:0},
+  {type:"mc", q:"A deficiência de GH na infância causa:", a:["Nanismo proporcional","Acromegalia","Hipotireoidismo","Hipercortisolismo"], correct:0},
+  {type:"mc", q:"O feocromocitoma secreta:", a:["Catecolaminas","Cortisol","GH","Prolactina"], correct:0},
+  {type:"mc", q:"O hipotireoidismo pode causar:", a:["Fadiga e ganho de peso","Perda de peso e taquicardia","Hipoglicemia","Hipercalcemia"], correct:0},
+  {type:"mc", q:"A doença de Graves causa:", a:["Hipertireoidismo","Hipotireoidismo","Diabetes tipo 1","Diabetes tipo 2"], correct:0},
+  {type:"mc", q:"O hipercortisolismo crônico pode levar a:", a:["Síndrome de Cushing","Doença de Addison","Hipotireoidismo","Hipopituitarismo"], correct:0},
+  {type:"mc", q:"A deficiência de ADH causa:", a:["Diabetes insípido","Diabetes mellitus","Hipertireoidismo","Hipotireoidismo"], correct:0},
+
+  // 20 verdadeiro/falso (VF)
+  {type:"vf", q:"O hipertireoidismo pode causar perda de peso.", correct:true},
+  {type:"vf", q:"A doença de Addison envolve excesso de cortisol.", correct:false},
+  {type:"vf", q:"O diabetes mellitus tipo 1 é autoimune.", correct:true},
+  {type:"vf", q:"A síndrome de Cushing resulta de excesso de cortisol.", correct:true},
+  {type:"vf", q:"A acromegalia ocorre após a puberdade devido a excesso de GH.", correct:true},
+  {type:"vf", q:"O gigantismo ocorre após a puberdade.", correct:false},
+  {type:"vf", q:"A deficiência de paratormônio causa hipocalcemia.", correct:true},
+  {type:"vf", q:"O bócio pode ser causado por deficiência de iodo.", correct:true},
+  {type:"vf", q:"O hipotireoidismo congênito não tem consequências se não tratado.", correct:false},
+  {type:"vf", q:"O prolactinoma pode causar galactorreia.", correct:true},
+  {type:"vf", q:"A resistência à insulina é característica do diabetes tipo 2.", correct:true},
+  {type:"vf", q:"O feocromocitoma secreta cortisol.", correct:false},
+  {type:"vf", q:"O hiperaldosteronismo primário aumenta a pressão arterial.", correct:true},
+  {type:"vf", q:"A deficiência de GH na infância causa nanismo.", correct:true},
+  {type:"vf", q:"O feocromocitoma pode causar hipertensão episódica.", correct:true},
+  {type:"vf", q:"A síndrome de Graves é uma causa de hipertireoidismo.", correct:true},
+  {type:"vf", q:"A síndrome de Conn envolve deficiência de aldosterona.", correct:false},
+  {type:"vf", q:"O diabetes insípido é causado por deficiência de ADH.", correct:true},
+  {type:"vf", q:"O hipercortisolismo crônico pode levar à síndrome de Cushing.", correct:true},
+  {type:"vf", q:"O hipotireoidismo não afeta a frequência cardíaca.", correct:false}
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a : ["Verdadeiro","Falso"];
+    options.forEach((ans,i)=>{
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?i:(i===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach((btn,i)=>{
+    if((q.type==="mc" && i===q.correct) || (q.type==="vf" && ((i===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === answer || (q.type==="vf" && ((i===0)===answer))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+
+      <!--=============== SWIPER CSS ===============-->
+      <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="assets/css/styles.css">
+
+      <title>Responsive book website - Bedimcode</title>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+               <img src="assets/img/eMed2.png" alt="">
+            </a>
+
+             <div class="nav__menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                        <span>Home</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#featured" class="nav__link active-link">
+                         <i class="ri-book-3-line"></i>
+                        <span>Featured</span>
+                     </a>
+                  </li> 
+
+                  <li class="nav__item">
+                     <a href="#stetho" class="nav__link active-link">
+                         <i class="ri-stethoscope-line"></i>
+                        <span>Health</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+
+                  <li class="nav__item">
+                     <a href="#contact" class="nav__link">
+                        <i class="ri-message-line"></i>
+                        <span>Contact Us</span>
+                     </a>
+                  </li>
+               </ul>
+             </div>
+             <div class="nav__actions">
+      <!--------------search-------------->
+               <i class="ri-search-line search-button" id="search-button"></i>
+      <!---------login-------------------->
+               <i class="ri-user-line login-button" id="login-button"></i>
+      <!---------theme button------------->
+               <i class="ri-moon-line change-theme" id="change-theme"></i>
+             </div>
+         </nav>
+      </header>
+
+      <!--==================== SEARCH ====================-->
+      <div class="search" id="search-content">
+         <form action="#" class="search">
+            <i class="ri-search-line search__icon"></i>
+            <input type="search" placeholder="What are you looking for?" class="search__input">
+         </form>
+
+         <i class="ri-close-line search__close" id="search-close"></i>
+      </div>
+
+      <!--==================== LOGIN ====================-->
+      <div class="login grid" id="login-content">
+         <form action="" class="login__form grid">
+            <h3 class="login__title">Log In</h3>
+             
+            <div class="login__group grid">
+               <div>
+                  <label for="login-email" class="login__label">Email</label>
+                  <input type="email" placeholder="Write your email" id="login-email" class="login__input">
+               </div>
+
+               <div>
+                  <label for="login-pass" class="login__label">Password</label>
+                  <input type="password" placeholder="Enter your password" id="login-pass" class="login__input">
+               </div>
+            </div>
+
+            <div>
+               <span class="login__signup">
+                  You do not have an account? <a href="#">Sign up</a>
+               </span>
+
+               <a href="#" class="login__forgot">
+                  You forgot your password
+               </a>
+
+               <button type="submit" class="login__button button">Log In</button>
+            </div>
+         </form>
+
+         <i class="ri-close-line login__close" id="login-close"></i>
+      </div>
+
+      <!--==================== MAIN ====================-->
+
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Verdana,sans-serif;color:#222;margin:0;padding:0}
+    header{background:#5c0a13;color:#fff;text-align:center;padding:2rem 1rem}
+    header h1{margin:0;font-size:2.2rem ; margin-top: 5rem;}
+    header p{opacity:.9}
+    .search-bar{text-align:center;margin:1.5rem auto}
+    .search-bar input,.search-bar select{padding:.7rem;font-size:1rem;border-radius:8px;border:1px solid #ccc;width:220px;margin:.3rem}
+    main{max-width:1200px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.6rem}
+    .card{background:#fff;border-radius:14px;box-shadow:0 4px 10px rgba(0,0,0,.1);padding:1.4rem;transition:transform .25s,box-shadow .25s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 10px 22px rgba(0,0,0,.14)}
+    .card h2{color:#5c0a13;margin-bottom:.4rem;font-size:1.15rem;border-bottom:2px solid #5c0a13;padding-bottom:.35rem}
+    .card p{line-height:1.5;text-align:justify;margin:0.25rem 0}
+    .card button{margin-top:1rem;padding:.45rem .8rem;background:#5c0a13;color:#fff;border:0;border-radius:6px;cursor:pointer}
+    .card button:hover{background:#7b0f1d}
+    footer{background:#5c0a13;color:#fff;text-align:center;padding:1rem;font-size:.9rem;margin-top:2rem}
+    .modal{display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,.6)}
+    .modal-content{background:#fff;margin:3% auto;padding:1.6rem;border-radius:12px;max-width:1000px;position:relative;max-height:86vh;overflow-y:auto}
+    .close{position:absolute;top:10px;right:20px;color:#5c0a13;font-size:1.6rem;font-weight:700;cursor:pointer}
+    .close:hover{color:#7b0f1d}
+    .modal h3{margin-top:1rem}
+    .modal p{line-height:1.6;text-align:justify}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distúrbios Cardiovasculares</h1>
+    <p>Etiologia, fisiopatologia, manifestações clínicas, diagnóstico, tratamento e prognóstico</p>
+  </header>
+
+  <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="🔍 Pesquise um distúrbio...">
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="isquemicas">Doenças Isquêmicas</option>
+      <option value="arritmias">Arritmias</option>
+      <option value="insuficiencia">Insuficiências</option>
+      <option value="vasculares">Vasculares</option>
+      <option value="valvulares">Valvulares</option>
+      <option value="miocardicas">Miocárdicas / Inflamatórias</option>
+      <option value="congenitas">Congênitas</option>
+      <option value="choque">Choque & Emergência</option>
+    </select>
+  </div>
+
+  <main id="cardsContainer">
+    <div class="card" data-categoria="isquemicas"><h2>Hipertensão Arterial Sistêmica (HAS)</h2><p>Elevação crônica da pressão arterial sistêmica com risco elevado de doença cardiovascular.</p><button onclick="abrirModal('has')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="insuficiencia"><h2>Insuficiência Cardíaca</h2><p>Síndrome clínica com redução da capacidade do coração de bombear sangue adequadamente.</p><button onclick="abrirModal('ic')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="isquemicas"><h2>Doença Arterial Coronariana (DAC)</h2><p>Aterosclerose das artérias coronárias levando a isquemia miocárdica.</p><button onclick="abrirModal('dac')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="isquemicas"><h2>Infarto Agudo do Miocárdio (IAM)</h2><p>Necrose miocárdica por obstrução aguda de artéria coronária.</p><button onclick="abrirModal('iam')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="isquemicas"><h2>Angina Pectoris</h2><p>Dor torácica transitória causada por isquemia miocárdica reversível.</p><button onclick="abrirModal('angina')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="arritmias"><h2>Fibrilação Atrial</h2><p>Arritmia supraventricular comum, associada a risco tromboembólico aumentado.</p><button onclick="abrirModal('fa')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="arritmias"><h2>Taquicardia Ventricular & Fibrilação Ventricular</h2><p>Arritmias ventriculares potencialmente fatais que causam instabilidade hemodinâmica.</p><button onclick="abrirModal('tvfv')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="arritmias"><h2>Bloqueio Atrioventricular (BAV)</h2><p>Distúrbio da condução atrioventricular com graus variados (I, II — Mobitz I/II, III).</p><button onclick="abrirModal('bav')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="valvulares"><h2>Valvulopatia Aórtica</h2><p>Estenose ou regurgitação da válvula aórtica com repercussões hemodinâmicas.</p><button onclick="abrirModal('aortica')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="valvulares"><h2>Valvulopatia Mitral</h2><p>Prolapso, estenose ou regurgitação mitral que podem causar insuficiência e sintomas.</p><button onclick="abrirModal('mitral')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="miocardicas"><h2>Miocardite</h2><p>Inflamação do miocárdio, frequentemente viral, com risco de disfunção ventricular.</p><button onclick="abrirModal('miocardite')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="miocardicas"><h2>Pericardite</h2><p>Inflamação do pericárdio que pode causar dor torácica e derrame pericárdico.</p><button onclick="abrirModal('pericardite')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="vasculares"><h2>Aneurisma da Aorta</h2><p>Dilatação anormal da aorta com risco de dissecção ou ruptura.</p><button onclick="abrirModal('aneurisma')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="vasculares"><h2>Tromboembolismo Pulmonar (TEP)</h2><p>Oclusão arterial pulmonar por êmbolo, frequentemente oriundo de trombose venosa profunda.</p><button onclick="abrirModal('tep')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="vasculares"><h2>Doença Arterial Periférica (DAP)</h2><p>Aterosclerose das artérias periféricas causando claudicação e risco de isquemia crítica.</p><button onclick="abrirModal('dap')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="miocardicas"><h2>Cardiomiopatia Dilatada</h2><p>Doença do músculo cardíaco com dilatação ventricular e redução da função sistólica.</p><button onclick="abrirModal('dilatada')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="miocardicas"><h2>Cardiomiopatia Hipertrófica</h2><p>Hipertrofia ventricular, muitas vezes genética, associada a obstrução e risco arritmogênico.</p><button onclick="abrirModal('hipertrofica')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="isquemicas"><h2>Choque Cardiogênico</h2><p>Falência circulatória devido ao colapso da função cardíaca — emergência com alta mortalidade.</p><button onclick="abrirModal('choque')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="isquemicas"><h2>Endocardite Infecciosa</h2><p>Infecção das válvulas cardíacas, associada a vegetações, embolias e insuficiência valvar.</p><button onclick="abrirModal('endocardite')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="congenitas"><h2>Cardiopatia Congênita (Ex.: CIV, CIA, Tetralogia de Fallot)</h2><p>Anomalias cardíacas estruturais presentes ao nascimento que variam de assintomáticas a cirticamente sintomáticas.</p><button onclick="abrirModal('congenita')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="vasculares"><h2>Doença Coronária Microvascular</h2><p>Isquemia miocárdica por disfunção microvascular coronariana, com angina e testes não invasivos anormais.</p><button onclick="abrirModal('microvascular')">Leitura detalhada</button></div>
+    <div class="card" data-categoria="arritmias"><h2>Síncope Cardíaca / Arrítmica</h2><p>Perda transitória de consciência por causas cardíacas, incluindo arritmias que ameaçam a vida.</p><button onclick="abrirModal('sincop')">Leitura detalhada</button></div>
+  </main>
+
+  <div id="modal" class="modal"><div class="modal-content"><span class="close" onclick="fecharModal()">&times;</span><div id="modalText"></div></div></div>
+
+  <footer><p>Fontes: Harrison's Principles of Internal Medicine, Braunwald's Heart Disease, ESC Guidelines, AHA Guidelines.</p></footer>
+
+  <script>
+    const searchInput=document.getElementById('searchInput');
+    const filterSelect=document.getElementById('filterSelect');
+    const cards=document.querySelectorAll('.card');
+    const modal=document.getElementById('modal');
+    const modalText=document.getElementById('modalText');
+    searchInput.addEventListener('input',filtrarCards);
+    filterSelect.addEventListener('change',filtrarCards);
+    function filtrarCards(){const termo=searchInput.value.toLowerCase();const categoria=filterSelect.value;cards.forEach(card=>{const titulo=card.querySelector('h2').textContent.toLowerCase();const texto=card.textContent.toLowerCase();const cardCategoria=card.getAttribute('data-categoria');const correspondeTermo=titulo.includes(termo)||texto.includes(termo);const correspondeCategoria=categoria==='todos'||cardCategoria===categoria;card.style.display=(correspondeTermo&&correspondeCategoria)?'block':'none'})}
+
+    const textosDetalhados={
+      has:`<h2>Hipertensão Arterial Sistêmica (HAS)</h2>
+<h3>Etiologia</h3>
+<p>Maioria é primária (essencial) com fatores genéticos, obesidade, dieta rica em sal, sedentarismo, consumo de álcool e idade; formas secundárias por doença renal, endocrinopatias e medicamentos.</p>
+<h3>Fisiopatologia</h3>
+<p>Aumento do tônus vascular periférico, alterações renais de retenção de sódio e ativação neuro-humoral (sistema renina-angiotensina-aldosterona, sistema simpático). Remodelamento vascular crônico.</p>
+<h3>Manifestações</h3>
+<p>Frequentemente assintomática; complicações incluem AVC, insuficiência cardíaca, doença arterial coronariana, doença renal crônica e retinopatia hipertensiva.</p>
+<h3>Diagnóstico</h3>
+<p>Medições repetidas da pressão arterial, monitorização ambulatorial de 24h quando indicada e avaliação de lesões de órgão-alvo (ECG, creatinina, proteinúria, fundo de olho).</p>
+<h3>Tratamento</h3>
+<p>Mudanças de estilo de vida: redução de sal, perda de peso, atividade física; fármacos: inibidores da ECA, BRA, diuréticos, bloqueadores dos canais de cálcio e betabloqueadores conforme indicação.</p>
+<h3>Prognóstico</h3>
+<p>Controle adequado reduz significativamente risco cardiovascular; adesão terapêutica é essencial.</p>`,
+
+      ic:`<h2>Insuficiência Cardíaca</h2>
+<h3>Etiologia</h3>
+<p>Doença arterial coronariana, hipertensão, valvopatias, cardiomiopatias e infeções (miocardite) são causas comuns.</p>
+<h3>Fisiopatologia</h3>
+<p>Disfunção sistólica e/ou diastólica levando a congestão venosa, baixa perfusão tecidual e remodelamento ventricular; ativação neuro-humoral (SRAA, sistema simpático) piora a progressão.</p>
+<h3>Manifestações</h3>
+<p>Dispneia ao esforço ou repouso, ortopneia, edema periférico, fadiga, intolerância ao exercício e sinais de congestão pulmonar.</p>
+<h3>Diagnóstico</h3>
+<p>Exame clínico, BNP/NT-proBNP, radiografia torácica, ecocardiograma para avaliar função ventricular e exames laboratoriais.</p>
+<h3>Tratamento</h3>
+<p>Diuréticos para alívio de congestão, inibidores da ECA/BRA, beta-bloqueadores, antagonistas de mineralocorticoides, antagonistas de neprilisina (ARNI) em indicações específicas; dispositivos: CDI, CRT e transplante em casos avançados.</p>
+<h3>Prognóstico</h3>
+<p>Variável; evolução crônica com mortalidade significativa, mas terapias modernas melhoraram sobrevida e qualidade de vida.</p>`,
+
+      dac:`<h2>Doença Arterial Coronariana (DAC)</h2>
+<h3>Etiologia</h3>
+<p>Aterosclerose coronariana por acúmulo de placa de lipídios e tecido fibroso; fatores de risco: tabagismo, dislipidemia, diabetes, hipertensão e idade.</p>
+<h3>Fisiopatologia</h3>
+<p>Placas obstrutivas ou vulneráveis podem reduzir fluxo coronariano; erosão/ruptura de placa leva à trombose e isquemia miocárdica.</p>
+<h3>Manifestações</h3>
+<p>Angina estável, angina instável, infarto do miocárdio, insuficiência cardíaca isquêmica e morte súbita.</p>
+<h3>Diagnóstico</h3>
+<p>Teste de esforço, ecocardiograma sob stress, angiografia coronariana, marcadores cardíacos quando agudo.</p>
+<h3>Tratamento</h3>
+<p>Mudanças de estilo de vida, antiagregação, estatinas, controle de fatores de risco, revascularização percutânea (angioplastia com stent) ou cirurgia de revascularização (CABG) conforme anatomia e caso.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com terapêuticas de prevenção secundária; risco residual depende do controle de fatores de risco.</p>`,
+
+      iam:`<h2>Infarto Agudo do Miocárdio (IAM)</h2>
+<h3>Etiologia</h3>
+<p>Oclusão trombótica aguda de uma artéria coronária, geralmente sobre placa aterosclerótica instável.</p>
+<h3>Fisiopatologia</h3>
+<p>Interrupção do fluxo coronariano leva a isquemia prolongada e necrose miocárdica; extensão depende de território e tempo de reperfusão.</p>
+<h3>Manifestações</h3>
+<p>Dor torácica prolongada, sudorese, náuseas, dispneia; sinais de insuficiência cardíaca e arritmias podem ocorrer.</p>
+<h3>Diagnóstico</h3>
+<p>ECG com alterações típicas (ST elevação/NSTEMI), elevação de troponinas e avaliação hemodinâmica; angiografia para confirmação e intervenção.</p>
+<h3>Tratamento</h3>
+<p>Reperfusão urgente (angioplastia primária preferível quando disponível, ou trombólise), antiagregantes, anticoagulação, estatinas, beta-bloqueadores e manejo de complicações.</p>
+<h3>Prognóstico</h3>
+<p>Depende do tempo para reperfusão, extensão do infarto e complicações (insuficiência cardíaca, choque, arritmias). Reabilitação cardíaca melhora resultados.</p>`,
+
+      angina:`<h2>Angina Pectoris</h2>
+<h3>Etiologia</h3>
+<p>Isquemia miocárdica transitória por aterosclerose coronariana ou desequilíbrio oferta-demanda.</p>
+<h3>Fisiopatologia</h3>
+<p>Isquemia subendocárdica reversível que causa dor torácica; pode ser estável (exercício) ou instável (risco de IAM).</p>
+<h3>Manifestações</h3>
+<p>Dor torácica opressiva, irradiação, dispneia e sintomas vagais; melhora com repouso ou nitratos.</p>
+<h3>Diagnóstico</h3>
+<p>Teste de esforço, imagem funcional, coronariografia dependendo do risco.</p>
+<h3>Tratamento</h3>
+<p>Anti-isquêmicos (nitratos, betabloqueadores), antiagregantes, estatinas e revascularização quando indicada.</p>
+<h3>Prognóstico</h3>
+<p>Estável: controle com terapia médica; angina instável requer avaliação urgente.</p>`,
+
+      fa:`<h2>Fibrilação Atrial</h2>
+<h3>Etiologia</h3>
+<p>Hipertensão, doença valvular, cardiomiopatias, idade avançada, álcool e doenças pulmonares.</p>
+<h3>Fisiopatologia</h3>
+<p>Atividade elétrica rápida e desorganizada nos átrios resulta em perda da contração atrial efetiva e irregularidade ventricular.</p>
+<h3>Manifestações</h3>
+<p>Palpitações, intolerância ao exercício, fadiga, dispneia e risco aumentadíssimo de acidente tromboembólico (AVC).</p>
+<h3>Diagnóstico</h3>
+<p>ECG confirma diagnóstico; ecocardiograma para avaliar estrutura e função; risco tromboembólico avaliado por escore CHA2DS2-VASc.</p>
+<h3>Tratamento</h3>
+<p>Controle da frequência ou ritmo (betabloqueadores, amiodarona, cardioversão), anticoagulação oral (DOACs ou varfarina conforme indicação) para prevenção de AVC, ablação em casos selecionados.</p>
+<h3>Prognóstico</h3>
+<p>Crônico em muitos; anticoagulação adequada reduz risco de AVC, manejo do ritmo/frequência melhora sintomas.</p>`,
+
+      tvfv:`<h2>Taquicardia Ventricular & Fibrilação Ventricular</h2>
+<h3>Etiologia</h3>
+<p>Isquemia miocárdica, cardiomiopatias, distúrbios eletrolíticos, drogas pró-arrítmicas e canalopatias genéticas.</p>
+<h3>Fisiopatologia</h3>
+<p>Ataques de atividade elétrica anômala em ventrículos que comprometem a perfusão efetiva e podem evoluir para parada cardíaca.</p>
+<h3>Manifestações</h3>
+<p>Palpitações intensas, síncope e parada cardíaca súbita quando evoluem para FV.</p>
+<h3>Diagnóstico</h3>
+<p>ECG, monitorização contínua, estudo eletrofisiológico; identificar causa precipitante, como isquemia.</p>
+<h3>Tratamento</h3>
+<p>Emergência: desfibrilação/ressuscitação e suporte avançado; tratamento de base: antiarrítmicos, cardioversão, implante de CDI e correção de causas reversíveis.</p>
+<h3>Prognóstico</h3>
+<p>Potencialmente letal; sobrevida depende do tratamento imediato e prevenção secundária.</p>`,
+
+      bav:`<h2>Bloqueio Atrioventricular (BAV)</h2>
+<h3>Etiologia</h3>
+<p>Isquemia, degeneração do sistema de condução, medicamentos (beta-bloqueadores, bloqueadores cálcio, digitálicos), causas congênitas ou infect </p>
+<h3>Fisiopatologia</h3>
+<p>Interrupção da condução elétrica entre átrios e ventrículos resultando em bradicardia e, em graus avançados, dissociação AV.</p>
+<h3>Manifestações</h3>
+<p>Assintomático em graus leves; tontura, síncope, fadiga e colapso em bloqueios completos.</p>
+<h3>Diagnóstico</h3>
+<p>ECG — identificação do grau do bloqueio, monitorização e avaliação de causas reversíveis.</p>
+<h3>Tratamento</h3>
+<p>Observação para graus menores; marcapasso definitivo em bloqueios de alto grau ou sintomáticos; corrigir causas reversíveis.</p>
+<h3>Prognóstico</h3>
+<p>Bom com implante de marcapasso quando indicado; sem tratamento pode haver risco de morte súbita em bloqueio completo.</p>`,
+
+      aortica:`<h2>Valvulopatia Aórtica</h2>
+<h3>Etiologia</h3>
+<p>Degenerativa (calcificação) em idosos, bicúspide congênita, reumática; regurgitação por dilatação da raiz aórtica ou endocardite.</p>
+<h3>Fisiopatologia</h3>
+<p>Estenose: obstrução ao fluxo sistólico provocando hipertrofia ventricular esquerda; regurgitação: sobrecarga volume e dilatação ventricular.</p>
+<h3>Manifestações</h3>
+<p>Dispneia, angina, síncope (na estenose clínica clássica); sopros audíveis, sinais de insuficiência cardíaca em fases avançadas.</p>
+<h3>Diagnóstico</h3>
+<p>Ecocardiograma é o pilar diagnóstico; avaliação por ecocardiografia Doppler quantifica gravidade; cateterismo em indicações selecionadas.</p>
+<h3>Tratamento</h3>
+<p>Monitorização em estágios iniciais; substituição valvar cirúrgica ou TAVI em pacientes selecionados; manejo da insuficiência quando presente.</p>
+<h3>Prognóstico</h3>
+<p>Razoável com intervenção oportuna; estenose crítica sintomática tem prognóstico reservado sem reparo.</p>`,
+
+      mitral:`<h2>Valvulopatia Mitral</h2>
+<h3>Etiologia</h3>
+<p>Prolapso mitral idiopático, doença reumática, degeneração mixomatosa, endocardite e isquemia.</p>
+<h3>Fisiopatologia</h3>
+<p>Regurgitação leva a sobrecarga de volume atrial e ventricular esquerdo; estenose (geralmente reumática) causa aumento de pressão atrial e congestão pulmonar.</p>
+<h3>Manifestações</h3>
+<p>Dispneia, fadiga, arritmias atriais (FA), edema; sopro sistólico de regurgitação ou diastólico na estenose.</p>
+<h3>Diagnóstico</h3>
+<p>Ecocardiograma transtorácico/ transesofágico para avaliação anatômica e hemodinâmica; cateterismo em casos selecionados.</p>
+<h3>Tratamento</h3>
+<p>Reparação valvar preferível quando possível; substituição ou intervenção percutânea (comissurotomia) na estenose; manejo médico para insuficiência cardíaca e FA.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com reparo valvar oportuno; sem tratamento, complicações incluem insuficiência cardíaca e morte.</p>`,
+
+      miocardite:`<h2>Miocardite</h2>
+<h3>Etiologia</h3>
+<p>Principalmente viral (coxsackie, adenovírus, SARS-CoV-2), também bacteriana, autoimune ou tóxica.</p>
+<h3>Fisiopatologia</h3>
+<p>Inflamação miocárdica causa lesão celular, disfunção contrátil e arritmias; pode progredir para cardiomiopatia dilatada.</p>
+<h3>Manifestações</h3>
+<p>Variável: desde sintomas leves (febre, mal-estar) até insuficiência cardíaca aguda, dor torácica e arritmias.</p>
+<h3>Diagnóstico</h3>
+<p>ECG, troponinas elevadas, ecocardiograma, ressonância magnética cardíaca (padrões de realce) e, em casos selecionados, biópsia endomiocárdica.</p>
+<h3>Tratamento</h3>
+<p>Suporte hemodinâmico, manejo de insuficiência cardíaca, antiarrítmicos; terapia imunossupressora em etiologias específicas.</p>
+<h3>Prognóstico</h3>
+<p>Majority recover, but some progress to chronic cardiomyopathy; close follow-up required.</p>`,
+
+      pericardite:`<h2>Pericardite</h2>
+<h3>Etiologia</h3>
+<p>Viral, autoimune, uremia, neoplásica, pós-infarto (síndrome de Dressler) e traumática.</p>
+<h3>Fisiopatologia</h3>
+<p>Inflamação do pericárdio com derrame em alguns casos; tamponamento cardíaco ocorre se acúmulo rápido de líquido.</p>
+<h3>Manifestações</h3>
+<p>Dor torácica pleurítica que melhora ao sentar-se, atrito pericárdico, febre e sinais de tamponamento (hipotensão, distensão jugular).</p>
+<h3>Diagnóstico</h3>
+<p>ECG (supradesnivelamento difuso do ST), ecocardiograma para avaliar derrame, marcadores inflamatórios.</p>
+<h3>Tratamento</h3>
+<p>AINEs e colchicina; corticosteróides em casos refratários; drenagem pericárdica quando tamponamento ou derrame volumoso.</p>
+<h3>Prognóstico</h3>
+<p>Geralmente favorável; risco de recorrência em alguns pacientes.</p>`,
+
+      aneurisma:`<h2>Aneurisma da Aorta</h2>
+<h3>Etiologia</h3>
+<p>Degeneração da média (aterosclerose), síndromes genéticas (Marfan, Ehlers-Danlos), hipertensão e infecções raras.</p>
+<h3>Fisiopatologia</h3>
+<p>Fraqueza da parede aórtica leva a dilatação; dissecção pode ocorrer quando há ruptura da íntima e fluxo entre camadas.</p>
+<h3>Manifestações</h3>
+<p>Muitas vezes assintomático até dissecção/ruptura; dor torácica/epigástrica intensa e sinais de choque quando agudo.</p>
+<h3>Diagnóstico</h3>
+<p>Ecocardiograma, angiotomografia computadorizada (angio-TC) e ressonância magnética para avaliação da extensão.</p>
+<h3>Tratamento</h3>
+<p>Monitorização para pequenos aneurismas, controle rigoroso da pressão arterial; cirurgia ou reparo endovascular quando atingir critérios de tamanho ou crescimento rápido.</p>
+<h3>Prognóstico</h3>
+<p>Risco de ruptura aumenta com diâmetro; reparo oportuno reduz mortalidade.</p>`,
+
+      tep:`<h2>Tromboembolismo Pulmonar (TEP)</h2>
+<h3>Etiologia</h3>
+<p>Êmbolos venosos (frequentemente trombose venosa profunda das pernas) que migram para artéria pulmonar; fatores de risco: imobilização, cirurgia, neoplasia, contraceptivos.</p>
+<h3>Fisiopatologia</h3>
+<p>Oclusão vascular pulmonar causa aumento da resistência vascular pulmonar, sobrecarga do ventrículo direito e hipoxemia.</p>
+<h3>Manifestações</h3>
+<p>Dispneia súbita, dor pleurítica, taquicardia, hemoptise, hipotensão em TEP maciço.</p>
+<h3>Diagnóstico</h3>
+<p>Angio-TC pulmonar (PE angio), cintilografia pulmonar, ecocardiograma com sinais de sobrecarga do VD; d-dímero em baixa probabilidade clínica.</p>
+<h3>Tratamento</h3>
+<p>Anticoagulação imediata (heparina, DOACs), trombólise em TEP maciço, embolectomia cirúrgica em casos selecionados, e prevenção secundária com anticoagulação prolongada quando indicado.</p>
+<h3>Prognóstico</h3>
+<p>Depende da carga tromboembólica e do tempo até o tratamento; TEP maciço tem alta mortalidade sem intervenção.</p>`,
+
+      dap:`<h2>Doença Arterial Periférica (DAP)</h2>
+<h3>Etiologia</h3>
+<p>Aterosclerose das artérias dos membros inferiores; fatores de risco semelhantes à DAC.</p>
+<h3>Fisiopatologia</h3>
+<p>Estreitamento luminal reduz perfusão distal causando claudicação e, em casos graves, isquemia crítica de membros.</p>
+<h3>Manifestações</h3>
+<p>Claudicação intermitente, dor em repouso, úlceras isquêmicas e risco de amputação em isquemia crítica.</p>
+<h3>Diagnóstico</h3>
+<p>Índice tornozelo-braquial (ITB), ecografia duplex, angio-TC ou angiografia invasiva.</p>
+<h3>Tratamento</h3>
+<p>Modificações de risco, exercício supervisionado, cilostazol, antiagregantes e revascularização endovascular ou cirurgia quando necessário.</p>
+<h3>Prognóstico</h3>
+<p>Melhora com revascularização; prevenção secundária reduz eventos cardiovasculares sistêmicos.</p>`,
+
+      dilatada:`<h2>Cardiomiopatia Dilatada</h2>
+<h3>Etiologia</h3>
+<p>Idiopática, genética, alcoólica, pós-viral (miocardite), tóxica (quimioterapia) e metabólica.</p>
+<h3>Fisiopatologia</h3>
+<p>Dilatação ventricular com contratilidade reduzida, insuficiência cardíaca e risco de arritmias.</p>
+<h3>Manifestações</h3>
+<p>Dispneia, fadiga, edema e sinais de congestão; arritmias e tromboembolismo são complicações.</p>
+<h3>Diagnóstico</h3>
+<p>Ecocardiograma mostrando dilatação e redução da fração de ejeção, ressonância e investigação genética em casos suspeitos.</p>
+<h3>Tratamento</h3>
+<p>Terapia para insuficiência cardíaca (IECA/ARNI, betabloqueadores, diuréticos), dispositivos e considerações para transplante em casos avançados.</p>
+<h3>Prognóstico</h3>
+<p>Variável; muitos respondem à terapia médica, mas risco de progressão para IC avançada existe.</p>`,
+
+      hipertrofica:`<h2>Cardiomiopatia Hipertrófica</h2>
+<h3>Etiologia</h3>
+<p>Freqüentemente genética, com herança autossômica dominante; mutações sarcoméricas (ex.: MYH7, MYBPC3).</p>
+<h3>Fisiopatologia</h3>
+<p>Hipertrofia assimétrica do septo interventricular, disfunção diastólica, obstrução do trato de saída e risco de morte súbita por arritmia.</p>
+<h3>Manifestações</h3>
+<p>Dispneia, síncope, palpitações e morte súbita, especialmente em jovens atletas.</p>
+<h3>Diagnóstico</h3>
+<p>Ecocardiograma mostrando hipertrofia assimétrica, ressonância magnética e estudo genético.</p>
+<h3>Tratamento</h3>
+<p>Betabloqueadores, bloqueadores dos canais de cálcio, redução de obstrução com septoplastia ou mioectomia, e desfibrilador automático implantável em risco alto.</p>
+<h3>Prognóstico</h3>
+<p>Variável; identificação e manejo reduzem risco de eventos graves.</p>`,
+
+      choque:`<h2>Choque Cardiogênico</h2>
+<h3>Etiologia</h3>
+<p>Insuficiência aguda do débito cardíaco, frequentemente após IAM extenso, disfunção ventricular grave ou arritmias refratárias.</p>
+<h3>Fisiopatologia</h3>
+<p>Débito cardíaco inadequado leva a hipóperfusão tecidual, acidose, vasoconstrição e falência orgânica múltipla se não revertido.</p>
+<h3>Manifestações</h3>
+<p>Hipotensão, oligúria, confusão, extremidades frias, sinais de congestão pulmonar.</p>
+<h3>Diagnóstico</h3>
+<p>Monitorização hemodinâmica, ecocardiograma urgente, marcadores cardíacos e avaliação de causas reversíveis.</p>
+<h3>Tratamento</h3>
+<p>Suporte hemodinâmico (vasopressores, inotrópicos), revascularização urgente se isquemia, dispositivos de suporte circulatório mecânico e cuidados intensivos.</p>
+<h3>Prognóstico</h3>
+<p>Alta mortalidade; resposta depende da velocidade de intervenção e reversibilidade da causa.</p>`,
+
+      endocardite:`<h2>Endocardite Infecciosa</h2>
+<h3>Etiologia</h3>
+<p>Infecção por bactérias (Staphylococcus aureus, streptococos viridans) ou fungos que colonizam válvulas nativas ou próteses.</p>
+<h3>Fisiopatologia</h3>
+<p>Formação de vegetações na superfície valvar que destroem tecido e podem embolizar para órgãos distantes.</p>
+<h3>Manifestações</h3>
+<p>Febre, sopro novo, fenómenos embólicos, lesões cutâneas (petequias, nódulos de Osler) e insuficiência valvar progressiva.</p>
+<h3>Diagnóstico</h3>
+<p>Hemoculturas repetidas, ecocardiografia transesofágica para visualizar vegetações e critérios de Duke para confirmação.</p>
+<h3>Tratamento</h3>
+<p>Antibióticos intravenosos dirigidos, cirurgia valvar em complicações (insuficiência grave, abscesso, embolia recorrente).</p>
+<h3>Prognóstico</h3>
+<p>Variante; mortalidade e morbilidade aumentadas sem tratamento adequado.</p>`,
+
+      congenita:`<h2>Cardiopatia Congênita (CIV, CIA, Tetralogia de Fallot)</h2>
+<h3>Etiologia</h3>
+<p>Anomalias embriológicas do coração e grandes vasos; fatores genéticos, síndromes e teratogênicos contribuem.</p>
+<h3>Fisiopatologia</h3>
+<p>Defeitos estruturais alteram fluxos intracardíacos e pressões, podendo levar a cianose, sobrecarga de câmaras ou insuficiência cardíaca.</p>
+<h3>Manifestações</h3>
+<p>Sintomas dependem do defeito: cianose, sopros, falha de medro em lactentes, intolerância ao exercício em adolescentes.</p>
+<h3>Diagnóstico</h3>
+<p>Ecocardiograma fetal/neonatal, ecocardiografia pós-natal e cateterismo quando indicado.</p>
+<h3>Tratamento</h3>
+<p>Observação em defeitos pequenos; intervenção percutânea (fechamento de CIA/CIV) ou cirurgia corretiva/ paliativa; acompanhamento ao longo da vida.</p>
+<h3>Prognóstico</h3>
+<p>Muito melhorou com avanços cirúrgicos; muitos sobrevivem até idade adulta com acompanhamento especializado.</p>`,
+
+      microvascular:`<h2>Doença Coronária Microvascular</h2>
+<h3>Etiologia</h3>
+<p>Disfunção endotelial e microvascular associada a fatores de risco como diabetes, hipertensão e síndrome metabólica; mais comum em mulheres.</p>
+<h3>Fisiopatologia</h3>
+<p>Alteração da vasodilatação microvascular e regulação do fluxo resultando em isquemia sem obstrução epicárdica significativa.</p>
+<h3>Manifestações</h3>
+<p>Angina típica com testes de imagem frequentemente discordantes; intolerância ao exercício e sintomas isquêmicos crônicos.</p>
+<h3>Diagnóstico</h3>
+<p>Exclusão de DAC epicárdica por angiografia; testes de perfusão e estudo da reserva de fluxo coronariano invasivo ou não invasivo.</p>
+<h3>Tratamento</h3>
+<p>Terapias antianginosas, controle de fatores de risco, reabilitação cardíaca; abordagem multidisciplinar necessária.</p>
+<h3>Prognóstico</h3>
+<p>Crônica; manejo dos sintomas e fatores de risco melhora qualidade de vida.</p>`,
+
+      sincop:`<h2>Síncope Cardíaca / Arrítmica</h2>
+<h3>Etiologia</h3>
+<p>Arritmias bradi ou taquicárdicas, estenose aórtica crítica, cardiomiopatias e outras condições que reduzem o débito cerebral.</p>
+<h3>Fisiopatologia</h3>
+<p>Queda momentânea do débito cardíaco leva a perda transitória de consciência; risco aumentado de trauma e morte súbita dependendo da causa.</p>
+<h3>Manifestações</h3>
+<p>Desmaio súbito, recuperação rápida; presença de pródromos pode indicar etiologia vasovagal.</p>
+<h3>Diagnóstico</h3>
+<p>Avaliação inicial clínica, ECG, monitorização ambulatorial, estudo eletrofisiológico e imagiologia conforme suspeita.</p>
+<h3>Tratamento</h3>
+<p>Direcionado à causa: marcapasso, ablação, correção valvar, dispositivos em risco de morte súbita; medidas de prevenção de quedas em síncope não-cardiogênica.</p>
+<h3>Prognóstico</h3>
+<p>Depende da causa subjacente; síncope arrítmica tem prognóstico pior sem tratamento.</p>`
+    };
+
+    function abrirModal(chave){modalText.innerHTML=textosDetalhados[chave]||'<p>Detalhes não disponíveis.</p>';modal.style.display='block'}
+    function fecharModal(){modal.style.display='none'}
+    window.onclick=function(e){if(e.target===modal)fecharModal()}
+  </script>
+</body>
+
+
+ 
+
+
+
+    
+    
+      <div class="footer__data grid">
+               <div>
+                  <a href="about.html"><h3 class="footer__title">About</h3></a>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Awards</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">FAQs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Privacy policy</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Terms of services</a>
+                  </li>
+               </div>
+                </ul>
+                <div>
+                  <h3 class="footer__title">Company</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <a href="#" class="footer__link">Blogs</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Comunity</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Our Team</a>
+                  </li>
+
+                  <li>
+                     <a href="#" class="footer__link">Help center</a>
+                  </li>
+               </div>
+              </ul>
+                <div>
+                  <h3 class="footer__title">Contact</h3>
+
+                  <ul class="footer__links">
+                  <li>
+                     <address class="footer__info">
+                        ekvandros@gmail.com <br>
+                        +258 87 237 3125
+                     </address>
+                  </li>
+
+                <div>
+                  <h3 class="footer__title"></h3>
+
+                  <div class="footer__social">
+                     <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-circle-line"></i>
+                     </a>
+
+                     <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                     </a>
+
+                     <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-x-line"></i>
+                     </a>
+                  </ul>
+                  </div>
+               </div>
+
+
+            </div>
+         </div>
+
+         <span class="footer__copy">
+          2025 &#169; All Rights Reserved
+         </span>
+      </footer>
+
+      <!--========== SCROLL UP ==========-->
+      <a href="#" class="scrollup" id="scroll-up">
+         <i class="ri-arrow-up-line"></i>
+      </a>
+
+      <!--=============== SCROLLREVEAL ===============-->
+      <script src=""></script>
+
+      <!--=============== SWIPER JS ===============-->
+      <script src="assets/js/swiper-bundle.min.js"></script>
+
+      <!--=============== MAIN JS ===============-->
+      <script src="assets/js/main.js"></script>
+   </body>
+</html>

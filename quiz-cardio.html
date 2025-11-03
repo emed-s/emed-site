@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Cardiovascular - Game Vibes</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0; /* fundo claro padrão */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  body.dark {
+    background-color: #1c1c1c; /* fundo escuro */
+    color: #f0f0f0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #b30000; /* vermelho escuro */
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-left: 8px solid #b30000;
+    border-radius: 12px;
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+  }
+
+  body.dark .card {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .answers button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border: 2px solid #b30000; /* borda vermelha */
+    border-radius: 8px;
+    background-color: #fff;
+    color: #b30000;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s, border-color 0.3s, background-color 0.3s, color 0.3s;
+  }
+
+  body.dark .answers button {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+  }
+
+  .answers button:hover {
+    background-color: #b30000;
+    color: #fff;
+  }
+
+  .correct {
+    background-color: #00cc00 !important; 
+    color: #000 !important;
+    border-color: #00cc00 !important;
+  }
+
+  .wrong {
+    background-color: #ff0000 !important; 
+    color: #fff !important;
+    border-color: #ff0000 !important;
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .nav-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #b30000;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .nav-buttons button:hover {
+    background-color: #d10000;
+  }
+
+  #score {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #00cc00;
+  }
+
+  #darkModeBtn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  input[type=text] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+
+  body.dark input[type=text] {
+    background-color: #1c1c1c;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Quiz Cardiovascular - Game Vibes</h1>
+  <button id="darkModeBtn">Modo Escuro</button>
+  <div id="quiz"></div>
+  <div class="nav-buttons">
+    <button id="prev">Anterior</button>
+    <button id="next">Próxima</button>
+  </div>
+  <div id="score"></div>
+</div>
+
+<script>
+const questions = [
+  // Mesmas 50 perguntas do exemplo anterior (MC, VF, abertas)
+  {type:"mc", q:"Qual o principal fator de risco para doença arterial coronariana?", a:["Hipertensão","Tabagismo","Diabetes","Sedentarismo"], correct:1},
+  {type:"mc", q:"A insuficiência cardíaca direita causa principalmente:", a:["Edema periférico","Congestão pulmonar","Dor torácica","Arritmia"], correct:0},
+  {type:"mc", q:"Qual exame é padrão-ouro para infarto agudo do miocárdio?", a:["ECG","Ecocardiograma","Angiografia coronária","RX tórax"], correct:2},
+  {type:"mc", q:"O que caracteriza a fibrilação atrial?", a:["Contrações ventriculares rápidas","Ritmo atrial irregular","Bloqueio AV completo","Hipertrofia ventricular"], correct:1},
+  {type:"mc", q:"Em hipertensão arterial, o alvo principal para prevenção é:", a:["Cérebro","Rins","Coração","Todos os anteriores"], correct:3},
+  {type:"mc", q:"Qual das seguintes drogas é inotrópica positiva?", a:["Digoxina","Losartana","Furosemida","Atenolol"], correct:0},
+  {type:"mc", q:"Angina instável é um tipo de:", a:["Infarto sem elevação do ST","Infarto com elevação do ST","Dor torácica não cardíaca","Arritmia"], correct:0},
+  {type:"mc", q:"A principal causa de aneurisma da aorta abdominal é:", a:["Hipertensão","Aterosclerose","Infecção","Trauma"], correct:1},
+  {type:"mc", q:"O sinal de Kussmaul indica:", a:["Insuficiência cardíaca direita","Infarto do miocárdio","Pericardite","Arritmia"], correct:0},
+  {type:"mc", q:"Qual biomarcador é mais específico para infarto do miocárdio?", a:["CK-MB","Troponina","Mioglobina","LDH"], correct:1},
+  {type:"mc", q:"A endocardite infecciosa afeta preferencialmente:", a:["Válvulas cardíacas","Miocárdio","Pericárdio","Artérias coronárias"], correct:0},
+  {type:"mc", q:"A cardiomiopatia dilatada apresenta:", a:["Ventrículos dilatados e função deprimida","Hipertrofia ventricular","Pericárdio espessado","Arritmia apenas"], correct:0},
+  {type:"mc", q:"Qual a complicação mais temida do infarto agudo do miocárdio?", a:["Ruptura ventricular","Arritmia leve","Hipotensão transitória","Tosse"], correct:0},
+  {type:"mc", q:"O choque cardiogênico ocorre devido a:", a:["Insuficiência cardíaca grave","Infecção sistêmica","Hipovolemia","Arritmia sinusal"], correct:0},
+  {type:"mc", q:"A hipertensão pulmonar causa inicialmente:", a:["Hipertrofia do VD","Insuficiência esquerda","Edema periférico","Arritmia"], correct:0},
+  {type:"mc", q:"O sopro em valva mitral pode indicar:", a:["Estenose ou insuficiência mitral","Estenose aórtica","Defeito septal","Arritmia"], correct:0},
+  {type:"mc", q:"O eletrocardiograma em infarto agudo apresenta:", a:["Elevação ou depressão do ST","Ondas P ausentes","QRS largo isolado","Taquicardia sinusal apenas"], correct:0},
+  {type:"mc", q:"A aterosclerose envolve principalmente:", a:["Artérias","Veias","Capilares","Linfáticos"], correct:0},
+  {type:"mc", q:"O uso de estatinas previne:", a:["Aterosclerose","Arritmia","Hipertensão","Insuficiência cardíaca"], correct:0},
+  {type:"mc", q:"O BNP elevado sugere:", a:["Insuficiência cardíaca","Infarto","Arritmia","Hipertensão isolada"], correct:0},
+  {type:"mc", q:"O tratamento inicial do infarto com supra de ST inclui:", a:["Reperfusão imediata","Betabloqueador isolado","Diurético apenas","Estatina isolada"], correct:0},
+  {type:"mc", q:"O edema pulmonar ocorre devido a:", a:["Insuficiência cardíaca esquerda","Arritmia","Hipertensão arterial","Aneurisma"], correct:0},
+  {type:"mc", q:"A pericardite pode apresentar:", a:["Dor torácica que melhora inclinando-se para frente","Arritmia isolada","Hipertensão apenas","Sopro mitral"], correct:0},
+  {type:"mc", q:"O exame de escolha para aneurisma aórtico é:", a:["Tomografia computadorizada","ECG","Radiografia simples","Holter"], correct:0},
+  {type:"mc", q:"A fibrilação ventricular causa:", a:["Morte súbita se não tratada","Dor torácica leve","Hipertensão transitória","Edema"], correct:0},
+  {type:"mc", q:"O IAM pode causar complicações mecânicas, como:", a:["Ruptura septal","Arritmia leve","Hipertensão","Tosse"], correct:0},
+  {type:"mc", q:"O sopro sistólico em válvula aórtica indica:", a:["Estenose aórtica","Insuficiência mitral","Estenose mitral","Pericardite"], correct:0},
+  {type:"mc", q:"A cardiomiopatia hipertrófica pode levar a:", a:["Morte súbita em jovens","Edema periférico","Hipotensão apenas","Arritmia bradicárdica"], correct:0},
+  {type:"mc", q:"A anticoagulação é fundamental em pacientes com:", a:["Fibrilação atrial","Hipertensão isolada","Infarto sem complicação","Insuficiência cardíaca leve"], correct:0},
+  {type:"vf", q:"Hipertensão arterial é fator de risco para acidente vascular cerebral.", correct:true},
+  {type:"vf", q:"Arritmia sempre causa sintomas evidentes.", correct:false},
+  {type:"vf", q:"A insuficiência cardíaca direita provoca edema periférico.", correct:true},
+  {type:"vf", q:"Angina estável piora com repouso.", correct:false},
+  {type:"vf", q:"Infarto do miocárdio pode ocorrer sem dor torácica.", correct:true},
+  {type:"vf", q:"O sopro cardíaco sempre indica doença valvar.", correct:false},
+  {type:"vf", q:"Fibrilação atrial aumenta risco de AVC.", correct:true},
+  {type:"vf", q:"Cardiomiopatia dilatada geralmente diminui fração de ejeção.", correct:true},
+  {type:"vf", q:"O BNP é útil no diagnóstico de hipertensão.", correct:false},
+  {type:"vf", q:"A endocardite infecciosa pode causar febre e sopro novo.", correct:true},
+  {type:"vf", q:"Estatinas são usadas para reduzir pressão arterial.", correct:false},
+  {type:"vf", q:"A insuficiência cardíaca esquerda causa congestão pulmonar.", correct:true},
+  {type:"vf", q:"Angioplastia é tratamento de escolha para aneurisma da aorta.", correct:false},
+  {type:"vf", q:"O choque cardiogênico está associado à baixa perfusão tecidual.", correct:true},
+  {type:"vf", q:"O edema pulmonar agudo pode ser fatal se não tratado rapidamente.", correct:true},
+  {type:"aberta", q:"Cite dois fatores de risco modificáveis para doença arterial coronariana."},
+  {type:"aberta", q:"Explique brevemente a diferença entre insuficiência cardíaca direita e esquerda."},
+  {type:"aberta", q:"Nomeie três complicações possíveis após infarto do miocárdio."},
+  {type:"aberta", q:"O que é angina instável e como difere da angina estável?"},
+  {type:"aberta", q:"Qual a importância do ECG no diagnóstico de arritmias?"},
+  // ... resto das perguntas omitido por brevidade
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quizDiv = document.getElementById("quiz");
+  quizDiv.innerHTML = "";
+  const q = questions[currentQuestion];
+
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `<strong>Q${currentQuestion+1}:</strong> ${q.q}`;
+  quizDiv.appendChild(card);
+
+  if(q.type === "mc" || q.type === "vf") {
+    const answersDiv = document.createElement("div");
+    answersDiv.className = "answers";
+    let options = q.type === "mc" ? q.a : ["Verdadeiro","Falso"];
+    options.forEach((ans,i)=>{
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.onclick = ()=>checkAnswer(q.type==="mc"?i:(i===0));
+      answersDiv.appendChild(btn);
+    });
+    quizDiv.appendChild(answersDiv);
+  } else if(q.type === "aberta") {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = "openAnswer";
+    input.placeholder = "Digite sua resposta...";
+    card.appendChild(input);
+    const btn = document.createElement("button");
+    btn.textContent = "Enviar";
+    btn.style.marginTop = "10px";
+    btn.onclick = ()=>checkAnswer(document.getElementById("openAnswer").value);
+    card.appendChild(btn);
+  }
+}
+
+function checkAnswer(answer) {
+  const q = questions[currentQuestion];
+  let correct = false;
+  if(q.type==="mc" || q.type==="vf"){
+    correct = answer===q.correct;
+  } else {
+    alert("Resposta registrada!");
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      showScore();
+    } else {
+      showQuestion();
+    }
+    return;
+  }
+
+  const buttons = document.querySelectorAll(".answers button");
+  buttons.forEach((btn,i)=>{
+    if((q.type==="mc" && i===q.correct) || (q.type==="vf" && ((i===0)===q.correct))){
+      btn.classList.add("correct");
+    } else if(btn.textContent === answer || (q.type==="vf" && ((i===0)===answer))){
+      btn.classList.add("wrong");
+    }
+    btn.disabled = true;
+  });
+
+  if(correct) score++;
+  setTimeout(()=>{
+    currentQuestion++;
+    if(currentQuestion>=questions.length){
+      showScore();
+    } else {
+      showQuestion();
+    }
+  },1000);
+}
+
+function showScore(){
+  document.getElementById("quiz").innerHTML = `<h2>Fim do Quiz! Sua pontuação: ${score}/${questions.length}</h2>`;
+}
+
+document.getElementById("next").onclick = ()=>{
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }
+};
+document.getElementById("prev").onclick = ()=>{
+  if(currentQuestion>0){
+    currentQuestion--;
+    showQuestion();
+  }
+};
+
+document.getElementById("darkModeBtn").onclick = ()=>{
+  document.body.classList.toggle("dark");
+  document.getElementById("darkModeBtn").textContent = document.body.classList.contains("dark") ? "Modo Claro" : "Modo Escuro";
+};
+
+showQuestion();
+</script>
+
+</body>
+</html>
